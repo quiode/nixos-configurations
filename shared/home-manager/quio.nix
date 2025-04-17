@@ -74,6 +74,7 @@
   # find values using "dconf watch /"
   dconf.settings = {
     "org/gnome/shell" = {
+      # are at "/run/current-system/sw/share/applications"
       favorite-apps = [
         "firefox.desktop"
         "codium.desktop"
