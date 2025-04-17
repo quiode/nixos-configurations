@@ -41,14 +41,34 @@
       enable = true;
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
-      extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
+      extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+        vscodevim.vim
+        pkief.material-icon-theme
+      ];
       userSettings = {
+        # General Settings
+        "files.autoSave" = "onFocusChange";
+        "window.zoomLevel" = 1;
+
         # Nix
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nil"; # or "nixd"
+        "nix.serverSettings" = {
+          # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
+          "nil" = {
+            "formatting" = {
+              "command" = [ "nixfmt" ];
+            };
+          };
+        };
 
         # Git
         "git.enableSmartCommit" = true;
+
+        # Vim
+        "vim.useSystemClipboard" = true;
+        "vim.useCtrlKeys" = false;
       };
     };
   };
