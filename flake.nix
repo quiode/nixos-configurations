@@ -22,8 +22,39 @@
     in
     {
       # NixOS configuration entrypoint
-      nixosConfigurations.gaming-pc = import ./gaming-pc {
-        inherit nixpkgs home-manager inputs outputs shared;
-      };
-    };
-}
+      nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem
+        {
+          # set system
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          # > Our main nixos configuration file <
+          modules = [
+            ./gaming-pc/configuration.nix
+            ./shared/configuration.nix
+
+            # make home-manager as a module of nixos
+            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.quio =
+                { inputs
+                , lib
+                , config
+                , pkgs
+                , ...
+                }: {
+                  imports = [
+                    ./gaming-pc/home-manager/quio.nix
+                    ./shared/home-manager/quio.nix
+                  ];
+                };
+            }
+          ];
+        }
+
+
+        };
+    }
