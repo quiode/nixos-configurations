@@ -106,6 +106,9 @@
     "org/gnome/shell/extensions/gravatar" = {
       email = "mail@dominik-schwaiger.ch";
     };
+    "org/gnome/shell/extensions/azwallpaper" = {
+      slideshow-directory = "/home/quio/Pictures/Background";
+    };
     "org/gnome/shell" = {
       disable-user-extensions = false;
 
@@ -116,6 +119,7 @@
         "system-monitor@gnome-shell-extensions.gcampax.github.com"
         "gravatar@dsheeler.net"
         "gsconnect@andyholmes.github.io"
+        "azwallpaper@azwallpaper.gitlab.com"
       ];
     };
 

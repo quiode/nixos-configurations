@@ -178,6 +178,7 @@
         removable-drive-menu
         gsconnect
         gravatar
+        wallpaper-slideshow
       ]);
 
     gnome.excludePackages = with pkgs; [
