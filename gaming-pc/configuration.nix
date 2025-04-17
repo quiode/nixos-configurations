@@ -10,8 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       shared.configuration
-      { config, pkgs };
-      ];
+    ];
 
-      networking.hostName = "gaming-pc"; # Define your hostname.
-      }
+  networking.hostName = "gaming-pc"; # Define your hostname.
+}
