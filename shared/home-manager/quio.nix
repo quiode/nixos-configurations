@@ -31,7 +31,7 @@
   programs = {
     home-manager.enable = true;
     git = {
-      enabled = true;
+      enable = true;
       userName = "Dominik Schwaiger";
       userEmail = "mail@dominik-schwaiger.ch";
     };
