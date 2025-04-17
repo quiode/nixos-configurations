@@ -102,8 +102,8 @@ in
 
   programs = {
     firefox.enable = true;
-    gnupg.agent.enable
-      git = {
+    gnupg.agent.enable = true;
+    git = {
       enable = true;
       signing = {
         signByDefault = true;
