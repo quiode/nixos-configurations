@@ -18,9 +18,10 @@
     } @ inputs:
     let
       inherit (self) outputs;
+      gaming-pc = import ./gaming-pc;
     in
     {
       # NixOS configuration entrypoint
-      nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem import ./gaming-pc;
+      nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem gaming-pc;
     };
 }
