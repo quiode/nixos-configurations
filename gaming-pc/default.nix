@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, inputs, outputs }:
+{ nixpkgs, home-manager, inputs, outputs, shared ... }:
 nixpkgs.lib.nixosSystem {
   # set system
   system = "x86_64-linux";

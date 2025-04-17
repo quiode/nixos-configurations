@@ -18,11 +18,12 @@
     } @ inputs:
     let
       inherit (self) outputs;
+      shared = import ./shared { inherit config pkgs; };
     in
     {
       # NixOS configuration entrypoint
       nixosConfigurations.gaming-pc = import ./gaming-pc {
-        inherit nixpkgs home-manager inputs outputs;
+        inherit nixpkgs home-manager inputs outputs shared;
       };
     };
 }

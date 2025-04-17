@@ -1,0 +1,3 @@
+{}: {
+  quio = import ./quio.nix;
+}
