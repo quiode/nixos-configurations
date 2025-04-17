@@ -18,7 +18,7 @@
     } @ inputs:
     let
       inherit (self) outputs;
-      shared = import ./shared { inherit config pkgs; };
+      shared = import ./shared { inherit pkgs; };
     in
     {
       # NixOS configuration entrypoint
