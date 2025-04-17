@@ -3,6 +3,9 @@
 , lib
 , config
 , pkgs
+, nixpkgs
+, outputs
+, home-manager
 , ...
 }: nixpkgs.lib.nixosSystem {
   # set system
@@ -22,4 +25,4 @@
       home-manager.users.quio = import ./home-manager/quio.nix;
     }
   ];
-};
+}
