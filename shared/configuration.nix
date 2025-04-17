@@ -2,16 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, nix-vscode-extensions, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  nix-vscode-extensions,
+  ...
+}:
 let
-  zfsCompatibleKernelPackages = lib.filterAttrs
-    (
-      name: kernelPackages:
-        (builtins.match "linux_[0-9]+_[0-9]+" name) != null
-        && (builtins.tryEval kernelPackages).success
-        && (!kernelPackages.${config.boot.zfs.package.kernelModuleAttribute}.meta.broken)
-    )
-    pkgs.linuxKernel.packages;
+  zfsCompatibleKernelPackages = lib.filterAttrs (
+    name: kernelPackages:
+    (builtins.match "linux_[0-9]+_[0-9]+" name) != null
+    && (builtins.tryEval kernelPackages).success
+    && (!kernelPackages.${config.boot.zfs.package.kernelModuleAttribute}.meta.broken)
+  ) pkgs.linuxKernel.packages;
   latestKernelPackage = lib.last (
     lib.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)) (
       builtins.attrValues zfsCompatibleKernelPackages
@@ -36,7 +40,10 @@ in
   };
 
   # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -96,7 +103,7 @@ in
 
       # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
       # Enable this if you have graphical corruption issues or application crashes after waking
-      # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+      # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
       # of just the bare essentials.
       powerManagement.enable = false;
 
@@ -106,9 +113,9 @@ in
 
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
-      # Support is limited to the Turing and later architectures. Full list of 
-      # supported GPUs is at: 
-      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+      # Support is limited to the Turing and later architectures. Full list of
+      # supported GPUs is at:
+      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
       # Only available from driver 515.43.04+
       open = false;
 
@@ -130,7 +137,10 @@ in
     users.quio = {
       isNormalUser = true;
       description = "Dominik Schwaiger";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       group = "quio";
     };
   };
@@ -171,20 +181,42 @@ in
     config.allowUnfree = true;
 
     overlays = [
-          nix-vscode-extensions.overlays.default
-        ];
+      nix-vscode-extensions.overlays.default
+    ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vscodium
-    wget
-    fastfetch
-    htop
-    nixfmt-rfc-style
-    nil
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      vscodium
+      wget
+      fastfetch
+      htop
+      nixfmt-rfc-style
+      nil
+      gnome-tweaks
+    ];
+
+    gnome.excludePackages = with pkgs; [
+      gnome-photos
+      gnome-tour
+      gedit # text editor
+      cheese # webcam tool
+      gnome-music
+      epiphany # web browser
+      geary # email reader
+      gnome-characters
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+      yelp # Help view
+      gnome-contacts
+      gnome-initial-setup
+      gnome-maps
+    ];
+  };
 
   # optimize storage automatically
   nix.optimise.automatic = true;
