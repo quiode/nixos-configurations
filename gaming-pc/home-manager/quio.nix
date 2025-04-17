@@ -7,7 +7,5 @@
 , ...
 }: {
   # You can import other home-manager modules here
-  imports = [
-    ../../shared/home-manager/quio.nix
-  ];
+  imports = [ ];
 }
