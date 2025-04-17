@@ -188,16 +188,22 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    systemPackages = with pkgs; [
-      vscodium
-      wget
-      fastfetch
-      htop
-      nixfmt-rfc-style
-      nil
-      gnome-tweaks
-      spotify
-    ];
+    systemPackages =
+      (with pkgs; [
+        vscodium
+        wget
+        fastfetch
+        htop
+        nixfmt-rfc-style
+        nil
+        gnome-tweaks
+        spotify
+      ])
+      ++ (with pkgs.gnomeExtensions; [
+        tray-icons-reloaded
+        removable-drive-menu
+        gsconnect
+      ]);
 
     gnome.excludePackages = with pkgs; [
       gnome-photos

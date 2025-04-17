@@ -62,6 +62,7 @@
 
         # Git
         "git.enableSmartCommit" = true;
+        "git.confirmSync" = false;
 
         # Vim
         "vim.useSystemClipboard" = true;
@@ -88,7 +89,17 @@
     "org/gnome/desktop/wm/preferences" = {
       workspace-names = [ "Main" ];
     };
-    "/org/gnome/desktop/session/idle-delay" = 0;
+    "org/gnome/desktop/session" = {
+      idle-delay = 0;
+    };
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+
+      # `gnome-extensions list` for a list
+      enabled-extensions = [
+        "trayIconsReloaded@selfmade.pl"
+      ];
+    };
   };
 
   # Nicely reload system units when changing configs
