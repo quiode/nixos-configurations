@@ -30,7 +30,7 @@
 
   programs = {
     home-manager.enable = true;
-    git.config = {
+    git = {
       userName = "Dominik Schwaiger";
       userEmail = "mail@dominik-schwaiger.ch";
     };
