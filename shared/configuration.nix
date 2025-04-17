@@ -105,9 +105,6 @@ in
     gnupg.agent.enable = true;
     git = {
       enable = true;
-      signing = {
-        signByDefault = true;
-      };
     };
     vim = {
       enable = true;
