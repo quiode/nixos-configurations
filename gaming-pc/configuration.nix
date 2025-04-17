@@ -13,6 +13,4 @@
     ];
 
   networking.hostName = "gaming-pc"; # Define your hostname.
-
-  programs.git.signing.key = 
 }

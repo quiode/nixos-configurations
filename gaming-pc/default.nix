@@ -7,7 +7,7 @@
 , outputs
 , home-manager
 , ...
-}: nixpkgs.lib.nixosSystem {
+}: {
   # set system
   system = "x86_64-linux";
   specialArgs = { inherit inputs outputs; };

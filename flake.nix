@@ -21,6 +21,6 @@
     in
     {
       # NixOS configuration entrypoint
-      nixosConfigurations.gaming-pc = import ./gaming-pc;
+      nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem import ./gaming-pc;
     };
 }
