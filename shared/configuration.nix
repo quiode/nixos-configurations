@@ -171,6 +171,7 @@
         dua
         nextcloud-client
         thunderbird
+        btop
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded

@@ -85,9 +85,10 @@
       # are at "/run/current-system/sw/share/applications"
       favorite-apps = [
         "firefox.desktop"
+        "thunderbird.desktop"
         "codium.desktop"
-        "org.gnome.Console.desktop"
         "spotify.desktop"
+        "org.gnome.Console.desktop"
         "org.gnome.Nautilus.desktop"
       ];
     };
