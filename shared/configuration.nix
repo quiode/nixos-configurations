@@ -192,11 +192,13 @@ in
         nil
         gnome-tweaks
         spotify
+        dua
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
         removable-drive-menu
         gsconnect
+        gravatar
       ]);
 
     gnome.excludePackages = with pkgs; [

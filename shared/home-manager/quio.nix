@@ -97,6 +97,9 @@
     "org/gnome/desktop/session" = {
       idle-delay = 0;
     };
+    "org/gnome/shell/extensions/gravatar" = {
+      email = "mail@dominik-schwaiger.ch";
+    };
     "org/gnome/shell" = {
       disable-user-extensions = false;
 
@@ -105,6 +108,8 @@
         "trayIconsReloaded@selfmade.pl"
         "drive-menu@gnome-shell-extensions.gcampax.github.com"
         "system-monitor@gnome-shell-extensions.gcampax.github.com"
+        "gravatar@dsheeler.net"
+        "gsconnect@andyholmes.github.io"
       ];
     };
   };
