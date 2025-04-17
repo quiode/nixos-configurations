@@ -108,9 +108,6 @@ in
       signing = {
         signByDefault = true;
       };
-      extraConfig = {
-        push = { autoSetupRemote = true; };
-      };
     };
     vim = {
       enable = true;
