@@ -43,8 +43,12 @@
       mutableExtensionsDir = false;
       extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
       userSettings = {
+        # Nix
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nil"; # or "nixd"
+
+        # Git
+        "git.enableSmartCommit" = true;
       };
     };
   };
