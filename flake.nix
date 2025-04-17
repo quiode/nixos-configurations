@@ -22,7 +22,7 @@
     {
       # NixOS configuration entrypoint
       nixosConfigurations.gaming-pc = import ./gaming-pc {
-        inherit nixpkgs home-manager;
+        inherit nixpkgs home-manager inputs outputs;
       };
     };
 }
