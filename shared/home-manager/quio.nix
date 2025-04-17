@@ -70,6 +70,27 @@
     };
   };
 
+  # find values using "dconf watch /"
+  dconf.settings = {
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "firefox.desktop"
+        "codium.desktop"
+        "org.gnome.Console.desktop"
+        "spotify.desktop"
+        "org.gnome.Nautilus.desktop"
+      ];
+    };
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      enable-hot-corners = true;
+    };
+    "org/gnome/desktop/wm/preferences" = {
+      workspace-names = [ "Main" ];
+    };
+    "/org/gnome/desktop/session/idle-delay" = 0;
+  };
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 

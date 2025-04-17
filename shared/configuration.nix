@@ -196,6 +196,7 @@ in
       nixfmt-rfc-style
       nil
       gnome-tweaks
+      spotify
     ];
 
     gnome.excludePackages = with pkgs; [
