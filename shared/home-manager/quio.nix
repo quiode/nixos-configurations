@@ -116,6 +116,25 @@
         "gsconnect@andyholmes.github.io"
       ];
     };
+
+    # Custom Keybinds
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Terminal";
+      binding = "<Super>Return";
+      command = "kgx";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "Firefox";
+      binding = "<Super>W";
+      command = "firefox";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+      ];
+    };
   };
 
   services = {
