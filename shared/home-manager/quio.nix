@@ -103,6 +103,8 @@
       # `gnome-extensions list` for a list
       enabled-extensions = [
         "trayIconsReloaded@selfmade.pl"
+        "drive-menu@gnome-shell-extensions.gcampax.github.com"
+        "system-monitor@gnome-shell-extensions.gcampax.github.com"
       ];
     };
   };
