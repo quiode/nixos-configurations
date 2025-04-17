@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
-  configuration = import ./configuration.nix { inherit config pkgs; };
+{}: {
+  configuration = import ./configuration.nix;
   home-manager = import ./home-manager;
 }

@@ -14,7 +14,7 @@ nixpkgs.lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
 
-      home-manager.users.quio = import ./home-manager/quio.nix;
+      home-manager.users.quio = import ./home-manager/quio.nix { inherit shared; };
     }
   ];
 }
