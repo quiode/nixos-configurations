@@ -1,13 +1,4 @@
-# This is the entrypoint for the configuration of this system
-{ inputs
-, lib
-, config
-, pkgs
-, nixpkgs
-, outputs
-, home-manager
-, ...
-}: {
+nixpkgs.lib.nixosSystem {
   # set system
   system = "x86_64-linux";
   specialArgs = { inherit inputs outputs; };
