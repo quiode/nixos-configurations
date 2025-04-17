@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nix-vscode-extensions, ... }:
 let
   zfsCompatibleKernelPackages = lib.filterAttrs
     (
@@ -167,11 +167,18 @@ in
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+
+    overlays = [
+          nix-vscode-extensions.overlays.default
+        ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    vscodium
     wget
     fastfetch
     htop

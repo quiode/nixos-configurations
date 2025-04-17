@@ -8,17 +8,20 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # VS Code Extensions
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs =
     { self
     , nixpkgs
     , home-manager
+    , nix-vscode-extensions
     , ...
     } @ inputs:
     let
       inherit (self) outputs;
-      shared = import ./shared { pkgs = nixpkgs; };
     in
     {
       # NixOS configuration entrypoint
@@ -44,6 +47,7 @@
                 , lib
                 , config
                 , pkgs
+                , nix-vscode-extensions
                 , ...
                 }: {
                   imports = [

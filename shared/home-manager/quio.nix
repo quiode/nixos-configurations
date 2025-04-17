@@ -35,6 +35,12 @@
       userName = "Dominik Schwaiger";
       userEmail = "mail@dominik-schwaiger.ch";
     };
+   vscode = {
+	enable = true;
+        package = pkgs.vscodium;
+        mutableExtensionsDir = false;
+extensions = with pkgs.vscode-extensions; [jnoortheen.nix-ide];
+};
   };
 
   # Nicely reload system units when changing configs
