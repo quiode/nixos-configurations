@@ -161,12 +161,6 @@ in
         update = "nix flake update --commit-lock-file --flake /config";
         upgrade = "nh os switch /config";
       };
-
-      loginShellInit = ''
-        # If not running interactively, don't do anything and return early
-        [[ $- == *i* ]] || return  
-        fastfetch
-      '';
     };
     nh = {
       enable = true;

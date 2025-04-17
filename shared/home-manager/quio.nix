@@ -28,6 +28,10 @@
   };
 
   programs = {
+    bash = {
+      enable = true;
+      bashrcExtra = "fastfetch";
+    };
     home-manager.enable = true;
     git = {
       enable = true;
