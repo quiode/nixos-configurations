@@ -182,6 +182,8 @@ in
     wget
     fastfetch
     htop
+    nixfmt-rfc-style
+    nil
   ];
 
   # optimize storage automatically

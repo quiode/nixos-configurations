@@ -24,12 +24,14 @@
       inherit (self) outputs;
     in
     {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+
       # NixOS configuration entrypoint
       nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem
         {
           # set system
           system = "x86_64-linux";
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs nix-vscode-extensions; };
           # > Our main nixos configuration file <
           modules = [
             ./gaming-pc/configuration.nix
@@ -47,7 +49,6 @@
                 , lib
                 , config
                 , pkgs
-                , nix-vscode-extensions
                 , ...
                 }: {
                   imports = [

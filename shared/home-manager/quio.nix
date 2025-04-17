@@ -1,11 +1,13 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -35,12 +37,16 @@
       userName = "Dominik Schwaiger";
       userEmail = "mail@dominik-schwaiger.ch";
     };
-   vscode = {
-	enable = true;
-        package = pkgs.vscodium;
-        mutableExtensionsDir = false;
-extensions = with pkgs.vscode-extensions; [jnoortheen.nix-ide];
-};
+    vscode = {
+      enable = true;
+      package = pkgs.vscodium;
+      mutableExtensionsDir = false;
+      extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
+      userSettings = {
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil"; # or "nixd"
+      };
+    };
   };
 
   # Nicely reload system units when changing configs
