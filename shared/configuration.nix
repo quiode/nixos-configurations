@@ -169,6 +169,8 @@
         gnome-tweaks
         spotify
         dua
+        nextcloud-client
+        thunderbird
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
