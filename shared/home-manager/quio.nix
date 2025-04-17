@@ -54,7 +54,8 @@
       userSettings = {
         # General Settings
         "files.autoSave" = "onFocusChange";
-        "window.zoomLevel" = 1;
+        "window.zoomLevel" = 1.5;
+        "workbench.iconTheme" = "material-icon-theme";
 
         # Nix
         "nix.enableLanguageServer" = true;
