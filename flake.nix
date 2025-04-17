@@ -18,7 +18,7 @@
     } @ inputs:
     let
       inherit (self) outputs;
-      gaming-pc = import ./gaming-pc;
+      gaming-pc = (import ./gaming-pc);
     in
     {
       # NixOS configuration entrypoint

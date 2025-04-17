@@ -10,5 +10,4 @@
   imports = [
     ../../shared/home-manager/quio.nix
   ];
-
 }
