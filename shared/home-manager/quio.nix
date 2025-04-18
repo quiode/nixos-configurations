@@ -81,6 +81,11 @@
         # Vim
         "vim.useSystemClipboard" = true;
         "vim.useCtrlKeys" = false;
+
+        # Prettier
+        "[json]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
       };
     };
 
