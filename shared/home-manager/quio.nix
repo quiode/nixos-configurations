@@ -54,6 +54,7 @@
         vscodevim.vim
         pkief.material-icon-theme
         ms-azuretools.vscode-docker
+        esbenp.prettier-vscode
       ];
       userSettings = {
         # General Settings
