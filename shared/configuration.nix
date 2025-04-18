@@ -27,6 +27,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+    enableNvidia = true;
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 

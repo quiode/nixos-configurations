@@ -53,6 +53,7 @@
         jnoortheen.nix-ide
         vscodevim.vim
         pkief.material-icon-theme
+        ms-azuretools.vscode-docker
       ];
       userSettings = {
         # General Settings
