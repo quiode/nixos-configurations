@@ -54,4 +54,8 @@ in
       autoScrub.enable = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    vesktop
+  ];
 }

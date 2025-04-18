@@ -11,6 +11,7 @@
       # are at "/run/current-system/sw/share/applications"
       favorite-apps = [
         "steam.desktop"
+        "vesktop.desktop"
       ];
     };
   };

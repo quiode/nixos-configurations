@@ -172,6 +172,7 @@
         nextcloud-client
         thunderbird
         btop
+        bitwarden-desktop
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
