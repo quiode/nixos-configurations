@@ -52,10 +52,6 @@
 
             home-manager.users.quio =
               {
-                inputs,
-                lib,
-                config,
-                pkgs,
                 ...
               }:
               {
