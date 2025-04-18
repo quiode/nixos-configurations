@@ -181,6 +181,7 @@
         btop
         bitwarden-desktop
         inputs.agenix.packages."${system}".default
+        immich-cli
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
