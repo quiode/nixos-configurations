@@ -6,6 +6,7 @@
   config,
   pkgs,
   nix-vscode-extensions,
+  inputs,
   ...
 }:
 {
@@ -173,6 +174,7 @@
         thunderbird
         btop
         bitwarden-desktop
+        inputs.agenix.packages."${system}".default
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded

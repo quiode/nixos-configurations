@@ -11,15 +11,22 @@
 
     # VS Code Extensions
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    # install agenix, for secret management
+    agenix.url = "github:ryantm/agenix";
+    # optional, not necessary for the module
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , nix-vscode-extensions
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-vscode-extensions,
+      agenix,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
     in
@@ -27,37 +34,41 @@
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
       # NixOS configuration entrypoint
-      nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem
-        {
-          # set system
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs outputs nix-vscode-extensions; };
-          # > Our main nixos configuration file <
-          modules = [
-            ./gaming-pc/configuration.nix
-            ./shared/configuration.nix
+      nixosConfigurations.gaming-pc = nixpkgs.lib.nixosSystem {
+        # set system
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs outputs nix-vscode-extensions; };
+        # > Our main nixos configuration file <
+        modules = [
+          ./gaming-pc/configuration.nix
+          ./shared/configuration.nix
 
-            # make home-manager as a module of nixos
-            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+          # make home-manager as a module of nixos
+          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-              home-manager.users.quio =
-                { inputs
-                , lib
-                , config
-                , pkgs
-                , ...
-                }: {
-                  imports = [
-                    ./gaming-pc/home-manager/quio.nix
-                    ./shared/home-manager/quio.nix
-                  ];
-                };
-            }
-          ];
-        };
+            home-manager.users.quio =
+              {
+                inputs,
+                lib,
+                config,
+                pkgs,
+                ...
+              }:
+              {
+                imports = [
+                  ./gaming-pc/home-manager/quio.nix
+                  ./shared/home-manager/quio.nix
+                ];
+              };
+          }
+
+          # insert agenix
+          agenix.nixosModules.default
+        ];
+      };
     };
 }
