@@ -82,9 +82,12 @@
         "vim.useSystemClipboard" = true;
         "vim.useCtrlKeys" = false;
 
-        # Prettier
+        # Formatting
         "[json]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[dockercompose]" = {
+          "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
         };
       };
     };
