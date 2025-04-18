@@ -32,7 +32,9 @@
       enable = true;
       bashrcExtra = "fastfetch";
     };
+
     home-manager.enable = true;
+
     git = {
       enable = true;
       userName = "Dominik Schwaiger";
@@ -42,6 +44,7 @@
         key = "D9FE 655C CD52 8F80 3D27 8F75 F7E7 E19B C69F 7DF5";
       };
     };
+
     vscode = {
       enable = true;
       package = pkgs.vscodium;
@@ -76,6 +79,34 @@
         # Vim
         "vim.useSystemClipboard" = true;
         "vim.useCtrlKeys" = false;
+      };
+    };
+
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        home = {
+          hostname = "dominik-schwaiger.ch";
+          port = 2222;
+          user = "domina";
+        };
+
+        home-root = {
+          hostname = "dominik-schwaiger.ch";
+          port = 2222;
+          user = "root";
+        };
+
+        backup = {
+          hostname = "yniederer.ch";
+          port = 2222;
+          user = "domina";
+        };
+
+        eth = {
+          hostname = "dominik-schwaiger.vsos.ethz.ch";
+          user = "ubuntu";
+        };
       };
     };
   };
