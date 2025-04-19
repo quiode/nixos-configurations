@@ -150,6 +150,7 @@
         inputs.agenix.packages."${system}".default
         immich-cli
         nvtopPackages.full
+        identity
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
