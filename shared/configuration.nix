@@ -151,6 +151,7 @@
         immich-cli
         nvtopPackages.full
         identity
+        rmtrash
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
