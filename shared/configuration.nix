@@ -152,6 +152,7 @@
         nvtopPackages.full
         identity
         rmtrash
+        signal-desktop
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
