@@ -153,6 +153,7 @@
         identity
         rmtrash
         signal-desktop
+        file
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
