@@ -14,6 +14,5 @@
     "/dev/disk/by-uuid/cfa0079d-7fc6-4991-b3f8-ec9e31f5bd9f";
   networking = {
     hostName = "laptop"; # Define your hostname.
-    wireless.enable = true; # Enables wireless support via wpa_supplicant.
   };
 }
