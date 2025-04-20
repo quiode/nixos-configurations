@@ -122,7 +122,10 @@
 
   # Allow unfree packages
   nixpkgs = {
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
 
     overlays = [
       nix-vscode-extensions.overlays.default
@@ -154,6 +157,7 @@
         rmtrash
         signal-desktop
         file
+        imagemagick
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded

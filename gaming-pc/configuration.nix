@@ -92,5 +92,6 @@ in
   environment.systemPackages = with pkgs; [
     vesktop
     prismlauncher
+    steam-run # to run steam games manually
   ];
 }
