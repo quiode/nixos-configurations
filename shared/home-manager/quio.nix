@@ -2,6 +2,7 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -122,7 +123,7 @@
   };
 
   # find values using "dconf watch /"
-  dconf.settings = {
+  dconf.settings = with lib.hm.gvariant; {
     "org/gnome/shell" = {
       # are at "/run/current-system/sw/share/applications"
       favorite-apps = [
@@ -142,7 +143,10 @@
       workspace-names = [ "Main" ];
     };
     "org/gnome/desktop/session" = {
-      idle-delay = 0;
+      idle-delay = mkUint32 0;
+    };
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
     };
     "org/gnome/shell/extensions/gravatar" = {
       email = "mail@dominik-schwaiger.ch";
