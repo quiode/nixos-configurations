@@ -2,9 +2,6 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 { ... }:
 {
-  # You can import other home-manager modules here
-  imports = [ ];
-
   # find values using "dconf watch /"
   dconf.settings = {
     "org/gnome/shell" = {
