@@ -32,11 +32,6 @@
       autoPrune.enable = true;
     };
 
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
-
     # For VM's (Lightroom)
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
