@@ -178,6 +178,7 @@
         file
         imagemagick
         geeqie
+        qbittorrent
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
