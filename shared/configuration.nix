@@ -170,6 +170,7 @@
         gsconnect
         gravatar
         wallpaper-slideshow
+        clipboard-history
       ]);
 
     gnome.excludePackages = with pkgs; [
