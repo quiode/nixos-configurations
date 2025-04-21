@@ -77,6 +77,8 @@
     pulseaudio.enable = false;
 
     graphics.enable = true;
+
+    enableAllFirmware = true;
   };
 
   security.rtkit.enable = true;
@@ -90,6 +92,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "camera" # needed to access camera
       ];
       group = "quio";
     };
@@ -98,6 +101,7 @@
   programs = {
     firefox.enable = true;
     gnupg.agent.enable = true;
+    gphoto2.enable = true; # used to access my fujifilm camera
     git = {
       enable = true;
     };
