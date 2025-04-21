@@ -44,6 +44,9 @@
         signByDefault = true;
         key = "D9FE 655C CD52 8F80 3D27 8F75 F7E7 E19B C69F 7DF5";
       };
+      extraConfig = {
+        pull.rebase = false;
+      };
     };
 
     vscode = {
