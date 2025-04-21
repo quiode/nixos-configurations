@@ -105,7 +105,6 @@
         "wheel"
         "camera" # needed to access camera
         "docker"
-        "vboxusers" # access to virtual machines
         "libvirtd" # access to virtual machines
       ];
       group = "quio";
