@@ -26,9 +26,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  virtualisation.docker = {
-    enable = true;
-    autoPrune.enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+    };
   };
 
   # Set your time zone.
@@ -93,6 +95,7 @@
         "networkmanager"
         "wheel"
         "camera" # needed to access camera
+        "docker"
       ];
       group = "quio";
     };
