@@ -168,6 +168,7 @@
         "gravatar@dsheeler.net"
         "gsconnect@andyholmes.github.io"
         "azwallpaper@azwallpaper.gitlab.com"
+        "clipboard-history@alexsaveau.dev"
       ];
     };
 
