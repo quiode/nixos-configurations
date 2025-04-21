@@ -157,6 +157,11 @@
     "org/gnome/shell/extensions/azwallpaper" = {
       slideshow-directory = "/home/quio/Pictures/Background";
     };
+    # Virtual Machine Default Connection
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
     "org/gnome/shell" = {
       disable-user-extensions = false;
 

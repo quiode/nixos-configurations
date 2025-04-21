@@ -36,6 +36,10 @@
       enable = true;
       enableExtensionPack = true;
     };
+
+    # For VM's (Lightroom)
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
   };
 
   # Set your time zone.
@@ -102,12 +106,14 @@
         "camera" # needed to access camera
         "docker"
         "vboxusers" # access to virtual machines
+        "libvirtd" # access to virtual machines
       ];
       group = "quio";
     };
   };
 
   programs = {
+    virt-manager.enable = true;
     firefox.enable = true;
     gnupg.agent.enable = true;
     gphoto2.enable = true; # used to access my fujifilm camera
