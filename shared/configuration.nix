@@ -162,6 +162,7 @@
         signal-desktop
         file
         imagemagick
+        geeqie
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
