@@ -196,6 +196,7 @@
         geeqie
         qbittorrent
         virtiofsd # needed for VM's
+        magic-wormhole # file sharing
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
