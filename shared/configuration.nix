@@ -31,6 +31,11 @@
       enable = true;
       autoPrune.enable = true;
     };
+
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
   };
 
   # Set your time zone.
@@ -96,6 +101,7 @@
         "wheel"
         "camera" # needed to access camera
         "docker"
+        "vboxusers" # access to virtual machines
       ];
       group = "quio";
     };
