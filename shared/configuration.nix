@@ -173,6 +173,7 @@
         imagemagick
         geeqie
         qbittorrent
+        virtiofsd # needed for VM's
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
