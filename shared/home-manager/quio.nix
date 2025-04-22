@@ -59,6 +59,7 @@
         pkief.material-icon-theme
         ms-azuretools.vscode-docker
         esbenp.prettier-vscode
+        ms-python.python
       ];
       userSettings = {
         # General Settings
