@@ -26,7 +26,6 @@
       home-manager,
       nix-vscode-extensions,
       agenix,
-      ...
     }@inputs:
     let
       inherit (self) outputs;
