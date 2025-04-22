@@ -11,6 +11,7 @@
 
     # VS Code Extensions
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # install agenix, for secret management
     agenix.url = "github:ryantm/agenix";
