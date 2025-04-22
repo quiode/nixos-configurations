@@ -60,6 +60,7 @@
         ms-azuretools.vscode-docker
         esbenp.prettier-vscode
         ms-python.python
+        ms-python.vscode-pylance
       ];
       userSettings = {
         # General Settings
