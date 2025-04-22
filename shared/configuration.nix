@@ -203,7 +203,7 @@
         geeqie
         qbittorrent
         virtiofsd # needed for VM's
-        localsend
+        localsend # to send files on the local network
       ])
       ++ (with pkgs.gnomeExtensions; [
         tray-icons-reloaded
