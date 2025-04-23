@@ -100,6 +100,15 @@
         "[dockercompose]" = {
           "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
         };
+        "[vue]" = {
+          "editor.defaultFormatter" = "Vue.volar";
+        };
+        "[scss]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[typescript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
       };
     };
 
