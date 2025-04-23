@@ -61,7 +61,6 @@
         esbenp.prettier-vscode
         ms-python.python
         ms-python.vscode-pylance
-        ms-vscode-remote.remote-containers
       ];
       userSettings = {
         # General Settings
