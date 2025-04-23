@@ -162,13 +162,14 @@
     };
   };
 
-  # Allow unfree packages
   nixpkgs = {
+    # Allow unfree packages
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
     };
 
+    # Impor tall vscode extensions
     overlays = [
       nix-vscode-extensions.overlays.default
     ];

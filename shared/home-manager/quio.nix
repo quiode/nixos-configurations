@@ -53,7 +53,7 @@
       enable = true;
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
-      extensions = with pkgs.vscode-extensions; [
+      extensions = with pkgs.vscode-marketplace; [
         jnoortheen.nix-ide
         vscodevim.vim
         pkief.material-icon-theme
@@ -61,6 +61,8 @@
         esbenp.prettier-vscode
         ms-python.python
         ms-python.vscode-pylance
+        nuxtr.nuxtr-vscode
+        vue.volar
       ];
       userSettings = {
         # General Settings
