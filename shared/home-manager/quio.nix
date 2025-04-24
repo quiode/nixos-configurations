@@ -173,6 +173,11 @@
     "org/gnome/shell/extensions/azwallpaper" = {
       slideshow-directory = "/home/quio/Pictures/Background";
     };
+    "org/gnome/desktop/privacy" = {
+      remove-old-temp-files = true;
+      remove-old-trash-files = true;
+      old-files-age = mkUint32 7;
+    };
     # Virtual Machine Default Connection
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
