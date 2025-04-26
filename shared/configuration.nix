@@ -180,7 +180,7 @@
       allowUnfreePredicate = _: true;
     };
 
-    # Import tall vscode extensions
+    # Import all vscode extensions
     overlays = [
       inputs.nix-vscode-extensions.overlays.default
     ];
