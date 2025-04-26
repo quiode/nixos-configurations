@@ -46,17 +46,16 @@
   networking = {
     networkmanager.enable = true;
 
-    firewall = {
+    firewall = let
+      commonPorts = [
+        53317 # localsend
+      ];
+    in {
       enable = true;
+      checkReversePath = false; # fix for wireguard
 
-      allowedTCPPorts = [
-        53317 # localsend
-      ];
-      allowedUDPPorts = [
-        53317 # localsend
-        51820 # Wireguard - Beaststation
-        51821 # Wireguard - Router
-      ];
+      allowedTCPPorts = commonPorts;
+      allowedUDPPorts = commonPorts;
     };
   };
 
