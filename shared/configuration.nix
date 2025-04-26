@@ -50,7 +50,7 @@
       enable = true;
 
       allowedTCPPorts = [
-        53317  # localsend
+        53317 # localsend
       ];
       allowedUDPPorts = [
         53317 # localsend
@@ -142,16 +142,22 @@
 
   programs = {
     virt-manager.enable = true;
+
     firefox.enable = true;
+
     gnupg.agent.enable = true;
+
     gphoto2.enable = true; # used to access my fujifilm camera
+
     git = {
       enable = true;
     };
+
     vim = {
       enable = true;
       defaultEditor = true;
     };
+
     bash = {
       # set alias for simple update
       shellAliases = {
@@ -159,6 +165,7 @@
         upgrade = "nh os switch /config";
       };
     };
+
     nh = {
       enable = true;
       clean.enable = true;
