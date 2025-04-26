@@ -47,8 +47,16 @@
     networkmanager.enable = true;
 
     firewall = {
-      allowedTCPPorts = [53317];
-      allowedUDPPorts = [53317];
+      enable = true;
+
+      allowedTCPPorts = [
+        53317 # localsend
+      ];
+      allowedUDPPorts = [
+        53317 # localsend
+        51820 # Wireguard - Beaststation
+        51821 # Wireguard - Router
+      ];
     };
   };
 
