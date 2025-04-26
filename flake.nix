@@ -30,7 +30,7 @@
       inherit system;
       specialArgs = {
         inherit inputs;
-        inherit (inputs) outputs nix-vscode-extensions;
+        inherit (inputs) self;
       };
       # > Our main nixos configuration file <
       modules = [
@@ -45,7 +45,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            users.quio = {...}: {
+            users.quio = _: {
               imports = [
                 ./gaming-pc/home-manager/quio.nix
                 ./shared/home-manager/quio.nix
@@ -65,7 +65,7 @@
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs;
-        inherit (inputs) outputs nix-vscode-extensions;
+        inherit (inputs) self;
       };
       # > Our main nixos configuration file <
       modules = [
@@ -80,7 +80,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            users.quio = {...}: {
+            users.quio = _: {
               imports = [
                 ./laptop/home-manager/quio.nix
                 ./shared/home-manager/quio.nix

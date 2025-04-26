@@ -76,7 +76,7 @@
           # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
           "nil" = {
             "formatting" = {
-              "command" = ["nixfmt"];
+              "command" = ["alejandra"];
             };
           };
         };

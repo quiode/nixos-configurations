@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
-  nix-vscode-extensions,
   inputs,
   ...
 }: {
@@ -169,7 +168,7 @@
 
     # Impor tall vscode extensions
     overlays = [
-      nix-vscode-extensions.overlays.default
+      inputs.nix-vscode-extensions.overlays.default
     ];
   };
 
@@ -182,7 +181,7 @@
         wget
         fastfetch
         htop
-        nixfmt-rfc-style
+        alejandra
         nil
         gnome-tweaks
         spotify
