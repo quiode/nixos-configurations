@@ -43,14 +43,20 @@
   ];
 
   # Enable networking
-  networking = {
+  networking = let
+    commonPorts = [
+      53317 # localsend
+      51820 # Wireguard - Beaststation
+      51821 # Wireguard - Router
+    ];
+  in {
     networkmanager.enable = true;
 
     firewall = {
       enable = true;
 
       allowedTCPPorts = [
-        53317  # localsend
+        53317 # localsend
       ];
       allowedUDPPorts = [
         53317 # localsend
@@ -249,6 +255,7 @@
 
   # optimize storage automatically
   nix.optimise.automatic = true;
+  nix.gc.automatic = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
