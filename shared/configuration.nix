@@ -177,9 +177,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment = {
+  environment = with pkgs; {
     systemPackages =
-      (with pkgs; [
+      ([
         vscodium
         wget
         fastfetch
@@ -205,8 +205,15 @@
         qbittorrent
         virtiofsd # needed for VM's
         localsend # to send files on the local network
+        libreoffice-qt
+        hunspell
       ])
-      ++ (with pkgs.gnomeExtensions; [
+      ++ (with hunspellDicts; [
+        en-gb-large
+        de-ch
+        fr-any
+      ])
+      ++ (with gnomeExtensions; [
         tray-icons-reloaded
         removable-drive-menu
         gsconnect
@@ -215,7 +222,7 @@
         clipboard-history
       ]);
 
-    gnome.excludePackages = with pkgs; [
+    gnome.excludePackages = [
       gnome-photos
       gnome-tour
       gedit # text editor
