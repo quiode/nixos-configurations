@@ -50,7 +50,7 @@
       enable = true;
 
       allowedTCPPorts = [
-        53317 # localsend
+        53317  # localsend
       ];
       allowedUDPPorts = [
         53317 # localsend
