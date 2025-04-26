@@ -1,20 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   pkgs,
   nix-vscode-extensions,
   inputs,
   ...
-}:
-{
+}: {
   # Bootloader.
   boot = {
     plymouth = {
       enable = true;
       theme = "nixos-bgrt";
-      themePackages = with pkgs; [ nixos-bgrt-plymouth ];
+      themePackages = with pkgs; [nixos-bgrt-plymouth];
     };
 
     # Enable "Silent boot"
@@ -50,8 +48,8 @@
     networkmanager.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 53317 ];
-      allowedUDPPorts = [ 53317 ];
+      allowedTCPPorts = [53317];
+      allowedUDPPorts = [53317];
     };
   };
 
@@ -119,7 +117,7 @@
   security.rtkit.enable = true;
 
   users = {
-    groups.quio = { };
+    groups.quio = {};
 
     users.quio = {
       isNormalUser = true;
@@ -179,7 +177,7 @@
   # $ nix search wget
   environment = with pkgs; {
     systemPackages =
-      ([
+      [
         vscodium
         wget
         fastfetch
@@ -207,7 +205,7 @@
         localsend # to send files on the local network
         libreoffice-qt
         hunspell
-      ])
+      ]
       ++ (with hunspellDicts; [
         en-gb-large
         de-ch

@@ -19,90 +19,79 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs:
-    let
-      system = "x86_64-linux";
-    in
-    {
-      formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+  outputs = inputs: let
+    system = "x86_64-linux";
+  in {
+    formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-      # Gaming PC Configuration Entrypoint
-      nixosConfigurations.gaming-pc = inputs.nixpkgs.lib.nixosSystem {
-        # set system
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit (inputs) outputs nix-vscode-extensions;
-        };
-        # > Our main nixos configuration file <
-        modules = [
-          ./gaming-pc/configuration.nix
-          ./shared/configuration.nix
-
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          inputs.home-manager.nixosModules.default
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-
-              users.quio =
-                {
-                  ...
-                }:
-                {
-                  imports = [
-                    ./gaming-pc/home-manager/quio.nix
-                    ./shared/home-manager/quio.nix
-                  ];
-                };
-            };
-          }
-
-          # insert agenix
-          inputs.agenix.nixosModules.default
-        ];
+    # Gaming PC Configuration Entrypoint
+    nixosConfigurations.gaming-pc = inputs.nixpkgs.lib.nixosSystem {
+      # set system
+      inherit system;
+      specialArgs = {
+        inherit inputs;
+        inherit (inputs) outputs nix-vscode-extensions;
       };
+      # > Our main nixos configuration file <
+      modules = [
+        ./gaming-pc/configuration.nix
+        ./shared/configuration.nix
 
-      # Laptop Configuration Entrypoint
-      nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
-        # set system
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          inherit (inputs) outputs nix-vscode-extensions;
-        };
-        # > Our main nixos configuration file <
-        modules = [
-          ./laptop/configuration.nix
-          ./shared/configuration.nix
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
 
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          inputs.home-manager.nixosModules.default
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-
-              users.quio =
-                {
-                  ...
-                }:
-                {
-                  imports = [
-                    ./laptop/home-manager/quio.nix
-                    ./shared/home-manager/quio.nix
-                  ];
-                };
+            users.quio = {...}: {
+              imports = [
+                ./gaming-pc/home-manager/quio.nix
+                ./shared/home-manager/quio.nix
+              ];
             };
-          }
+          };
+        }
 
-          # insert agenix
-          inputs.agenix.nixosModules.default
-        ];
-      };
+        # insert agenix
+        inputs.agenix.nixosModules.default
+      ];
     };
+
+    # Laptop Configuration Entrypoint
+    nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
+      # set system
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+        inherit (inputs) outputs nix-vscode-extensions;
+      };
+      # > Our main nixos configuration file <
+      modules = [
+        ./laptop/configuration.nix
+        ./shared/configuration.nix
+
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            users.quio = {...}: {
+              imports = [
+                ./laptop/home-manager/quio.nix
+                ./shared/home-manager/quio.nix
+              ];
+            };
+          };
+        }
+
+        # insert agenix
+        inputs.agenix.nixosModules.default
+      ];
+    };
+  };
 }

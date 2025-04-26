@@ -4,8 +4,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -77,7 +76,7 @@
           # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
           "nil" = {
             "formatting" = {
-              "command" = [ "nixfmt" ];
+              "command" = ["nixfmt"];
             };
           };
         };
@@ -159,7 +158,7 @@
       enable-hot-corners = true;
     };
     "org/gnome/desktop/wm/preferences" = {
-      workspace-names = [ "Main" ];
+      workspace-names = ["Main"];
     };
     "org/gnome/desktop/session" = {
       idle-delay = mkUint32 0;
@@ -180,8 +179,8 @@
     };
     # Virtual Machine Default Connection
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
     "org/gnome/shell" = {
       disable-user-extensions = false;

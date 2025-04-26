@@ -6,9 +6,7 @@
   lib,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -20,17 +18,16 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c91cec5c-cd04-48f1-a9db-1d6a8326163a";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-f8e682e4-9a55-446e-af35-79ab21e1fb3f".device =
-    "/dev/disk/by-uuid/f8e682e4-9a55-446e-af35-79ab21e1fb3f";
+  boot.initrd.luks.devices."luks-f8e682e4-9a55-446e-af35-79ab21e1fb3f".device = "/dev/disk/by-uuid/f8e682e4-9a55-446e-af35-79ab21e1fb3f";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/FA2D-5727";
@@ -42,7 +39,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/1c6190c6-983d-4169-9884-1902c3cbf62e"; }
+    {device = "/dev/disk/by-uuid/1c6190c6-983d-4169-9884-1902c3cbf62e";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
