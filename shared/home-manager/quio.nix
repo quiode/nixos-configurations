@@ -68,6 +68,7 @@
         "files.autoSave" = "onFocusChange";
         "window.zoomLevel" = 1.5;
         "workbench.iconTheme" = "material-icon-theme";
+        "editor.wordWrap" = "wordWrapColumn";
 
         # Nix
         "nix.enableLanguageServer" = true;
