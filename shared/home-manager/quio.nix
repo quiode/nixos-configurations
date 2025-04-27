@@ -45,6 +45,7 @@
       };
       extraConfig = {
         pull.rebase = true;
+        push.autoSetupRemote = true;
       };
     };
 
