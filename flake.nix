@@ -21,8 +21,11 @@
 
   outputs = inputs: let
     system = "x86_64-linux";
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
   in {
-    formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter.x86_64-linux = pkgs.alejandra;
+
+    devShells.x86_64-linux.default = pkgs.callPackage ./shell.nix {};
 
     # Gaming PC Configuration Entrypoint
     nixosConfigurations.gaming-pc = inputs.nixpkgs.lib.nixosSystem {
