@@ -4,7 +4,7 @@
   writeShellApplication,
   nh,
 }: let
-  current_dir = builtins.toString ./.;
+  flake_dir = builtins.toString ./.;
 in
   mkShellNoCC {
     name = "Nix Configurations";
@@ -18,14 +18,14 @@ in
       (writeShellApplication {
         name = "update";
         text = ''
-          nix flake update --commit-lock-file --flake ${current_dir}
+          nix flake update --commit-lock-file --flake ${flake_dir}
         '';
       })
 
       (writeShellApplication {
         name = "upgrade";
         text = ''
-          nh os switch ${current_dir}
+          nh os switch ${flake_dir}
         '';
       })
     ];
