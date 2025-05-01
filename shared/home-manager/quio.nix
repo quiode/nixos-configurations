@@ -71,6 +71,7 @@
         "workbench.iconTheme" = "material-icon-theme";
         "editor.wordWrap" = "wordWrapColumn";
         "editor.wordWrapColumn" = 120;
+        "git.autofetch" = true;
 
         # Nix
         "nix.enableLanguageServer" = true;
