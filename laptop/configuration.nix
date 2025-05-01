@@ -7,7 +7,7 @@
     ./hardware-configuration.nix
   ];
 
-  boot.initrd.luks.devices."luks-cfa0079d-7fc6-4991-b3f8-ec9e31f5bd9f".device = "/dev/disk/by-uuid/cfa0079d-7fc6-4991-b3f8-ec9e31f5bd9f";
+  boot.initrd.luks.devices."luks-e33fcdd4-9e85-413e-bd46-6f141716d32a".device = "/dev/disk/by-uuid/e33fcdd4-9e85-413e-bd46-6f141716d32a";
   networking = {
     hostName = "laptop"; # Define your hostname.
   };

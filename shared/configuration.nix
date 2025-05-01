@@ -206,7 +206,6 @@
         bitwarden-desktop
         inputs.agenix.packages."${system}".default
         immich-cli
-        nvtopPackages.full
         identity
         rmtrash
         signal-desktop

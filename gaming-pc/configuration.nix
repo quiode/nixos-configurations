@@ -93,5 +93,6 @@ in {
     vesktop
     prismlauncher
     steam-run # to run steam games manually
+    nvtopPackages.full
   ];
 }
