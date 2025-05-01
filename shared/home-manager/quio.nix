@@ -135,11 +135,6 @@
           port = 2222;
           user = "domina";
         };
-
-        eth = {
-          hostname = "dominik-schwaiger.vsos.ethz.ch";
-          user = "ubuntu";
-        };
       };
     };
   };
