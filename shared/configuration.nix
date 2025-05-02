@@ -115,7 +115,10 @@
   hardware = {
     pulseaudio.enable = false;
 
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true; # fixes at-least steam on laptop
+    };
 
     enableAllFirmware = true;
   };
