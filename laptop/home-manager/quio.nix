@@ -8,7 +8,7 @@
     };
     # Fixes for ASUS Specific Laptop
     "org/gnome/shell/keybindings" = {
-      show-screenshot-u = ["<Shift><Super>s"];
+      show-screenshot-u = ["<Shift><Super>s" "Print"];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/btop" = {
       name = "Btop";
