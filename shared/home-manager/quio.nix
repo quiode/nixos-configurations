@@ -152,6 +152,9 @@
         "org.gnome.Nautilus.desktop"
       ];
     };
+    "org/gnome/mutter" = {
+      edge-tiling = true; # snap on drag
+    };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-hot-corners = true;
