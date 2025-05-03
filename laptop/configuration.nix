@@ -24,5 +24,7 @@
       enable = true;
       enableUserService = true;
     };
+
+    # TODO: test if this changes something: xserver.xkb.model = "asus_laptop";
   };
 }
