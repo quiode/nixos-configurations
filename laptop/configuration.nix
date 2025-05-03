@@ -15,6 +15,7 @@
   environment.systemPackages = with pkgs; [
     xournalpp
     steam
+    keyd # to minitor key press event, used with keyd service below
   ];
 
   services = {
@@ -25,6 +26,20 @@
       enableUserService = true;
     };
 
-    # TODO: test if this changes something: xserver.xkb.model = "asus_laptop";
+    # Fix Keyboard
+    xserver.xkb.model = "asus_laptop";
+    keyd = {
+      enable = true;
+      keyboards = {
+        built-in = {
+          ids = ["0b05:19b6:42ab166f"];
+          settings = {
+            "meta+shift" = {
+              "s" = "print";
+            };
+          };
+        };
+      };
+    };
   };
 }
