@@ -9,9 +9,7 @@ _: {
       click-method = "areas";
     };
     # Fixes for ASUS Specific Laptop
-    "org/gnome/shell/keybindings" = {
-      show-screenshot-u = ["<Shift><Super>s" "<Print>"];
-    };
+    "org/gnome/shell/keybindings".show-screenshot-u = ["<Shift><Super>s" "<Print>"];
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/btop" = {
       name = "Btop";
       binding = "Launch1";
@@ -27,12 +25,10 @@ _: {
       binding = "Launch4";
       command = ''kgx -e "echo TODO: Launch4"'';
     };
-    "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/btop/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/launch3/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/launch4/"
-      ];
-    };
+    "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/btop/"
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/launch3/"
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/launch4/"
+    ];
   };
 }

@@ -141,40 +141,26 @@
 
   # find values using "dconf watch /"
   dconf.settings = with lib.hm.gvariant; {
-  "org/gnome/shell" = {
-      # are at "/run/current-system/sw/share/applications"
-      favorite-apps = [
-        "firefox.desktop"
-        "thunderbird.desktop"
-        "codium.desktop"
-        "spotify.desktop"
-        "org.gnome.Console.desktop"
-        "org.gnome.Nautilus.desktop"
-        "signal-desktop.desktop"
-      ];
-    };
-    "org/gnome/mutter" = {
-      edge-tiling = true; # snap on drag
-    };
+    # are at "/run/current-system/sw/share/applications"
+    "org/gnome/shell".favorite-apps = [
+      "firefox.desktop"
+      "thunderbird.desktop"
+      "codium.desktop"
+      "spotify.desktop"
+      "org.gnome.Console.desktop"
+      "org.gnome.Nautilus.desktop"
+      "signal-desktop.desktop"
+    ];
+    "org/gnome/mutter".edge-tiling = true; # snap on drag
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-hot-corners = true;
     };
-    "org/gnome/desktop/wm/preferences" = {
-      workspace-names = ["Main"];
-    };
-    "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 0;
-    };
-    "org/gnome/settings-daemon/plugins/power" = {
-      sleep-inactive-ac-type = "nothing";
-    };
-    "org/gnome/shell/extensions/gravatar" = {
-      email = "mail@dominik-schwaiger.ch";
-    };
-    "org/gnome/shell/extensions/azwallpaper" = {
-      slideshow-directory = "/home/quio/Pictures/Background";
-    };
+    "org/gnome/desktop/wm/preferences".workspace-names = ["Main"];
+    "org/gnome/desktop/session". idle-delay = mkUint32 0;
+    "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
+    "org/gnome/shell/extensions/gravatar".email = "mail@dominik-schwaiger.ch";
+    "org/gnome/shell/extensions/azwallpaper".slideshow-directory = "/home/quio/Pictures/Background";
     "org/gnome/desktop/privacy" = {
       remove-old-temp-files = true;
       remove-old-trash-files = true;
@@ -217,13 +203,11 @@
       command = "nautilus";
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
-      ];
-    };
+    "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+    ];
   };
 
   services = {
