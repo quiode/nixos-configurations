@@ -141,7 +141,7 @@
 
   # find values using "dconf watch /"
   dconf.settings = with lib.hm.gvariant; {
-    "org/gnome/shell" = {
+  "org/gnome/shell" = {
       # are at "/run/current-system/sw/share/applications"
       favorite-apps = [
         "firefox.desktop"
