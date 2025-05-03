@@ -16,4 +16,13 @@
     xournalpp
     steam
   ];
+
+  services = {
+    # for ROG Laptop
+    supergfxd.enable = true;
+    asusd = {
+      enable = true;
+      enableUserService = true;
+    };
+  };
 }
