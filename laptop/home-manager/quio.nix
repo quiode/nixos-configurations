@@ -5,9 +5,7 @@ _: {
   dconf.settings = {
     # are at "/run/current-system/sw/share/applications"
     "org/gnome/shell".favorite-apps = ["com.github.xournalpp.xournalpp.desktop"];
-    "org/gnome/desktop/peripherals/touchpad" = {
-      click-method = "areas";
-    };
+    "org/gnome/desktop/peripherals/touchpad".click-method = "areas";
     # Fixes for ASUS Specific Laptop
     "org/gnome/shell/keybindings".show-screenshot-u = ["<Shift><Super>s" "<Print>"];
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/btop" = {
