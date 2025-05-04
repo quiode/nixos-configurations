@@ -1,6 +1,6 @@
 {pkgs}: let
   # Recursively list all files from the current directory
-  allFiles = pkgs.lib.filesystem.listFilesRecursive (toString ./.);
+  allFiles = pkgs.lib.filesystem.listFilesRecursive ./.;
 
   # Filter for .nix files that are not default.nix and directories with package.nix
   packagePaths =
