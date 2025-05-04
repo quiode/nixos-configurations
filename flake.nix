@@ -34,7 +34,12 @@
 
     # set up formatter for each system
     formatter = eachSystem (
-      system: (pkgsFor.${system}.alejandra)
+      system: pkgsFor.${system}.alejandra
+    );
+
+    # load custom packages
+    packages = eachSystem (
+      system: import ./packages {pkgs = pkgsFor.${system};}
     );
   };
 }
