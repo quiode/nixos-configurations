@@ -13,7 +13,6 @@
 in {
   options.modules.desktop.gnome.enable = mkEnableOption "Gnome Desktop Environment";
   options.modules.desktop.gnome.users = mkOption {
-    name = "Users";
     example = "[quio, domina, ...]";
     description = "The user for which a home manager configuration should be created.";
     type = listOf str;

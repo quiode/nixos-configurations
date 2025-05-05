@@ -13,13 +13,11 @@ in {
   options.modules.desktop = {
     enable = mkEnableOption "Desktop";
     manager = mkOption {
-      name = "Window Manager / Deskop Environment / etc.";
       type = str;
       default = "gnome";
       description = "The wm, de, etc. to use. Has to be an existing option under `desktop`.";
     };
     users = mkOption {
-      name = "Users";
       example = "[quio, domina, ...]";
       description = "The user for which a home manager configuration should be created.";
       type = listOf str;

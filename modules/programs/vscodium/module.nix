@@ -15,7 +15,6 @@
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
   options.modules.programs.vscodium.users = mkOption {
-    name = "Users";
     example = "[quio, domina, ...]";
     description = "The user for which a home manager configuration should be created.";
     type = listOf str;
