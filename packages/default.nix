@@ -1,9 +1,13 @@
-{pkgs}: let
+pkgs: let
+  inherit (pkgs) lib callPackage;
+  inherit (lib) filter;
+  inherit (lib.filesystem) listFilesRecursive;
+in let
   # Recursively list all files from the current directory
-  allFiles = pkgs.lib.filesystem.listFilesRecursive ./.;
+  allFiles = listFilesRecursive ./.;
   # Filter for .nix files that are not default.nix and directories with package.nix
   packagePaths =
-    pkgs.lib.filter
+    filter
     (
       path: let
         baseName = builtins.baseNameOf path;
@@ -24,7 +28,7 @@
           else builtins.substring 0 (builtins.stringLength baseName - (builtins.stringLength ".nix")) baseName;
       in {
         name = name;
-        value = pkgs.callPackage path {};
+        value = callPackage path {};
       }
     )
     packagePaths);
