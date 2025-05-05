@@ -1,7 +1,5 @@
 # Contains shared configuration for all systems that are mainly graphical, so laptop, pc, etc.
-_: let
-  admins = ["quio"];
-in {
+{config, ...}: {
   modules = {
     boot.plymouth.enable = true;
 
@@ -9,7 +7,7 @@ in {
 
     desktop = {
       enable = true;
-      users = admins;
+      users = config.users.users;
     };
 
     programs = {
