@@ -4,7 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib) types;
+  inherit (lib) genAttrs;
+  inherit (lib.types) listOf str;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   cfg = config.modules.desktop;
@@ -13,15 +14,24 @@ in {
     enable = mkEnableOption "Desktop";
     manager = mkOption {
       name = "Window Manager / Deskop Environment / etc.";
-      type = types.str;
+      type = str;
       default = "gnome";
       description = "The wm, de, etc. to use. Has to be an existing option under `desktop`.";
+    };
+    users = mkOption {
+      name = "Users";
+      example = "[quio, domina, ...]";
+      description = "The user for which a home manager configuration should be created.";
+      type = listOf str;
     };
   };
 
   config = mkIf cfg.enable {
     modules = {
-      desktop.${cfg.manager}.enable = true;
+      desktop.${cfg.manager} = {
+        enable = true;
+        users = cfg.users;
+      };
       programs = {
         vscodium.enable = true;
       };
@@ -56,5 +66,14 @@ in {
     };
 
     programs.firefox.enable = true;
+
+    home-manager = genAttrs cfg.users (username: {
+      services = {
+        nextcloud-client = {
+          enable = true;
+          startInBackground = true;
+        };
+      };
+    });
   };
 }

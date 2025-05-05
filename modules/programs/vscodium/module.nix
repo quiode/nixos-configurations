@@ -5,21 +5,97 @@
   inputs,
   ...
 }: let
-  inherit (lib.options) mkEnableOption;
+  inherit (lib) genAttrs;
+  inherit (lib.types) listOf str;
+  inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) vscodium nil;
+  inherit (pkgs) vscodium nil vscode-marketplace;
   inherit (inputs) nix-vscode-extensions;
   cfg = config.modules.programs.vscodium;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
+  options.modules.programs.vscodium.users = mkOption {
+    name = "Users";
+    example = "[quio, domina, ...]";
+    description = "The user for which a home manager configuration should be created.";
+    type = listOf str;
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [vscodium nil];
-  };
 
-  nixpkgs.
+    nixpkgs.
     overlays = [
-    # Import all vscode extensions
-    nix-vscode-extensions.overlays.default
-  ];
+      # Import all vscode extensions
+      nix-vscode-extensions.overlays.default
+    ];
+
+    home-manager = genAttrs cfg.users (username: {
+      programs.vscode = {
+        enable = true;
+        package = vscodium;
+        mutableExtensionsDir = false;
+        extensions = with vscode-marketplace; [
+          jnoortheen.nix-ide
+          vscodevim.vim
+          pkief.material-icon-theme
+          ms-azuretools.vscode-docker
+          esbenp.prettier-vscode
+          ms-python.python
+          ms-python.vscode-pylance
+          nuxtr.nuxtr-vscode
+          vue.volar
+        ];
+        userSettings = {
+          # General Settings
+          "files.autoSave" = "onFocusChange";
+          "window.zoomLevel" = 1.5;
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.wordWrap" = "wordWrapColumn";
+          "editor.wordWrapColumn" = 120;
+          "git.autofetch" = true;
+
+          # Nix
+          "nix.enableLanguageServer" = true;
+          "nix.serverPath" = "nil"; # or "nixd"
+          "nix.serverSettings" = {
+            # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
+            "nil" = {
+              "formatting" = {
+                "command" = ["alejandra"];
+              };
+            };
+          };
+
+          # Git
+          "git.enableSmartCommit" = true;
+          "git.confirmSync" = false;
+
+          # Vim
+          "vim.useSystemClipboard" = true;
+          "vim.useCtrlKeys" = false;
+
+          # Formatting
+          "[json]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "[jsonc]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "[dockercompose]" = {
+            "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
+          };
+          "[vue]" = {
+            "editor.defaultFormatter" = "Vue.volar";
+          };
+          "[scss]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "[typescript]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+        };
+      };
+    });
+  };
 }
