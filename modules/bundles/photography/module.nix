@@ -1,0 +1,22 @@
+# Contains all applications needed to edit photos
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  inherit (lib.options) mkEnableOption;
+  inherit (lib.modules) mkIf;
+  inherit (pkgs) geeqie identity;
+  cfg = config.modules.bundles.photography;
+in {
+  options.modules.programs.bundles.enable = mkEnableOption "Photography Bundle";
+
+  config = mkIf cfg.enable {
+    programs.gphoto2.enable = true; # used to access my fujifilm camera
+
+    modules.services.vm.enable = true; # enable vm to install windows for adobe lightroom
+
+    environment.systemPackages = [geeqie identity];
+  };
+}

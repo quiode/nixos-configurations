@@ -1,7 +1,6 @@
 {pkgs}: let
   # Recursively list all files from the current directory
   allFiles = pkgs.lib.filesystem.listFilesRecursive ./.;
-
   # Filter for .nix files that are not default.nix and directories with package.nix
   packagePaths =
     pkgs.lib.filter
@@ -14,15 +13,15 @@
         isNixFile || isPackageNix
     )
     allFiles;
-
   # Create an attribute set using these paths
   packages = builtins.listToAttrs (map
     (
       path: let
+        baseName = builtins.baseNameOf path;
         name =
-          if builtins.baseNameOf path == "package.nix"
+          if baseName == "package.nix"
           then builtins.baseNameOf (builtins.dirOf path)
-          else builtins.removeSuffix ".nix" (builtins.baseNameOf path);
+          else builtins.substring 0 (builtins.stringLength baseName - (builtins.stringLength ".nix")) baseName;
       in {
         name = name;
         value = pkgs.callPackage path {};

@@ -39,7 +39,7 @@
 
     # load custom packages
     packages = eachSystem (
-      system: import ./packages pkgsFor.${system}
+      system: import ./packages {pkgs = pkgsFor.${system};}
     );
 
     # loads hosts
