@@ -29,7 +29,7 @@ in {
       nix-vscode-extensions.overlays.default
     ];
 
-    home-manager = genAttrs cfg.users (username: {
+    home-manager.users = genAttrs cfg.users (username: {
       programs.vscode = {
         enable = true;
         package = vscodium;

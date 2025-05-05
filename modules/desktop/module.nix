@@ -65,7 +65,7 @@ in {
 
     programs.firefox.enable = true;
 
-    home-manager = genAttrs cfg.users (username: {
+    home-manager.users = genAttrs cfg.users (username: {
       services = {
         nextcloud-client = {
           enable = true;

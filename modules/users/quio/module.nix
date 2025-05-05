@@ -28,7 +28,7 @@ in {
       };
     };
 
-    home-manager = {
+    home-manager.users.quio = {
       nixpkgs = {
         config = {
           allowUnfree = true;

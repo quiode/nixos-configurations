@@ -62,7 +62,7 @@ in {
       ];
     };
 
-    home-manager = genAttrs cfg.users (username: {
+    home-manager.users = genAttrs cfg.users (username: {
       # find values using "dconf watch /"
       dconf.settings = with gvariant; {
         # are at "/run/current-system/sw/share/applications"
