@@ -1,0 +1,25 @@
+stages:
+  - format_check
+  - build
+
+variables:
+  IMAGE: nixos/nix # Use the official Nix Docker image
+
+format_check:
+  stage: format_check
+  image: $IMAGE
+  script:
+    - nix develop -c nix fmt . # Use nix fmt through nix develop
+    - echo "Format check completed."
+
+build_hosts:
+  stage: build
+  image: $IMAGE
+  script:
+    - echo "Building configuration for $HOST..."
+    - nixos-rebuild build --flake .#$HOST
+  needs:
+    - format_check # Requires a successful format check
+  parallel:
+    matrix:
+      - HOST: ["beaststation", "artemis", "hades"]
