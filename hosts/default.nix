@@ -59,12 +59,12 @@ in {
     system = "x86_64-linux";
     hostname = "beaststation";
   };
+  */
   # Gaming PC
   artemis = mkSystem {
     system = "x86_64-linux";
     hostname = "artemis";
   };
-  */
   # ASUS ROG Gaming Laptop
   hades = mkSystem {
     system = "x86_64-linux";
