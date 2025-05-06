@@ -53,6 +53,7 @@ in {
       };
 
       vali.enable = true;
+      virt.enable = true;
     };
   };
 
