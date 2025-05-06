@@ -8,7 +8,7 @@
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   inherit (lib.types) listOf str;
-  inherit (pkgs) linuxKernel;
+  inherit (pkgs) linuxKernel zfs-prune-snapshots;
   cfg = config.modules.services.zfs;
   latestKernelPackage = let
     zfsCompatibleKernelPackages =
@@ -36,6 +36,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [zfs-prune-snapshots];
+
     boot = {
       supportedFilesystems = ["zfs"];
 

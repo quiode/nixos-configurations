@@ -1,0 +1,129 @@
+x-env: &env
+  environment:
+    APACHE_BODY_LIMIT: '21474836480' # 20G
+    PHP_MEMORY_LIMIT: '10G'
+    PHP_UPLOAD_LIMIT: '20G'
+    MYSQL_DATABASE: 'nextcloud'
+    MYSQL_USER: 'nextcloud'
+    MYSQL_HOST: 'nextcloud-database'
+    NEXTCLOUD_ADMIN_USER: 'admin'
+    REDIS_HOST: 'nextcloud-cache'
+    APACHE_DISABLE_REWRITE_IP: '1'
+    TRUSTED_PROXIES: '172.16.0.0/12'
+    OVERWRITEHOST: 'nextcloud.dominik-schwaiger.ch'
+    OVERWRITEPROTOCOL: 'https'
+    OVERWRITEWEBROOT: '/'
+    NEXTCLOUD_TRUSTED_DOMAINS: 'nextcloud.dominik-schwaiger.ch'
+    SMTP_HOST: 'mail.dominik-schwaiger.ch'
+    SMTP_SECURE: 'ssl'
+    SMTP_NAME: 'nextcloud@dominik-schwaiger.ch'
+    SMTP_PORT: '465'
+    MAIL_FROM_ADDRESS: 'nextcloud'
+    MAIL_DOMAIN: 'dominik-schwaiger.ch'
+  env_file:
+    - /ssd/critical/nextcloud/secrets.env
+
+services:
+  nextcloud:
+    <<: *env
+    image: nextcloud:production-apache
+    restart: always
+    container_name: nextcloud
+    depends_on:
+      - nextcloud-database
+      - nextcloud-cache
+    networks:
+      - nextcloud-extern
+      - nextcloud-intern
+    volumes:
+      - /ssd/critical/nextcloud/html:/var/www/html
+      - /hdd/critical/nextcloud/data:/var/www/html/data
+      - /ssd/critical/nextcloud/apps:/var/www/html/custom_apps
+      - /ssd/critical/nextcloud/config:/var/www/html/config
+      - /ssd/critical/nextcloud/themes:/var/www/html/themes
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      traefik.http.routers.nextcloud.rule: Host(`nextcloud.dominik-schwaiger.ch`)
+      traefik.http.routers.nextcloud.tls: true
+      traefik.http.routers.nextcloud.tls.certresolver: letsencrypt
+      traefik.http.services.nextcloud.loadbalancer.server.port: 80
+      traefik.enable: true
+      traefik.docker.network: nextcloud
+
+  # cron job to allow nextcloud to use cron (instead of custom image https://github.com/nextcloud/docker/blob/master/.examples/docker-compose/insecure/mariadb/apache/docker-compose.yml)
+  nextcloud-cron:
+    <<: *env
+    image: 'nextcloud:production-apache'
+    restart: always
+    container_name: nextcloud-cron
+    volumes:
+      - /ssd/critical/nextcloud/html:/var/www/html
+      - /hdd/critical/nextcloud/data:/var/www/html/data
+      - /ssd/critical/nextcloud/apps:/var/www/html/custom_apps
+      - /ssd/critical/nextcloud/config:/var/www/html/config
+      - /ssd/critical/nextcloud/themes:/var/www/html/themes
+      - /etc/localtime:/etc/localtime:ro
+    entrypoint: /cron.sh
+    networks:
+      - nextcloud-intern
+    depends_on:
+      - nextcloud
+
+  onlyoffice:
+    image: onlyoffice/documentserver
+    container_name: onlyoffice
+    restart: always
+    depends_on:
+      - nextcloud
+    networks:
+      - onlyoffice
+      - nextcloud-intern
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /ssd/critical/onlyoffice/secrets.env
+    labels:
+      traefik.http.routers.office.rule: Host(`office.dominik-schwaiger.ch`)
+      traefik.http.routers.office.tls: true
+      traefik.http.routers.office.tls.certresolver: letsencrypt
+      traefik.enable: true
+      traefik.docker.network: onlyoffice
+      # Workaround a bug in OnlyOffice, see the issue tracker: https://github.com/ONLYOFFICE/DocumentServer/issues/2186
+      traefik.http.middlewares.onlyoffice_redirect_http2https_header.headers.contentSecurityPolicy: upgrade-insecure-requests
+      traefik.http.routers.office.middlewares: onlyoffice_redirect_http2https_header
+
+  nextcloud-database:
+    image: mariadb:lts
+    container_name: nextcloud-database
+    restart: always
+    environment:
+      MARIADB_DATABASE: 'nextcloud'
+      MARIADB_USER: 'nextcloud'
+      MARIADB_AUTO_UPGRADE: 1
+    networks:
+      - nextcloud-intern
+    volumes:
+      - /ssd/critical/nextcloud/database:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /ssd/critical/nextcloud/secrets.env
+
+  nextcloud-cache:
+    image: redis:alpine
+    container_name: nextcloud-cache
+    restart: always
+    networks:
+      - nextcloud-intern
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+networks:
+  nextcloud-extern:
+    name: nextcloud
+    external: true
+
+  nextcloud-intern:
+
+  onlyoffice:
+    name: onlyoffice
+    external: true

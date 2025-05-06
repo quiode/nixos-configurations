@@ -7,8 +7,9 @@
 }: let
   inherit (pkgs) lix;
   inherit (inputs) nix-vscode-extensions;
+  stateVersion = "24.11";
 in {
-  environment.systemPackages = (with pkgs; [wget fastfetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick]) ++ (with self.packages.${pkgs.stdenv.system}; []);
+  environment.systemPackages = (with pkgs; [wget fastfetch onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
 
   nix.package = lix;
 
@@ -21,6 +22,26 @@ in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+
+    # home manager config for all users
+    sharedModules = [
+      (_: {
+        nixpkgs = {
+          config = {
+            allowUnfree = true;
+            # Workaround for https://github.com/nix-community/home-manager/issues/2942
+            allowUnfreePredicate = _: true;
+          };
+        };
+
+        home.stateVersion = stateVersion;
+
+        programs.home-manager.enable = true;
+
+        # Nicely reload system units when changing configs
+        systemd.user.startServices = "sd-switch";
+      })
+    ];
   };
 
   boot.loader = {
@@ -97,5 +118,5 @@ in {
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = stateVersion; # Did you read the comment?
 }

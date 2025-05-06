@@ -1,0 +1,56 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    volumes:
+      - /hdd/non-critical/ollama:/root/.ollama
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    tty: true
+    runtime: nvidia
+    networks:
+      - ollama-internal
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:cuda
+    container_name: open-webui
+    networks:
+      - ollama-internal
+      - ollama-external
+    environment:
+      WEBUI_URL: https://chat.dominik-schwaiger.ch
+      CUSTOM_NAME: Chat
+      USE_CUDA_DOCKER: true
+      OLLAMA_BASE_URL: http://ollama:11434
+      ENABLE_OPENAI_API: false
+      ENABLE_LOGIN_FORM: false
+      ENABLE_OAUTH_SIGNUP: true
+      OAUTH_MERGE_ACCOUNTS_BY_EMAIL: true
+      OAUTH_PROVIDER_NAME: Authentik
+      OPENID_PROVIDER_URL: https://auth.dominik-schwaiger.ch/application/o/open-webui/.well-known/openid-configuration
+      OAUTH_SCOPES: openid email profile
+      OPENID_REDIRECT_URI: https://chat.dominik-schwaiger.ch/oauth/oidc/callback
+    env_file:
+      - /ssd/critical/open-webui/secrets.env
+    runtime: nvidia
+    volumes:
+      - /hdd/critical/open-webui:/app/backend/data
+      - /ssd/non-critical/open-webui/cache:/app/backend/data/cache
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - ollama
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: ollama
+      traefik.http.routers.ollama.rule: Host(`chat.dominik-schwaiger.ch`)
+      traefik.http.routers.ollama.tls: true
+      traefik.http.routers.ollama.tls.certresolver: letsencrypt
+
+networks:
+  ollama-internal:
+    name: ollama-internal
+
+  ollama-external:
+    name: ollama
+    external: true

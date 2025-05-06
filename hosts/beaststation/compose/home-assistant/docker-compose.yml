@@ -1,0 +1,55 @@
+services:
+  home-assistant:
+    container_name: home-assistant
+    hostname: home.dominik-schwaiger.ch
+    image: ghcr.io/home-assistant/home-assistant:stable
+    depends_on:
+      - esphome
+    volumes:
+      - /ssd/critical/home-assistant/config:/config
+      - /hdd/critical/home-assistant/backups:/config/backups
+      - ./configuration.yaml:/config/configuration.yaml:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: always
+    privileged: true
+    #network_mode: host
+    networks:
+      - home-assistant
+      - esphome
+    labels:
+      traefik.enable: true
+      traefik.docker.network: home-assistant
+      traefik.http.routers.home-assistant.rule: Host(`home.dominik-schwaiger.ch`)
+      traefik.http.routers.home-assistant.tls: true
+      traefik.http.routers.home-assistant.tls.certresolver: letsencrypt
+      traefik.http.services.home-assistant.loadbalancer.server.port: 8123
+
+  esphome:
+    image: ghcr.io/esphome/esphome
+    container_name: esphome
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ssd/critical/home-assistant/esphome:/config
+    restart: always
+    environment:
+      ESPHOME_DASHBOARD_USE_PING: true
+    networks:
+      - esphome
+    labels:
+      traefik.enable: true
+      traefik.docker.network: esphome
+      traefik.http.routers.esphome.rule: Host(`esphome.dominik-schwaiger.ch`)
+      traefik.http.routers.esphome.tls: true
+      traefik.http.routers.esphome.tls.certresolver: letsencrypt
+      traefik.http.services.esphome.loadbalancer.server.port: 6052
+      traefik.http.routers.esphome.middlewares: authentik@docker
+
+networks:
+  home-assistant:
+    name: home-assistant
+    external: true
+
+  esphome:
+    name: esphome
+    external: true

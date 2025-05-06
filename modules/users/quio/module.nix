@@ -32,23 +32,12 @@ in {
     };
 
     home-manager.users.quio = {
-      nixpkgs = {
-        config = {
-          allowUnfree = true;
-          # Workaround for https://github.com/nix-community/home-manager/issues/2942
-          allowUnfreePredicate = _: true;
-        };
-      };
-
       home = {
         username = "quio";
         homeDirectory = "/home/quio";
-        stateVersion = "24.11";
       };
 
       programs = {
-        home-manager.enable = true;
-
         git = {
           enable = true;
           userName = "Dominik Schwaiger";

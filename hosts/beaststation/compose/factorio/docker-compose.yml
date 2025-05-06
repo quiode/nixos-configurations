@@ -1,0 +1,19 @@
+services:
+  factorio:
+    container_name: factorio
+    image: factoriotools/factorio:stable
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - 34197:34197/udp
+      # - 27015:27015/tcp # RCON (optional)
+    volumes:
+      # To load an old save stop the server and run the command touch oldsave.zip. This resets the date. Then restart the server. Another option is to delete all saves except one.
+      - /ssd/critical/factorio:/factorio
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      DLC_SPACE_AGE: true
+      UPDATE_MODS_ON_START: true
+    env_file:
+      - /ssd/critical/factorio/secrets.env

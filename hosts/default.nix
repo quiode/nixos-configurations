@@ -53,13 +53,11 @@ inputs: let
       ];
     };
 in {
-  /*
   # Server
   beaststation = mkSystem {
     system = "x86_64-linux";
     hostname = "beaststation";
   };
-  */
   # Gaming PC
   artemis = mkSystem {
     system = "x86_64-linux";

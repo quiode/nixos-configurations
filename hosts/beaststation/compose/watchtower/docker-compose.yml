@@ -1,0 +1,16 @@
+services:
+  watchtower:
+    image: "containrrr/watchtower"
+    container_name: watchtower
+    restart: always
+    command: --cleanup --schedule "0 0 3 * * *"
+    environment:
+      REPO_USER: "quiooo"
+      WATCHTOWER_NOTIFICATION_REPORT: "true"
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_NOTIFICATIONS_HOSTNAME: "beaststation"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /ssd/critical/watchtower/secrets.env
