@@ -9,7 +9,7 @@ format_check:
   stage: format_check
   image: $IMAGE
   script:
-    - nix develop -c nix fmt . # Use nix fmt through nix develop
+    - nix develop -c alejandra -c . # Use alejandra through nix develop
     - echo "Format check completed."
 
 build_hosts:
