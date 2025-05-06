@@ -1,19 +1,18 @@
 stages:
-  - format_check
-  - build
+  - check
 
 variables:
   IMAGE: nixos/nix # Use the official Nix Docker image
 
 format_check:
-  stage: format_check
+  stage: check
   image: $IMAGE
   script:
     - nix develop --extra-experimental-features nix-command -c alejandra -c . # Use alejandra through nix develop
     - echo "Format check completed."
 
 build_hosts:
-  stage: build
+  stage: check
   image: $IMAGE
   script:
     - echo "Building configuration for $HOST..."
