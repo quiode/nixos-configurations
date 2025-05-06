@@ -8,7 +8,7 @@ format_check:
   stage: check
   image: $IMAGE
   script:
-    - nix develop --extra-experimental-features nix-command -c alejandra -c . # Use alejandra through nix develop
+    - nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c alejandra -c . # Use alejandra through nix develop
     - echo "Format check completed."
 
 build_hosts:
