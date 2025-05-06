@@ -2,7 +2,7 @@
   modules = {
     services.zfs = {
       enable = true;
-      pools     = ["hdd"];
+      pools = ["hdd"];
     };
 
     bundles.gaming = {
