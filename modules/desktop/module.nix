@@ -26,6 +26,7 @@ in {
 
   config = mkIf cfg.enable {
     modules = {
+      # TODO: make more generic
       desktop.gnome = mkIf (cfg.manager == "gnome") {
         enable = true;
         users = cfg.users;
