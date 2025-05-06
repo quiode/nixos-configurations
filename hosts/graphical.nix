@@ -30,4 +30,6 @@
       main = true;
     };
   };
+
+  networking.networkmanager.enable = true;
 }

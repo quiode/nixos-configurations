@@ -56,13 +56,9 @@ in {
     "flakes"
   ];
 
-  # Enable networking and firewall
-  networking = {
-    networkmanager.enable = true;
-    firewall.enable = true;
-  };
+  networking.firewall.enable = true;
 
-  # Set time zone.
+  # set time zone
   time.timeZone = "Europe/Zurich";
 
   # Select internationalisation properties.
