@@ -6,15 +6,15 @@ This Repository contains all my NixOS configuration files for my Computers, Lapt
 
 ### `packages`
 
-TODO
+Contains custom packages not in `nixpkgs`.
 
 ### `modules`
 
-TODO
+Contains the modularized configurations of my systems. Everything is under `modules.*`.
 
 ### `hosts`
 
-TODO
+Contains host-specific configurations.
 
 ## Develop
 
