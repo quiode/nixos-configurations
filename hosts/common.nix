@@ -11,6 +11,10 @@
 in {
   environment.systemPackages = (with pkgs; [wget fastfetch onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
 
+  modules = {
+    programs.zsh.enable = true;
+  };
+
   nix.package = lix;
 
   nixpkgs.

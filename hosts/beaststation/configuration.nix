@@ -55,6 +55,10 @@ in {
       vali.enable = true;
       virt.enable = true;
     };
+
+    programs = {
+      zsh.users = [config.modules.users.main];
+    };
   };
 
   # Use the grub EFI boot loader.

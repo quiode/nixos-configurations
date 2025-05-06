@@ -18,6 +18,7 @@
         users = [config.modules.users.main];
       };
       wireguard.enable = true;
+      zsh.users = [config.modules.users.main];
     };
 
     services = {
