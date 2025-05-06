@@ -38,6 +38,10 @@ in {
 
         initExtra = ''fastfetch'';
 
+        shellAliases = {
+          upgrade = "nh os switch /config";
+        };
+
         # see https://github.com/ohmyzsh/ohmyzsh/wiki
         oh-my-zsh = {
           enable = true;
