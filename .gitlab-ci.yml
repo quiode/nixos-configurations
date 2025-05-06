@@ -18,8 +18,6 @@ build_hosts:
   script:
     - echo "Building configuration for $HOST..."
     - nixos-rebuild build --flake .#$HOST
-  needs:
-    - format_check # Requires a successful format check
   parallel:
     matrix:
       - HOST: ["beaststation", "artemis", "hades"]
