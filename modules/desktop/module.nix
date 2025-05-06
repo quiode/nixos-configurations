@@ -26,12 +26,15 @@ in {
 
   config = mkIf cfg.enable {
     modules = {
-      desktop.${cfg.manager} = {
+      desktop.gnome = mkIf (cfg.manager == "gnome") {
         enable = true;
         users = cfg.users;
       };
       programs = {
-        vscodium.enable = true;
+        vscodium = {
+          enable = true;
+          users = config.users.users;
+        };
       };
     };
 

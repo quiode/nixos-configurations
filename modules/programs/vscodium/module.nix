@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) genAttrs;
@@ -10,7 +9,6 @@
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   inherit (pkgs) vscodium nil vscode-marketplace;
-  inherit (inputs) nix-vscode-extensions;
   cfg = config.modules.programs.vscodium;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
@@ -22,12 +20,6 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [vscodium nil];
-
-    nixpkgs.
-    overlays = [
-      # Import all vscode extensions
-      nix-vscode-extensions.overlays.default
-    ];
 
     home-manager.users = genAttrs cfg.users (username: {
       programs.vscode = {

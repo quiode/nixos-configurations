@@ -13,7 +13,10 @@
     programs = {
       libreoffice.enable = true;
       localsend.enable = true;
-      vscodium.enable = true;
+      vscodium = {
+        enable = true;
+        users = config.users.users;
+      };
       wireguard.enable = true;
     };
 

@@ -3,9 +3,18 @@
   self,
   pkgs,
   system,
+  inputs,
   ...
-}: {
+}: let
+  inherit (inputs) nix-vscode-extensions;
+in {
   environment.systemPackages = (with pkgs; [wget fastfetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick]) ++ (with self.packages.${pkgs.stdenv.system}; [hello]);
+
+  nixpkgs.
+    overlays = [
+    # Import all vscode extensions
+    nix-vscode-extensions.overlays.default
+  ];
 
   home-manager = {
     useGlobalPkgs = true;

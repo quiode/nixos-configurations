@@ -10,7 +10,7 @@
   inherit (pkgs) geeqie identity;
   cfg = config.modules.bundles.photography;
 in {
-  options.modules.programs.bundles.enable = mkEnableOption "Photography Bundle";
+  options.modules.bundles.photography.enable = mkEnableOption "Photography Bundle";
 
   config = mkIf cfg.enable {
     programs.gphoto2.enable = true; # used to access my fujifilm camera
