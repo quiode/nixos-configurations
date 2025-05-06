@@ -16,7 +16,7 @@ build_hosts:
   image: $IMAGE
   script:
     - echo "Building configuration for $HOST..."
-    - nixos-rebuild build --flake .#$HOST
+    - nix build .#nixosConfigurations.$HOST.config.system.build.toplevel
   parallel:
     matrix:
       - HOST: ["beaststation", "artemis", "hades"]
