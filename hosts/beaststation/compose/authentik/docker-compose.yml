@@ -1,0 +1,113 @@
+services:
+  postgresql:
+    image: pgautoupgrade/pgautoupgrade:alpine
+    container_name: authentik_postgres
+    restart: always
+    networks:
+      - authentik-internal
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}' ]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - /ssd/critical/authentik/database:/var/lib/postgresql/data
+    env_file:
+      - /ssd/critical/authentik/secrets.env
+    environment:
+      POSTGRES_USER: authentik
+      POSTGRES_DB: authentik
+
+  redis:
+    image: redis:alpine
+    container_name: authentik_redis
+    command: --save 60 1 --loglevel warning
+    restart: always
+    networks:
+      - authentik-internal
+    healthcheck:
+      test: [ 'CMD-SHELL', 'redis-cli ping | grep PONG' ]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+
+  authentik_ldap:
+    image: ghcr.io/goauthentik/ldap
+    container_name: authentik_ldap
+    restart: always
+    ports:
+      - 389:3389
+      - 636:6636
+    env_file:
+      - /ssd/critical/authentik/secrets.env
+      - /ssd/critical/authentik/ldap-secrets.env
+    environment:
+      AUTHENTIK_HOST: https://auth.dominik-schwaiger.ch
+      AUTHENTIK_INSECURE: 'false'
+
+  authentik:
+    image: ghcr.io/goauthentik/server
+    restart: always
+    container_name: authentik
+    command: server
+    networks:
+      - authentik-internal
+      - authentik-external
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+    volumes:
+      - /ssd/critical/authentik/media:/media
+      - /ssd/critical/authentik/custom-templates:/templates
+    env_file:
+      - /ssd/critical/authentik/secrets.env
+    depends_on:
+      - postgresql
+      - redis
+      - authentik_ldap
+    labels:
+      traefik.http.routers.authentik.rule: Host(`auth.dominik-schwaiger.ch`)
+      traefik.http.routers.authentik.tls: true
+      traefik.http.routers.authentik.tls.certresolver: letsencrypt
+      traefik.http.services.authentik.loadbalancer.server.port: 9000
+      traefik.enable: true
+      traefik.docker.network: authentik
+
+  worker:
+    image: ghcr.io/goauthentik/server
+    restart: always
+    container_name: authentik_worker
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+    # `user: root` and the docker socket volume are optional.
+    # See more for the docker socket integration here:
+    # https://goauthentik.io/docs/outposts/integrations/docker
+    # Removing `user: root` also prevents the worker from fixing the permissions
+    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+    # (1000:1000 by default)
+    user: root
+    volumes:
+      - /ssd/critical/authentik/media:/media
+      - /ssd/critical/authentik/custom-templates:/templates
+    env_file:
+      - /ssd/critical/authentik/secrets.env
+    depends_on:
+      - postgresql
+      - redis
+    networks:
+      - authentik-internal
+
+networks:
+  authentik-internal:
+
+  authentik-external:
+    name: authentik
+    external: true

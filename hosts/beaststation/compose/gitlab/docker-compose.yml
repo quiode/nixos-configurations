@@ -1,0 +1,116 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: gitlab
+    hostname: gitlab.dominik-schwaiger.ch
+    restart: always
+    depends_on:
+      - registry-db
+    networks:
+      - gitlab
+      - gitlab-internal
+    env_file:
+      - /ssd/critical/gitlab/secrets.env
+      - /ssd/critical/gitlab/registry/secrets.env
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        # Add any other gitlab.rb configuration here, each on its own line
+        external_url 'https://gitlab.dominik-schwaiger.ch'
+        letsencrypt['enabled'] = false
+        nginx['enable'] = true
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+
+        # Mail Config - Incoming
+        gitlab_rails['incoming_email_enabled'] = true
+        gitlab_rails['incoming_email_address'] = "gitlab+%{key}@dominik-schwaiger.ch"
+        gitlab_rails['incoming_email_email'] = "gitlab@dominik-schwaiger.ch"
+        gitlab_rails['incoming_email_password'] = ENV['GITLAB_SMTP_PASSWORD']
+        gitlab_rails['incoming_email_host'] = "mail.dominik-schwaiger.ch"
+        gitlab_rails['incoming_email_port'] = 993
+        gitlab_rails['incoming_email_ssl'] = true
+        gitlab_rails['incoming_email_start_tls'] = false
+        gitlab_rails['incoming_email_mailbox_name'] = "INBOX"
+        gitlab_rails['incoming_email_delete_after_delivery'] = true
+        gitlab_rails['incoming_email_expunge_deleted'] = true
+        gitlab_rails['incoming_email_delivery_method'] = "sidekiq"
+        gitlab_rails['service_desk_email_delivery_method'] = "sidekiq"
+
+        # Mail Config - SMTP
+        gitlab_rails['smtp_enable'] = true 
+        gitlab_rails['smtp_address'] = "mail.dominik-schwaiger.ch"
+        gitlab_rails['smtp_port'] = 465    
+        gitlab_rails['smtp_user_name'] = "gitlab@dominik-schwaiger.ch"
+        gitlab_rails['smtp_password'] = ENV['GITLAB_SMTP_PASSWORD']
+        gitlab_rails['smtp_tls'] = true    
+        gitlab_rails['smtp_enable_starttls_auto'] = false
+        gitlab_rails['smtp_domain'] = "dominik-schwaiger.ch"
+        gitlab_rails['smtp_authentication'] = "login"
+        gitlab_rails['gitlab_email_from'] = "gitlab@dominik-schwaiger.ch"
+        gitlab_rails['gitlab_email_reply_to'] = "noreply@dominik-schwaiger.ch"
+
+        # Container Registry
+        registry['enable'] = true
+        registry_external_url 'https://registry.dominik-schwaiger.ch'
+        registry['database'] = {'enabled' => true,'host' => 'registry-db','port' => 5432,'user' => 'registry','password' => ENV['POSTGRES_PASSWORD'],'dbname' => 'registry','sslmode' => 'disable'}
+        registry_nginx['enable'] = true
+        registry_nginx['redirect_http_to_https'] = false
+        registry_nginx['listen_port'] = 80
+        registry_nginx['listen_https'] = false
+        registry_nginx['proxy_set_headers'] = {"X-Forwarded-Proto" => "https","X-Forwarded-Ssl" => "on"}
+
+        # Authentik
+        gitlab_rails['omniauth_allow_single_sign_on'] = ['openid_connect']
+        gitlab_rails['omniauth_sync_email_from_provider'] = 'openid_connect'
+        gitlab_rails['omniauth_sync_profile_from_provider'] = ['openid_connect']
+        gitlab_rails['omniauth_sync_profile_attributes'] = ['email']
+        gitlab_rails['omniauth_auto_sign_in_with_provider'] = 'openid_connect'
+        gitlab_rails['omniauth_allow_bypass_two_factor'] = 'openid_connect'
+        gitlab_rails['omniauth_block_auto_created_users'] = false
+        gitlab_rails['omniauth_auto_link_saml_user'] = true
+        gitlab_rails['omniauth_auto_link_user'] = ["openid_connect"]
+        gitlab_rails['omniauth_providers'] = [{name: 'openid_connect',label: 'Authentik Login',args: {name: 'openid_connect',scope: ['openid','profile','email'],response_type: 'code',issuer: 'https://auth.dominik-schwaiger.ch/application/o/gitlab/',discovery: true,client_auth_method: 'query',uid_field: 'preferred_username',send_scope_to_token_endpoint: 'true',pkce: true,client_options: {identifier: ENV['OIDC_CLIENT_ID'],secret: ENV['OIDC_CLIENT_SECRET'],redirect_uri: 'https://gitlab.dominik-schwaiger.ch/users/auth/openid_connect/callback'}}}]
+    ports:
+      - 22:22
+    volumes:
+      - /ssd/critical/gitlab/config:/etc/gitlab
+      - /hdd/non-critical/gitlab/logs:/var/log/gitlab
+      - /hdd/critical/gitlab/data:/var/opt/gitlab
+      - /etc/localtime:/etc/localtime:ro
+    shm_size: '256m'
+    labels:
+      traefik.http.routers.gitlab.rule: Host(`gitlab.dominik-schwaiger.ch`) || Host(`registry.dominik-schwaiger.ch`)
+      traefik.http.routers.gitlab.tls: true
+      traefik.http.routers.gitlab.tls.certresolver: letsencrypt
+      traefik.http.services.gitlab.loadbalancer.server.port: 80
+      traefik.enable: true
+      traefik.docker.network: gitlab
+
+  registry-db:
+    image: pgautoupgrade/pgautoupgrade:alpine
+    restart: always
+    networks:
+      - gitlab-internal
+    volumes:
+      - /ssd/critical/gitlab/registry/database:/var/lib/postgresql/data
+    env_file:
+      - /ssd/critical/gitlab/registry/secrets.env
+    environment:
+      POSTGRES_USER: registry
+      POSTGRES_DB: registry
+
+  runner:
+    image: gitlab/gitlab-runner
+    container_name: gitlab-runner
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /ssd/critical/gitlab/runner/config:/etc/gitlab-runner
+      - /etc/localtime:/etc/localtime:ro
+
+networks:
+  gitlab:
+    name: gitlab
+    external: true
+
+  gitlab-internal:

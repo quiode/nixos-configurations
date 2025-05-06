@@ -1,0 +1,36 @@
+services:
+  minecraft:
+    container_name: minecraft
+    ports:
+      - 25565:25565
+    image: 'itzg/minecraft-server'
+    volumes:
+      - /ssd/critical/minecraft/server:/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      EULA: 'true'
+      VERSION: 'LATEST'
+      INIT_MEMORY: '2G'
+      MAX_MEMORY: '32G'
+      MOTD: 'A Vanilla Minecraft Server powered by the power of Love'
+      OVERRIDE_ICON: 'true'
+      ICON: 'https://raw.githubusercontent.com/quiode/beaststation-config/main/compose/minecraft-server/crystal_kontur_lila_moon.png'
+      SERVER_NAME: 'Crystal'
+    tty: true
+    stdin_open: true
+    restart: always
+
+  minecraft-backup:
+    container_name: minecraft-backup
+    image: 'itzg/mc-backup'
+    environment:
+      BACKUP_INTERVAL: '2h'
+      RCON_HOST: minecraft
+      PAUSE_IF_NO_PLAYERS: 'true'
+      LINK_LATEST: 'true'
+      PRUNE_BACKUPS_DAYS: '14'
+    restart: always
+    volumes:
+      - /hdd/non-critical/minecraft/backups:/backups
+      - /ssd/critical/minecraft/server:/data:ro
+      - /etc/localtime:/etc/localtime:ro

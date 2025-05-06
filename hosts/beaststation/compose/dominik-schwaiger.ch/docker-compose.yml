@@ -1,0 +1,33 @@
+services:
+  website:
+    image: registry.dominik-schwaiger.ch/quio/dominik-schwaiger-ch:main
+    container_name: dominik-schwaiger.ch
+    restart: always
+    networks:
+      - dominik-schwaiger
+    volumes:
+      - /hdd/critical/dominik-schwaiger.ch/images:/dominik-schwaiger.ch/public/images
+      - /hdd/critical/dominik-schwaiger.ch/data:/dominik-schwaiger.ch/data
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /ssd/critical/dominik-schwaiger.ch/secrets.env
+    labels:
+      traefik.enable: true
+      traefik.docker.network: dominik-schwaiger
+      # Main Router
+      traefik.http.routers.website.rule: Host(`dominik-schwaiger.ch`)
+      traefik.http.routers.website.tls: true
+      traefik.http.routers.website.tls.certresolver: letsencrypt
+      # Images Router (For Caching)
+      traefik.http.routers.website-images.rule: Host(`dominik-schwaiger.ch`) && PathPrefix(`/_ipx`)
+      traefik.http.routers.website-images.tls: true
+      traefik.http.routers.website-images.tls.certresolver: letsencrypt
+      traefik.http.middlewares.website-image-cache.plugin.simplecache.path: /hdd/non-critical/dominik-schwaiger.ch/cache
+      traefik.http.middlewares.website-image-cache.plugin.simplecache.maxExpiry: 31536000 # cache for one year
+      traefik.http.middlewares.website-image-cache.plugin.simplecache.cleanup: 86400 # clean up daily
+      traefik.http.routers.website-images.middlewares: website-image-cache@docker
+
+networks:
+  dominik-schwaiger:
+    name: dominik-schwaiger
+    external: true

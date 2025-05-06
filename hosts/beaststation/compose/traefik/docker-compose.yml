@@ -1,0 +1,122 @@
+services:
+  traefik:
+    image: traefik:3
+    container_name: traefik
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - /etc/localtime:/etc/localtime:ro
+      - acme:/etc/certs # for sharing certs with other services
+      # For External Services
+      - /hdd/non-critical/dominik-schwaiger.ch/cache:/hdd/non-critical/dominik-schwaiger.ch/cache # for caching the personal website
+    labels:
+      traefik.http.middlewares.authentik.forwardauth.address: http://authentik:9000/outpost.goauthentik.io/auth/traefik
+      traefik.http.middlewares.authentik.forwardauth.trustForwardHeader: true
+      traefik.http.middlewares.authentik.forwardauth.authResponseHeaders: X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version
+      traefik.http.routers.dashboard.middlewares: authentik@docker
+      traefik.http.routers.dashboard.service: api@internal
+      traefik.http.routers.dashboard.rule: Host(`traefik.dominik-schwaiger.ch`)
+      traefik.http.routers.dashboard.tls: true
+      traefik.http.routers.dashboard.tls.certresolver: letsencrypt
+      traefik.enable: true
+    networks:
+      - nextcloud
+      - dominik-schwaiger
+      - onlyoffice
+      - vaultwarden
+      - gitlab
+      - jellyfin
+      - qbittorrent
+      - immich
+      - ollama
+      - home-assistant
+      - matrix
+      - esphome
+      - authentik
+      - jellyseerr
+      - radarr
+      - sonarr
+      - prowlarr
+      - wg-easy
+      - stalwart
+
+  traefik-certs-dumper:
+    image: ghcr.io/kereis/traefik-certs-dumper
+    container_name: traefik-certs-dumper
+    command: --restart-containers stalwart
+    restart: always
+    depends_on:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - acme:/traefik:ro
+      - certs:/output
+
+# using volumes because data is temporary and small -> on ssd
+volumes:
+  acme:
+  certs:
+    name: traefik_certs
+
+networks:
+  nextcloud:
+    name: nextcloud
+
+  dominik-schwaiger:
+    name: dominik-schwaiger
+
+  onlyoffice:
+    name: onlyoffice
+
+  vaultwarden:
+    name: vaultwarden
+
+  gitlab:
+    name: gitlab
+
+  jellyfin:
+    name: jellyfin
+
+  qbittorrent:
+    name: qbittorrent
+
+  immich:
+    name: immich
+
+  ollama:
+    name: ollama
+
+  home-assistant:
+    name: home-assistant
+
+  matrix:
+    name: matrix
+
+  esphome:
+    name: esphome
+
+  authentik:
+    name: authentik
+
+  jellyseerr:
+    name: jellyseerr
+
+  radarr:
+    name: radarr
+
+  sonarr:
+    name: sonarr
+
+  prowlarr:
+    name: prowlarr
+
+  wg-easy:
+    name: wg-easy
+
+  stalwart:
+    name: stalwart

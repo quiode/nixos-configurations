@@ -3,6 +3,7 @@
   git,
   writeShellApplication,
   nh,
+  alejandra,
 }: let
   current_dir = builtins.toString ./.;
 in
@@ -14,6 +15,7 @@ in
     packages = [
       git # take a guess
       nh # for upgrading
+      alejandra # for formatting
 
       (writeShellApplication {
         name = "update";

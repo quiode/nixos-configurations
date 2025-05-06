@@ -1,0 +1,22 @@
+stages:
+  - check
+
+variables:
+  IMAGE: nixos/nix # Use the official Nix Docker image
+
+format_check:
+  stage: check
+  image: $IMAGE
+  script:
+    - nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c alejandra -c . # Use alejandra through nix develop
+    - echo "Format check completed."
+
+build_hosts:
+  stage: check
+  image: $IMAGE
+  script:
+    - echo "Building configuration for $HOST..."
+    - nix build --extra-experimental-features nix-command --extra-experimental-features flakes .#nixosConfigurations.$HOST.config.system.build.toplevel
+  parallel:
+    matrix:
+      - HOST: ["beaststation", "artemis", "hades"]

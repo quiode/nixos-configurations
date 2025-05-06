@@ -1,0 +1,47 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+notify:
+  - name: 'email'
+    platform: smtp
+    sender: 'home-assistant@dominik-schwaiger.ch'
+    recipient: 'mail@dominik-schwaiger.ch'
+    server: 'mail.dominik-schwaiger.ch'
+    username: 'home-assistant@dominik-schwaiger.ch'
+    password: !secret email_password
+  - platform: telegram
+    name: 'Beaststation Notifications'
+    chat_id: -1001816372793
+  - platform: telegram
+    name: 'Dominik Bot Chat'
+    chat_id: 806378608
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.16.0.0/12
+
+auth_oidc:
+  client_id: !secret auth_client_id
+  client_secret: !secret auth_client_secret
+  discovery_url: 'https://auth.dominik-schwaiger.ch/application/o/home-assistant/.well-known/openid-configuration'
+  features:
+    automatic_user_linking: true
+
+recorder:
+  purge_keep_days: 150
+
+telegram_bot:
+  - platform: broadcast
+    api_key: !secret telegram_token
+    allowed_chat_ids:
+      - -1001816372793 # beaststation notifications chat
+      - 806378608 # bot chat dominik

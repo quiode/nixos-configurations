@@ -1,0 +1,47 @@
+services:
+  matrix:
+    image: matrixdotorg/synapse
+    hostname: matrix.dominik-schwaiger.ch
+    container_name: matrix
+    restart: always
+    environment:
+      SYNAPSE_SERVER_NAME: matrix.dominik-schwaiger.ch
+      SYNAPSE_REPORT_STATS: yes
+    networks:
+      - matrix-internal
+      - matrix-external
+    depends_on:
+      - db
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /hdd/critical/matrix/data/media:/data/media
+      - /ssd/critical/matrix/data:/data
+    labels:
+      traefik.enable: true
+      traefik.docker.network: matrix
+      traefik.http.routers.matrix.rule: Host(`matrix.dominik-schwaiger.ch`)
+      traefik.http.routers.matrix.tls: true
+      traefik.http.routers.matrix.tls.certresolver: letsencrypt
+      traefik.http.services.matrix.loadbalancer.server.port: 8008
+
+  db:
+    image: pgautoupgrade/pgautoupgrade:alpine
+    container_name: matrix-db
+    restart: always
+    networks:
+      - matrix-external
+    volumes:
+      - /ssd/critical/matrix/db:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      POSTGRES_USER: matrix
+      POSTGRES_INITDB_ARGS: '--encoding=UTF8 --locale=C'
+    env_file:
+      - /ssd/critical/matrix/secrets.env # for POSTGRES_PASSWORD
+
+networks:
+  matrix-internal:
+
+  matrix-external:
+    name: matrix
+    external: true

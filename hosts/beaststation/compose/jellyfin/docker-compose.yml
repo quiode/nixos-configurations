@@ -1,0 +1,223 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: 'jellyfin'
+    group_add: # by id as these may not exist within the container. Needed to provide permissions to the VAAPI Devices
+      - '107' #render
+      - '44' #video
+    # Network mode of 'host' exposes the ports on the host. This is needed for DLNA access.
+    #network_mode: 'host'
+    volumes:
+      # Update this configuration as desired
+      - /ssd/critical/jellyfin/config:/config
+      - /hdd/non-critical/jellyfin/media:/media
+      - cache:/cache # store the cache on a named volume so it is stored on the ssd instead of hdd
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    runtime: nvidia
+    networks:
+      - jellyfin-internal
+      - jellyfin-external
+    labels:
+      traefik.enable: true
+      ## HTTP Router
+      #### Host or Path where Jellyfin is accessible
+      #### Remove (or change) this rule if you'd rather have Jellyfin accessible at a PathPrefix URI
+      traefik.http.routers.jellyfin.rule: Host(`jellyfin.dominik-schwaiger.ch`) # OPTIONAL: && PathPrefix(`/jellyfin`)
+      #### Enable TLS with the ACME/LetsEncrypt resolver for HOSTNAME.DOMAIN_NAME
+      traefik.http.routers.jellyfin.tls: true
+      traefik.http.routers.jellyfin.tls.certResolver: letsencrypt
+      ## Middleware
+      traefik.http.routers.jellyfin.middlewares: jellyfin-mw@docker
+      #### The customResponseHeaders option lists the Header names and values to apply to the response.
+      traefik.http.middlewares.jellyfin-mw.headers.customResponseHeaders.X-Robots-Tag: noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex
+      #### The stsSeconds is the max-age of the Strict-Transport-Security header. If set to 0, would NOT include the header.
+      traefik.http.middlewares.jellyfin-mw.headers.STSSeconds: 315360000
+      #### The stsIncludeSubdomains is set to true, the includeSubDomains directive will be
+      #### appended to the Strict-Transport-Security header.
+      traefik.http.middlewares.jellyfin-mw.headers.STSIncludeSubdomains: true
+      #### Set stsPreload to true to have the preload flag appended to the Strict-Transport-Security header.
+      traefik.http.middlewares.jellyfin-mw.headers.STSPreload: true
+      #### Set forceSTSHeader to true, to add the STS header even when the connection is HTTP.
+      traefik.http.middlewares.jellyfin-mw.headers.forceSTSHeader: true
+      #### Set frameDeny to true to add the X-Frame-Options header with the value of DENY.
+      traefik.http.middlewares.jellyfin-mw.headers.frameDeny: true
+      #### Set contentTypeNosniff to true to add the X-Content-Type-Options header with the value nosniff.
+      traefik.http.middlewares.jellyfin-mw.headers.contentTypeNosniff: true
+      #### Set browserXssFilter to true to add the X-XSS-Protection header with the value 1; mode=block.
+      traefik.http.middlewares.jellyfin-mw.headers.customresponseheaders.X-XSS-PROTECTION: 1
+      #### The customFrameOptionsValue allows the X-Frame-Options header value to be set with a custom value. This
+      #### overrides the FrameDeny option.
+      traefik.http.middlewares.jellyfin-mw.headers.customFrameOptionsValue: 'allow-from https://jellyfin.dominik-schwaiger.ch'
+      ## HTTP Service
+      # We define the port here as a port is required
+      traefik.http.services.jellyfin.loadBalancer.server.port: 8096
+      traefik.http.services.jellyfin.loadBalancer.passHostHeader: true
+      traefik.docker.network: jellyfin
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr
+    container_name: jellyseerr
+    depends_on:
+      - jellyfin
+      - sonarr
+      - radarr
+    networks:
+      - jellyseerr
+      - jellyfin-internal
+    environment:
+      LOG_LEVEL: debug
+      PORT: 5055 #optional
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ssd/critical/jellyseerr/config:/app/config
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: jellyseerr
+      traefik.http.routers.jellyseerr.rule: Host(`jellyseerr.dominik-schwaiger.ch`)
+      traefik.http.routers.jellyseerr.tls: true
+      traefik.http.routers.jellyseerr.tls.certresolver: letsencrypt
+      traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    depends_on:
+      - prowlarr
+      - qbittorrent
+    environment:
+      PUID: 1000
+      PGID: 1000
+    networks:
+      - jellyfin-internal
+      - sonarr
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ssd/critical/sonarr/config:/config
+      - /hdd/non-critical/jellyfin/media/shows:/tv #optional
+      - /hdd/non-critical/qbittorrent/downloads:/downloads #optional
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: sonarr
+      traefik.http.routers.sonarr.rule: Host(`sonarr.dominik-schwaiger.ch`)
+      traefik.http.routers.sonarr.tls: true
+      traefik.http.routers.sonarr.tls.certresolver: letsencrypt
+      traefik.http.services.sonarr.loadbalancer.server.port: 8989
+      traefik.http.routers.sonarr.middlewares: authentik@docker
+
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    container_name: radarr
+    depends_on:
+      - prowlarr
+      - qbittorrent
+    environment:
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - /ssd/critical/radarr/config:/config
+      - /hdd/non-critical/jellyfin/media/movies:/movies #optional
+      - /hdd/non-critical/qbittorrent/downloads:/downloads #optional
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - jellyfin-internal
+      - radarr
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: radarr
+      traefik.http.routers.radarr.rule: Host(`radarr.dominik-schwaiger.ch`)
+      traefik.http.routers.radarr.tls: true
+      traefik.http.routers.radarr.tls.certresolver: letsencrypt
+      traefik.http.services.radarr.loadbalancer.server.port: 7878
+      traefik.http.routers.radarr.middlewares: authentik@docker
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr
+    container_name: prowlarr
+    depends_on:
+      - flaresolverr
+    environment:
+      PUID: 1000
+      PGID: 1000
+    networks:
+      - jellyfin-internal
+      - prowlarr
+    volumes:
+      - /ssd/critical/prowlarr/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: prowlarr
+      traefik.http.routers.prowlarr.rule: Host(`prowlarr.dominik-schwaiger.ch`)
+      traefik.http.routers.prowlarr.tls: true
+      traefik.http.routers.prowlarr.tls.certresolver: letsencrypt
+      traefik.http.services.prowlarr.loadbalancer.server.port: 9696
+      traefik.http.routers.prowlarr.middlewares: authentik@docker
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr
+    container_name: flaresolverr
+    environment:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - jellyfin-internal
+    restart: always
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent
+    container_name: qbittorrent
+    environment:
+      PUID: 1000
+      PGID: 1000
+      WEBUI_PORT: 8080
+      TORRENTING_PORT: 6881
+    volumes:
+      - /ssd/critical/qbittorrent/appdata:/config
+      - /hdd/non-critical/qbittorrent/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    networks:
+      - jellyfin-internal
+      - qbittorrent
+    labels:
+      traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.dominik-schwaiger.ch`)
+      traefik.http.routers.qbittorrent.tls: true
+      traefik.http.routers.qbittorrent.tls.certresolver: letsencrypt
+      traefik.http.routers.qbittorrent.middlewares: authentik@docker
+      traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
+      traefik.enable: true
+      traefik.docker.network: qbittorrent
+
+volumes:
+  cache:
+
+networks:
+  jellyfin-internal:
+
+  jellyfin-external:
+    name: jellyfin
+    external: true
+
+  jellyseerr:
+    name: jellyseerr
+    external: true
+
+  qbittorrent:
+    name: qbittorrent
+    external: true
+
+  radarr:
+    name: radarr
+    external: true
+
+  sonarr:
+    name: sonarr
+    external: true
+
+  prowlarr:
+    name: prowlarr
+    external: true

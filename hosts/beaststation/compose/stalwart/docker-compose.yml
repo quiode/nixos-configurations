@@ -1,0 +1,35 @@
+services:
+  stalwart:
+    image: stalwartlabs/mail-server
+    container_name: stalwart
+    ports:
+      - 25:25 # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
+      - 143:143 # IMAP4 (explicit TLS => STARTTLS)
+      - 465:465 # ESMTP (implicit TLS)
+      - 587:587 # ESMTP (explicit TLS => STARTTLS)
+      - 993:993 # IMAP4 (implicit TLS)
+      - 4190:4190 # ManageSieve (Sieve scripts)
+    networks:
+      - stalwart
+    restart: always
+    volumes:
+      - /ssd/critical/stalwart:/opt/stalwart-mail
+      - /etc/localtime:/etc/localtime:ro
+      - certs:/data/certs:ro # certs from traefik
+    labels:
+      traefik.enable: true
+      traefik.docker.network: stalwart
+      traefik.http.routers.stalwart.rule: Host(`mail.dominik-schwaiger.ch`) || Host(`autodiscover.dominik-schwaiger.ch`) || Host(`autoconfig.dominik-schwaiger.ch`) || Host(`smtp.dominik-schwaiger.ch`) || Host(`imap.dominik-schwaiger.ch`) || Host(`mta-sts.dominik-schwaiger.ch`)
+      traefik.http.routers.stalwart.tls: true
+      traefik.http.routers.stalwart.tls.certresolver: letsencrypt
+      traefik.http.services.stalwart.loadbalancer.server.port: 8080
+
+volumes:
+  certs:
+    name: traefik_certs
+    external: true
+
+networks:
+  stalwart:
+    name: stalwart
+    external: true

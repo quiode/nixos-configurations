@@ -1,8 +1,22 @@
 # NixOS Configurations
 
-This Repository contains all my configuration files for my various personal computers and laptops (except for my server which can be found in a separate [repository](https://gitlab.dominik-schwaiger.ch/quio/beaststation-config)).
+This Repository contains all my NixOS configuration files for my Computers, Laptops, Servers, etc.
 
-## Develope
+## Structure
+
+### `packages`
+
+Contains custom packages not in `nixpkgs`.
+
+### `modules`
+
+Contains the modularized configurations of my systems. Everything is under `modules.*`.
+
+### `hosts`
+
+Contains host-specific configurations.
+
+## Develop
 
 Run `nix develop` to open a shell with some usefull commands and the minimal required packages.
 
