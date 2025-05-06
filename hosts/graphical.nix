@@ -7,7 +7,7 @@
 
     desktop = {
       enable = true;
-      users = config.users.users;
+      users = [config.modules.users.main];
     };
 
     programs = {
@@ -15,7 +15,7 @@
       localsend.enable = true;
       vscodium = {
         enable = true;
-        users = config.users.users;
+        users = [config.modules.users.main];
       };
       wireguard.enable = true;
     };
@@ -25,6 +25,9 @@
       vm.enable = true;
     };
 
-    users.quio.enable = true;
+    users.quio = {
+      enable = true;
+      main = true;
+    };
   };
 }

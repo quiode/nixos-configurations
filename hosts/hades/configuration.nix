@@ -39,9 +39,9 @@ in {
     };
   };
 
-  home-manager.users = genAttrs config.users.users (username: {
+  home-manager.users = genAttrs [config.modules.users.main] (username: {
     # find values using "dconf watch /"
-    dconf.settings = mkIf config.modules.graphical.gnome.enable {
+    dconf.settings = mkIf config.modules.desktop.gnome.enable {
       # are at "/run/current-system/sw/share/applications"
       "org/gnome/shell".favorite-apps = ["com.github.xournalpp.xournalpp.desktop"];
       "org/gnome/desktop/peripherals/touchpad".click-method = "areas";

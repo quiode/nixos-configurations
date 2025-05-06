@@ -5,7 +5,6 @@
   ...
 }: let
   inherit (lib) genAttrs;
-  inherit (lib.hm) gvariant;
   inherit (lib.types) listOf str;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
@@ -62,9 +61,9 @@ in {
       ];
     };
 
-    home-manager.users = genAttrs cfg.users (username: {
+    home-manager.users = genAttrs cfg.users (username: {lib, ...}: {
       # find values using "dconf watch /"
-      dconf.settings = with gvariant; {
+      dconf.settings = with lib.hm.gvariant; {
         # are at "/run/current-system/sw/share/applications"
         "org/gnome/shell".favorite-apps =
           [
@@ -75,7 +74,11 @@ in {
             "org.gnome.Nautilus.desktop"
             "signal-desktop.desktop"
           ]
-          ++ (mkIf config.modules.programs.vscodium.enable ["codium.desktop"]);
+          ++ (
+            if config.modules.programs.vscodium.enable
+            then ["codium.desktop"]
+            else []
+          );
         "org/gnome/mutter".edge-tiling = true; # snap on drag
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
@@ -84,7 +87,7 @@ in {
         "org/gnome/desktop/wm/preferences".workspace-names = ["Main"];
         "org/gnome/desktop/session".idle-delay = mkUint32 0;
         "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
-        "org/gnome/shell/extensions/gravatar".email = config.home-manager.${username}.programs.git.userEmail;
+        "org/gnome/shell/extensions/gravatar".email = "mail@dominik-schwaiger.ch";
         "org/gnome/shell/extensions/azwallpaper".slideshow-directory = "/home/${username}/Pictures/Background";
         "org/gnome/desktop/privacy" = {
           remove-old-temp-files = true;

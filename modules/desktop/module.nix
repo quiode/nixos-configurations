@@ -34,7 +34,7 @@ in {
       programs = {
         vscodium = {
           enable = true;
-          users = config.users.users;
+          users = [config.modules.users.main];
         };
       };
     };

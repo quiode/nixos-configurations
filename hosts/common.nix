@@ -2,7 +2,6 @@
 {
   self,
   pkgs,
-  system,
   inputs,
   ...
 }: let

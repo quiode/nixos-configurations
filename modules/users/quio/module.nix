@@ -7,9 +7,12 @@
   inherit (lib.modules) mkIf;
   cfg = config.modules.users.quio;
 in {
-  options.modules.users.quio.enable = mkEnableOption "Quio User";
+  options.modules.users.quio.enable = mkEnableOption "Enable the Quio User";
+  options.modules.users.quio.main = mkEnableOption "Set to true if quio is the main user of the system";
 
   config = mkIf cfg.enable {
+    modules.users.main = mkIf cfg.main "quio";
+
     users = {
       groups.quio = {};
 
@@ -40,6 +43,7 @@ in {
       home = {
         username = "quio";
         homeDirectory = "/home/quio";
+        stateVersion = "24.11";
       };
 
       programs = {
