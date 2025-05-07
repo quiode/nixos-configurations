@@ -16,7 +16,7 @@ services:
       - /ssd/critical/atuin/secrets.env
     environment:
       ATUIN_HOST: 0.0.0.0
-      ATUIN_OPEN_REGISTRATION: true
+      ATUIN_OPEN_REGISTRATION: false
       RUST_LOG: info,atuin_server=debug
     labels:
       traefik.enable: true
