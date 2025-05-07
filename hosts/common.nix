@@ -10,19 +10,25 @@
   inherit (inputs) nix-vscode-extensions;
   stateVersion = "24.11";
 in {
-  environment.systemPackages = (with pkgs; [wget fastfetch onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
+  environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
 
   modules = {
-    programs.zsh = {
-      enable = true;
-      users = [config.modules.users.main];
+    programs = {
+      zsh = {
+        enable = true;
+        users = [config.modules.users.main];
+      };
+
+      fastfetch.enable = true;
     };
+
     services.atuin = {
       enable = true;
       users = [config.modules.users.main];
     };
   };
 
+  # use lix instead of nix. ask vali why lix is better
   nix.package = lix;
 
   nixpkgs.

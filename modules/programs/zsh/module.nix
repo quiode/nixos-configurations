@@ -37,8 +37,6 @@ in {
 
           history.append = true;
 
-          initExtra = ''fastfetch'';
-
           shellAliases = {
             upgrade = "nh os switch /config";
           };
