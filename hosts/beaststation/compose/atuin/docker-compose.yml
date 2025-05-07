@@ -37,8 +37,8 @@ services:
       - /ssd/critical/atuin/database:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
     environment:
-      MARIADB_DATABASE: 'atuin'
-      MARIADB_USER: 'atuin'
+      MARIADB_DATABASE: atuin
+      MARIADB_USER: atuin
       MARIADB_ROOT_PASSWORD: ${ATUIN_DB_PASSWORD:?required}
       MARIADB_PASSWORD: ${ATUIN_DB_PASSWORD:?required}
       MARIADB_AUTO_UPGRADE: 1
