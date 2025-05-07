@@ -56,18 +56,7 @@ in {
           enableZshIntegration = true;
         };
 
-        # TODO: maybe move to it's own module?
-        atuin = {
-          enable = true;
-          enableZshIntegration = true;
-          # daemon.enable = true; # is currently unstable
-          settings = {
-            dialect = "uk";
-            auto_sync = true;
-            sync_frequency = "5m";
-            sync_address = "https://atuin.dominik-schwaiger.ch";
-          };
-        };
+        atuin.enableZshIntegration = true;
       };
     });
 
