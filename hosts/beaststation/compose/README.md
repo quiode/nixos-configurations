@@ -65,9 +65,8 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
 - **Atuin**
   - `ATUIN_DB_PASSWORD`
   ```bash
-    MARIADB_ROOT_PASSWORD=${ATUIN_DB_PASSWORD}
-    MARIADB_PASSWORD=${ATUIN_DB_PASSWORD}
-    ATUIN_DB_URI=mariadb://atuin:${ATUIN_DB_PASSWORD}@db/atuin
+    POSTGRES_PASSWORD=${ATUIN_DB_PASSWORD}
+    ATUIN_DB_URI=postgres://atuin:${ATUIN_DB_PASSWORD}@atuin-db/atuin
   ```
 
 ## Bind Volumes

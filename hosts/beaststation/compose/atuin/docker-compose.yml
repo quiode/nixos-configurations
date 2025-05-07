@@ -4,6 +4,8 @@ services:
     restart: always
     image: ghcr.io/atuinsh/atuin
     command: server start
+    depends_on:
+      - atuin-db
     networks:
       - atuin-internal
       - atuin-external
@@ -25,7 +27,7 @@ services:
       traefik.http.services.atuin.loadbalancer.server.port: 8888
 
   atuin-db:
-    image: mariadb:lts
+    image: pgautoupgrade/pgautoupgrade:alpine
     container_name: atuin-database
     restart: always
     env_file:
@@ -33,12 +35,11 @@ services:
     networks:
       - atuin-internal
     volumes:
-      - /ssd/critical/atuin/database:/var/lib/mysql
+      - /ssd/critical/atuin/database:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
     environment:
-      MARIADB_DATABASE: atuin
-      MARIADB_USER: atuin
-      MARIADB_AUTO_UPGRADE: 1
+      POSTGRES_USER: atuin
+      POSTGRES_DB: atuin
 
 networks:
   atuin-internal:
