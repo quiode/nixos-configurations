@@ -8,8 +8,9 @@ format_check:
   stage: check
   image: $IMAGE
   script:
+    - echo "Checking the format of the flake"
     - nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c alejandra -c . # Use alejandra through nix develop
-    - echo "Format check completed."
+    - echo "Format check completed"
 
 flake_check:
   stage: check
@@ -17,3 +18,4 @@ flake_check:
   script:
     - echo "Checking the flake"
     - nix flake check --extra-experimental-features nix-command --extra-experimental-features flakes
+    - echo "Flake check completed"
