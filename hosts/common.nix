@@ -26,6 +26,7 @@ in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "bak";
 
     # home manager config for all users
     sharedModules = [
@@ -41,8 +42,6 @@ in {
         home.stateVersion = stateVersion;
 
         programs.home-manager.enable = true;
-
-        backupFileExtension = "bak";
 
         # Nicely reload system units when changing configs
         systemd.user.startServices = "sd-switch";
