@@ -15,7 +15,6 @@ services:
     environment:
       ATUIN_HOST: 0.0.0.0
       ATUIN_OPEN_REGISTRATION: true
-      ATUIN_DB_URI: mariadb://atuin:${ATUIN_DB_PASSWORD:?required}@db/atuin
       RUST_LOG: info,atuin_server=debug
     labels:
       traefik.enable: true
@@ -39,8 +38,6 @@ services:
     environment:
       MARIADB_DATABASE: atuin
       MARIADB_USER: atuin
-      MARIADB_ROOT_PASSWORD: ${ATUIN_DB_PASSWORD:?required}
-      MARIADB_PASSWORD: ${ATUIN_DB_PASSWORD:?required}
       MARIADB_AUTO_UPGRADE: 1
 
 networks:
