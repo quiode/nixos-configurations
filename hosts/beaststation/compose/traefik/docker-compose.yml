@@ -43,6 +43,7 @@ services:
       - prowlarr
       - wg-easy
       - stalwart
+      - atuin
 
   traefik-certs-dumper:
     image: ghcr.io/kereis/traefik-certs-dumper
@@ -120,3 +121,6 @@ networks:
 
   stalwart:
     name: stalwart
+
+  atuin:
+    name: atuin

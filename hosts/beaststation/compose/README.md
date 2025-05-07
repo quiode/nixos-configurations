@@ -62,6 +62,8 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
 - **Factorio**
   - `USERNAME`
   - `TOKEN`
+- **Atuin**
+  - `ATUIN_DB_PASSWORD`
 
 ## Bind Volumes
 
@@ -112,6 +114,8 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/factorio`
 - `/ssd/critical/wg-easy`
 - `/ssd/critical/stalwart`
+- `/ssd/critical/atuin/config`
+- `/ssd/critical/atuin/database`
 
 ### Other
 

@@ -1,0 +1,51 @@
+services:
+  atuin:
+    container_name: atuin
+    restart: always
+    image: ghcr.io/atuinsh/atuin
+    command: server start
+    networks:
+      - atuin-internal
+      - atuin-external
+    volumes:
+      - /ssd/critical/atuin/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /ssd/critical/atuin/secrets.env
+    environment:
+      ATUIN_HOST: 0.0.0.0
+      ATUIN_OPEN_REGISTRATION: true
+      ATUIN_DB_URI: mariadb://atuin:$ATUIN_DB_PASSWORD@db/atuin
+      RUST_LOG: info,atuin_server=debug
+    labels:
+      traefik.enable: true
+      traefik.docker.network: atuin
+      traefik.http.routers.atuin.rule: Host(`atuin.dominik-schwaiger.ch`)
+      traefik.http.routers.atuin.tls: true
+      traefik.http.routers.atuin.tls.certresolver: letsencrypt
+      traefik.http.services.atuin.loadbalancer.server.port: 8888
+
+  atuin-db:
+    image: mariadb:lts
+    container_name: atuin-database
+    restart: always
+    env_file:
+      - /ssd/critical/atuin/secrets.env
+    networks:
+      - atuin-internal
+    volumes:
+      - /ssd/critical/atuin/database:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      MARIADB_DATABASE: 'atuin'
+      MARIADB_USER: 'atuin'
+      MARIADB_ROOT_PASSWORD: ${ATUIN_DB_PASSWORD}
+      MARIADB_PASSWORD: ${ATUIN_DB_PASSWORD}
+      MARIADB_AUTO_UPGRADE: 1
+
+networks:
+  atuin-internal:
+
+  atuin-external:
+    name: atuin
+    external: true
