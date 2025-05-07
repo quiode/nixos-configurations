@@ -62,6 +62,9 @@ in {
           # daemon.enable = true; # is currently unstable
           settings = {
             dialect = "uk";
+            auto_sync = true;
+            sync_frequency = "5m";
+            sync_address = "https://atuin.dominik-schwaiger.ch";
           };
         };
       };
