@@ -51,6 +51,7 @@ in {
               "memory"
               "swap"
               "disk"
+              "zpool"
               "wifi"
               "localip"
               "publicip"
@@ -60,7 +61,6 @@ in {
               "locale"
               "break"
               "colors"
-              "zpool"
             ];
           };
         };
