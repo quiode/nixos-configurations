@@ -56,6 +56,7 @@ in {
           enableZshIntegration = true;
         };
 
+        # TODO: maybe move to it's own module?
         atuin = {
           enable = true;
           enableZshIntegration = true;
