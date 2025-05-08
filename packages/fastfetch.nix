@@ -38,6 +38,7 @@
   xorg,
   yyjson,
   zlib,
+  zfs,
   # Feature flags
   audioSupport ? true,
   brightnessSupport ? true,
@@ -174,6 +175,10 @@ stdenv.mkDerivation (finalAttrs: {
       ++ lib.optionals xfceSupport [
         #  Needed for XFWM theme and XFCE Terminal font.
         xfce.xfconf
+      ]
+      ++ lib.optionals zfsSupport [
+        # Needed for zpool module
+        zfs
       ]
     );
 
