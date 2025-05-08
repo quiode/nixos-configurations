@@ -7,7 +7,7 @@
   ...
 }: let
   inherit (pkgs) lix;
-  inherit (inputs) nix-vscode-extensions;
+  inherit (inputs) nix-vscode-extensions nixpkgs-unstable;
   stateVersion = "24.11";
 in {
   environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
@@ -33,8 +33,24 @@ in {
 
   nixpkgs.
     overlays = [
+    # make unstable nixpkgs avaiable
+    (final: prev: {
+      unstable = nixpkgs-unstable.legacyPackages.${final.system};
+    })
+
     # Import all vscode extensions
     nix-vscode-extensions.overlays.default
+
+    # use unstable for some packages instead of stable
+    (final: prev: {
+      # use unstable fastfetch so that my zfs commit applies and enable the option
+      fastfetch = final.unstable.fastfetch.override {
+        # zfsSupport = config.modules.services.zfs.enable;
+      };
+
+      # use unstalbe vscodium so that the extensions are up-to-date
+      vscodium = final.unstable.vscodium;
+    })
   ];
 
   home-manager = {
