@@ -39,7 +39,8 @@ in {
               };
 
               padding = {
-                top = 2;
+                top = 1;
+                left = 1;
               };
             };
 
