@@ -2,11 +2,12 @@
   lib,
   config,
   pkgs,
+  self,
   ...
 }: let
   inherit (lib.options) mkEnableOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) fastfetch;
+  inherit (self.packages.${pkgs.stdenv.system}) fastfetch;
   cfg = config.modules.programs.fastfetch;
   files = {
     beaststation = ./beaststation.txt;
@@ -26,6 +27,7 @@ in {
       (_: {
         programs.fastfetch = {
           enable = true;
+          package = fastfetch;
 
           settings = {
             logo = {
