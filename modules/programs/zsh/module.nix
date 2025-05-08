@@ -39,6 +39,7 @@ in {
 
           shellAliases = {
             upgrade = "nh os switch /config";
+            tmpd = ''zsh -c "cd $(mktemp -d); zsh -i"'';
           };
 
           # see https://github.com/ohmyzsh/ohmyzsh/wiki
