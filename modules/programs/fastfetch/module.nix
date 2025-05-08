@@ -7,7 +7,9 @@
 }: let
   inherit (lib.options) mkEnableOption;
   inherit (lib.modules) mkIf;
-  inherit (self.packages.${pkgs.stdenv.system}) fastfetch;
+  fastfetch = self.packages.${pkgs.stdenv.system}.fastfetch.override {
+    zfsSupport = config.modules.services.zfs.enable;
+  };
   cfg = config.modules.programs.fastfetch;
   files = {
     beaststation = ./beaststation.txt;
