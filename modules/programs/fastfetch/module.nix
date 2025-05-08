@@ -11,7 +11,7 @@
   files = {
     beaststation = ./beaststation.txt;
     artemis = ./artemis.txt;
-    hades = ./beaststation.png;
+    hades = ./hades.txt;
   };
 in {
   options.modules.programs.fastfetch.enable = mkEnableOption "enable fastfetch";
@@ -26,14 +26,23 @@ in {
       (_: {
         programs.fastfetch = {
           enable = true;
+
           settings = {
             logo = {
-              type = "chafa";
+              type = "auto";
               source = files.${config.networking.hostName};
-              chafa = {
-                canvasMode = "INDEXED_8";
+
+              color = {
+                "1" = "red";
+                "2" = "blue";
+                "3" = "cyan";
+              };
+
+              padding = {
+                top = 2;
               };
             };
+
             modules = [
               "title"
               "separator"
