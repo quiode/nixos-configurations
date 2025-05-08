@@ -55,7 +55,7 @@
   waylandSupport ? true,
   x11Support ? true,
   xfceSupport ? true,
-  zfsSupport ? true,
+  zfsSupport ? false,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "fastfetch";
@@ -277,7 +277,7 @@ stdenv.mkDerivation (finalAttrs: {
     longDescription = ''
       Fast and highly customizable system info script.
 
-      Feature flags (all default to 'true' except rpmSupport and flashfetchSupport):
+      Feature flags (all default to 'true' except rpmSupport, flashfetchSupport, and zfsSupport):
       * audioSupport: PulseAudio functionality
       * brightnessSupport: External display brightness detection via DDCUtil
       * dbusSupport: DBus functionality for Bluetooth, WiFi, player & media detection
