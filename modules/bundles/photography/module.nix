@@ -7,7 +7,7 @@
 }: let
   inherit (lib.options) mkEnableOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) geeqie identity;
+  inherit (pkgs) geeqie identity gimp;
   cfg = config.modules.bundles.photography;
 in {
   options.modules.bundles.photography.enable = mkEnableOption "Photography Bundle";
@@ -17,6 +17,6 @@ in {
 
     modules.services.vm.enable = true; # enable vm to install windows for adobe lightroom
 
-    environment.systemPackages = [geeqie identity];
+    environment.systemPackages = [geeqie identity gimp];
   };
 }
