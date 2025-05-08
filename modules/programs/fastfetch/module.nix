@@ -8,6 +8,11 @@
   inherit (lib.modules) mkIf;
   inherit (pkgs) fastfetch;
   cfg = config.modules.programs.fastfetch;
+  files = {
+    beaststation = ./beaststation.txt;
+    artemis = ./artemis.txt;
+    hades = ./beaststation.png;
+  };
 in {
   options.modules.programs.fastfetch.enable = mkEnableOption "enable fastfetch";
 
@@ -23,7 +28,11 @@ in {
           enable = true;
           settings = {
             logo = {
-              source = "nixos";
+              type = "chafa";
+              source = files.${config.networking.hostName};
+              chafa = {
+                canvasMode = "INDEXED_8";
+              };
             };
             modules = [
               "title"
