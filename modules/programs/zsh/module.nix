@@ -38,7 +38,7 @@ in {
           history.append = true;
 
           shellAliases = {
-            upgrade = "nh os switch /config";
+            upgrade = "nh os switch";
             tmpd = ''zsh -c "cd $(mktemp -d); zsh -i"'';
           };
 

@@ -25,7 +25,7 @@ mkShellNoCC {
     (writeShellApplication {
       name = "upgrade";
       text = ''
-        nh os switch .
+        nh os switch
       '';
     })
   ];
