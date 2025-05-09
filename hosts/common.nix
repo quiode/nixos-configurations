@@ -45,7 +45,7 @@ in {
     (final: prev: {
       # use unstable fastfetch so that my zfs commit applies and enable the option
       fastfetch = final.unstable.fastfetch.override {
-        # zfsSupport = config.modules.services.zfs.enable;
+        zfsSupport = config.modules.services.zfs.enable;
       };
 
       # use unstalbe vscodium so that the extensions are up-to-date
