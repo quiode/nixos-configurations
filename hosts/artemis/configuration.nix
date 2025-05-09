@@ -1,8 +1,12 @@
 {config, ...}: {
   modules = {
-    services.zfs = {
-      enable = true;
-      pools = ["hdd"];
+    services = {
+      zfs = {
+        enable = true;
+        pools = ["hdd"];
+      };
+
+      nvidia.enable = true;
     };
 
     bundles.gaming = {
