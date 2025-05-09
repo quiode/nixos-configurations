@@ -45,7 +45,7 @@ in {
           # see https://github.com/ohmyzsh/ohmyzsh/wiki
           oh-my-zsh = {
             enable = true;
-            theme = "robbyrussell";
+            theme = "bira"; # jispwoso also nice
             plugins = ["extract" "colorize" "globalias" "autojump"];
           };
         };
