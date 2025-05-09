@@ -52,6 +52,8 @@ in {
         main = true;
       };
 
+      main = ["root"]; # make root also a main user so all the default configs also apply to him
+
       vali.enable = true;
       virt.enable = true;
     };

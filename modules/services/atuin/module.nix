@@ -11,8 +11,8 @@
 in {
   options.modules.services.atuin.enable = mkEnableOption "Enable Atuin";
   options.modules.services.atuin.users = mkOption {
-    example = "[quio, domina, ...]";
-    description = "The user for which a home manager configuration should be created.";
+    example = ["quio" "domina"];
+    description = "The users for which a home manager configuration should be created.";
     type = listOf str;
   };
 

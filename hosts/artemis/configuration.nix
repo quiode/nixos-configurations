@@ -7,7 +7,7 @@
 
     bundles.gaming = {
       enable = true;
-      users = [config.modules.users.main];
+      users = config.modules.users.main;
     };
   };
 

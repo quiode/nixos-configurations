@@ -11,7 +11,7 @@ in {
   options.modules.users.quio.main = mkEnableOption "Set to true if quio is the main user of the system";
 
   config = mkIf cfg.enable {
-    modules.users.main = mkIf cfg.main "quio";
+    modules.users.main = mkIf cfg.main ["quio"];
 
     users = {
       groups.quio = {};

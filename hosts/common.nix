@@ -16,7 +16,7 @@ in {
     programs = {
       zsh = {
         enable = true;
-        users = [config.modules.users.main];
+        users = config.modules.users.main;
       };
 
       fastfetch.enable = true;
@@ -24,7 +24,7 @@ in {
 
     services.atuin = {
       enable = true;
-      users = [config.modules.users.main];
+      users = config.modules.users.main;
     };
   };
 

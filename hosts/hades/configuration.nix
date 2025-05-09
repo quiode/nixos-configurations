@@ -39,7 +39,7 @@ in {
     };
   };
 
-  home-manager.users = genAttrs [config.modules.users.main] (username: {
+  home-manager.users = genAttrs config.modules.users.main (username: {
     # find values using "dconf watch /"
     dconf.settings = mkIf config.modules.desktop.gnome.enable {
       # are at "/run/current-system/sw/share/applications"

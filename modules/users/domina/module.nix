@@ -11,7 +11,7 @@ in {
   options.modules.users.domina.main = mkEnableOption "Set to true if domina is the main user of the system";
 
   config = mkIf cfg.enable {
-    modules.users.main = mkIf cfg.main "domina";
+    modules.users.main = mkIf cfg.main ["domina"];
 
     users = {
       groups.domina = {};
