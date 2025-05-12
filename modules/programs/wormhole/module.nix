@@ -34,9 +34,11 @@ in {
     environment.systemPackages = [magic-wormhole];
 
     home-manager.users = genAttrs cfg.users (username: {
-      home.shellAliases = {
-        wormhole = "wormhole --relay-url wss://relay.wormhole.dominik-schwaiger.ch/v1 --transit-helper tcp:transit.wormhole.dominik-schwaiger.ch:443";
-        wm = "wormhole";
+      home.shellAliases = let
+        command = "wormhole --relay-url wss://relay.wormhole.dominik-schwaiger.ch/v1 --transit-helper tcp:transit.wormhole.dominik-schwaiger.ch:443";
+      in {
+        wormhole = command;
+        wm = command;
       };
     });
   };
