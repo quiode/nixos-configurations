@@ -3,9 +3,6 @@ services:
     restart: always
     container_name: wormhole
     image: registry.dominik-schwaiger.ch/quio/magic-wormhole-docker:latest
-    ports:
-      - 4000:4000/tcp
-      - 4001:4001/tcp
     volumes:
       - /ssd/critical/wormhole:/wormhole/data
     labels:
