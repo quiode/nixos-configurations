@@ -6,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Unstable Nixpkgs
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/master"; # TODO: change back to unstable in a few days
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
