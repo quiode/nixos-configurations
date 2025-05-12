@@ -1,0 +1,26 @@
+services:
+  wormhole:
+    restart: always
+    container_name: wormhole
+    image: registry.dominik-schwaiger.ch/quio/magic-wormhole-docker:latest
+    ports:
+      - 4000:4000/tcp
+      - 4001:4001/tcp
+    volumes:
+      - /ssd/critical/wormhole:/wormhole/data
+    labels:
+      traefik.enable: true
+      traefik.docker.network: wormhole
+      traefik.http.routers.wormhole-mailbox.rule: Host(`mailbox.wormhole.dominik-schwaiger.ch`)
+      traefik.http.routers.wormhole-mailbox.tls: true
+      traefik.http.routers.wormhole-mailbox.tls.certresolver: letsencrypt
+      traefik.http.services.wormhole-mailbox.loadbalancer.server.port: 4000
+      traefik.http.routers.wormhole-relay.rule: Host(`relay.wormhole.dominik-schwaiger.ch`)
+      traefik.http.routers.wormhole-relay.tls: true
+      traefik.http.routers.wormhole-relay.tls.certresolver: letsencrypt
+      traefik.http.services.wormhole-relay.loadbalancer.server.port: 4001
+
+networks:
+  wormhole:
+    name: wormhole
+    external: true

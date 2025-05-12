@@ -44,6 +44,7 @@ services:
       - wg-easy
       - stalwart
       - atuin
+      - wormhole
 
   traefik-certs-dumper:
     image: ghcr.io/kereis/traefik-certs-dumper
@@ -124,3 +125,6 @@ networks:
 
   atuin:
     name: atuin
+
+  wormhole:
+    name: wormhole
