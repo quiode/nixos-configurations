@@ -2,6 +2,8 @@ services:
   wormhole:
     restart: always
     container_name: wormhole
+    networks:
+      - wormhole
     image: registry.dominik-schwaiger.ch/quio/magic-wormhole-docker:latest
     volumes:
       - /ssd/critical/wormhole:/wormhole/data
