@@ -8,14 +8,14 @@ services:
     labels:
       traefik.enable: true
       traefik.docker.network: wormhole
-      traefik.http.routers.wormhole-mailbox.rule: Host(`mailbox.wormhole.dominik-schwaiger.ch`)
-      traefik.http.routers.wormhole-mailbox.tls: true
-      traefik.http.routers.wormhole-mailbox.tls.certresolver: letsencrypt
-      traefik.http.services.wormhole-mailbox.loadbalancer.server.port: 4000
       traefik.http.routers.wormhole-relay.rule: Host(`relay.wormhole.dominik-schwaiger.ch`)
       traefik.http.routers.wormhole-relay.tls: true
       traefik.http.routers.wormhole-relay.tls.certresolver: letsencrypt
-      traefik.http.services.wormhole-relay.loadbalancer.server.port: 4001
+      traefik.http.services.wormhole-relay.loadbalancer.server.port: 4000
+      traefik.http.routers.wormhole-transit.rule: Host(`transit.wormhole.dominik-schwaiger.ch`)
+      traefik.http.routers.wormhole-transit.tls: true
+      traefik.http.routers.wormhole-transit.tls.certresolver: letsencrypt
+      traefik.http.services.wormhole-transit.loadbalancer.server.port: 4001
 
 networks:
   wormhole:
