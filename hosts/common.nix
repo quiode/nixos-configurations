@@ -19,6 +19,11 @@ in {
         users = config.modules.users.main;
       };
 
+      wormhole = {
+        enable = true;
+        users = config.modules.users.main;
+      };
+
       fastfetch.enable = true;
     };
 
