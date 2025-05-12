@@ -36,6 +36,7 @@ in {
           ms-python.vscode-pylance
           nuxtr.nuxtr-vscode
           vue.volar
+          ultram4rine.vscode-choosealicense
         ];
         userSettings = {
           # General Settings
@@ -84,6 +85,12 @@ in {
           };
           "[typescript]" = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+
+          # License Extension
+          license = {
+            default = "mit";
+            author = "Dominik Schwaiger";
           };
         };
       };
