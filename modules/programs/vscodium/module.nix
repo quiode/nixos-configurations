@@ -43,29 +43,37 @@ in {
           "files.autoSave" = "onFocusChange";
           "window.zoomLevel" = 1.5;
           "workbench.iconTheme" = "material-icon-theme";
-          "editor.wordWrap" = "wordWrapColumn";
-          "editor.wordWrapColumn" = 120;
-          "git.autofetch" = true;
+          editor = {
+            wordWrap = "wordWrapColumn";
+            wordWrapColumn = 120;
+          };
 
           # Nix
-          "nix.enableLanguageServer" = true;
-          "nix.serverPath" = "nil"; # or "nixd"
-          "nix.serverSettings" = {
-            # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
-            "nil" = {
-              "formatting" = {
-                "command" = ["alejandra"];
+          nix = {
+            enableLanguageServer = true;
+            serverPath = "nil"; # or "nixd"
+            serverSettings = {
+              # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
+              nil = {
+                formatting = {
+                  command = ["alejandra"];
+                };
               };
             };
           };
 
           # Git
-          "git.enableSmartCommit" = true;
-          "git.confirmSync" = false;
+          git = {
+            autofetch = true;
+            enableSmartCommit = true;
+            confirmSync = false;
+          };
 
           # Vim
-          "vim.useSystemClipboard" = true;
-          "vim.useCtrlKeys" = false;
+          vim = {
+            useSystemClipboard = true;
+            useCtrlKeys = false;
+          };
 
           # Formatting
           "[json]" = {
