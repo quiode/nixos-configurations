@@ -26,7 +26,6 @@ in {
         enable = true;
         package = vscodium;
         mutableExtensionsDir = false;
-        # TODO: create profiles when avaiable and move special extensions there
         extensions = with vscode-marketplace; [
           jnoortheen.nix-ide
           vscodevim.vim
@@ -35,11 +34,10 @@ in {
           esbenp.prettier-vscode
           ms-python.python
           ms-python.vscode-pylance
-          nuxtr.nuxtr-vscode # Only used for Nuxt, a Vue Framework
-          vue.volar # Only used for Vue
+          nuxtr.nuxtr-vscode
+          vue.volar
           ultram4rine.vscode-choosealicense
           myriad-dreamin.tinymist
-          viper-admin.viper # for Viper, only used in FMFP
         ];
         userSettings = {
           # General Settings
