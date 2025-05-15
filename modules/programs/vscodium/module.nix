@@ -37,6 +37,7 @@ in {
           nuxtr.nuxtr-vscode
           vue.volar
           ultram4rine.vscode-choosealicense
+          myriad-dreamin.tinymist
         ];
         userSettings = {
           # General Settings
