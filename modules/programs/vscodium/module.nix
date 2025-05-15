@@ -68,6 +68,7 @@ in {
             autofetch = true;
             enableSmartCommit = true;
             confirmSync = false;
+            replaceTagsWhenPull = true;
           };
 
           # Vim
