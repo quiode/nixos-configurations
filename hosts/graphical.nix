@@ -1,5 +1,9 @@
 # Contains shared configuration for all systems that are mainly graphical, so laptop, pc, etc.
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   modules = {
     boot.plymouth.enable = true;
 
@@ -32,4 +36,6 @@
   };
 
   networking.networkmanager.enable = true;
+
+  environment.systemPackages = with pkgs; [pdfsam-basic];
 }
