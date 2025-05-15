@@ -18,7 +18,7 @@ mkShellNoCC {
     (writeShellApplication {
       name = "update";
       text = ''
-        nix flake update --commit-lock-file --flake .
+        nix flake update --flake .
       '';
     })
 
