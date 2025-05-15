@@ -104,6 +104,29 @@ in {
             default = "mit";
             author = "Dominik Schwaiger";
           };
+
+          # Viper Settings
+          viperSettings.viperServerSettings = {
+            v = "674a514867b1";
+            serverJars = {
+              windows = [
+                "$viperTools$/backends"
+              ];
+              linux = [
+                "$viperTools$/backends"
+              ];
+              mac = [
+                "$viperTools$/backends"
+              ];
+            };
+            customArguments = "--submitForEvaluation --serverMode LSP --singleClient $backendSpecificCache$ --logLevel $logLevel$ --logFile $logFile$";
+            backendSpecificCache = true;
+            disableCaching = false;
+            timeout = 5000;
+            viperServerPolicy = "create";
+            viperServerAddress = "http://127.0.0.1";
+            viperServerPort = 12345;
+          };
         };
       };
     });
