@@ -27,6 +27,7 @@
     services = {
       docker.enable = true;
       vm.enable = true;
+      printing.enable = true;
     };
 
     users.quio = {
