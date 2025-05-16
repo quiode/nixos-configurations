@@ -26,7 +26,7 @@ in {
           BrowseProtocols all
         '';
 
-        drivers = with pkgs; [gutenprint gutenprintBin canon-cups-ufr2 cups-bjnp cups-filters];
+        drivers = with pkgs; [gutenprint gutenprintBin canon-cups-ufr2 cups-bjnp cups-filters cnijfilter2];
       };
 
       # IPP Everywhere protocol
