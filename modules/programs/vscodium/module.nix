@@ -26,6 +26,7 @@ in {
         enable = true;
         package = vscodium;
         mutableExtensionsDir = false;
+        # TODO: create profiles when avaiable and move special extensions there
         extensions = with vscode-marketplace; [
           jnoortheen.nix-ide
           vscodevim.vim
@@ -38,12 +39,16 @@ in {
           vue.volar
           ultram4rine.vscode-choosealicense
           myriad-dreamin.tinymist
+          tomoki1207.pdf # pdf viewer
+          streetsidesoftware.code-spell-checker # spellcheck
+          streetsidesoftware.code-spell-checker-german # spellcheck - german addon
+          edwinhuish.better-comments-next
         ];
         userSettings = {
           # General Settings
-          "files.autoSave" = "onFocusChange";
-          "window.zoomLevel" = 1.5;
-          "workbench.iconTheme" = "material-icon-theme";
+          files.autoSave = "onFocusChange";
+          window.zoomLevel = 1.5;
+          workbench.iconTheme = "material-icon-theme";
           editor = {
             wordWrap = "wordWrapColumn";
             wordWrapColumn = 120;
@@ -102,6 +107,8 @@ in {
             default = "mit";
             author = "Dominik Schwaiger";
           };
+
+          cSpell.language = "en,de-DE";
         };
       };
     });
