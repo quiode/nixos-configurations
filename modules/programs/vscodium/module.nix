@@ -43,14 +43,14 @@ in {
           streetsidesoftware.code-spell-checker-german # spellcheck - german addon
           edwinhuish.better-comments-next
           catppuccin.catppuccin-vsc
-          catppuccin.catppuccin-vsc-icons
+          pkief.material-icon-theme
         ];
         userSettings = {
           # General Settings
           files.autoSave = "onFocusChange";
           window.zoomLevel = 1.5;
           workbench = {
-            iconTheme = "catppuccin-mocha";
+            iconTheme = "material-icon-theme";
             colorTheme = "Catppuccin Mocha";
           };
           editor = {
