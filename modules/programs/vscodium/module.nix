@@ -30,7 +30,6 @@ in {
         extensions = with vscode-marketplace; [
           jnoortheen.nix-ide
           vscodevim.vim
-          pkief.material-icon-theme
           ms-azuretools.vscode-docker
           esbenp.prettier-vscode
           ms-python.python
@@ -43,12 +42,17 @@ in {
           streetsidesoftware.code-spell-checker # spellcheck
           streetsidesoftware.code-spell-checker-german # spellcheck - german addon
           edwinhuish.better-comments-next
+          catppuccin.catppuccin-vsc
+          catppuccin.catppuccin-vsc-icons
         ];
         userSettings = {
           # General Settings
           files.autoSave = "onFocusChange";
           window.zoomLevel = 1.5;
-          workbench.iconTheme = "material-icon-theme";
+          workbench = {
+            iconTheme = "catppuccin-mocha";
+            colorTheme = "Catppuccin Mocha";
+          };
           editor = {
             wordWrap = "wordWrapColumn";
             wordWrapColumn = 120;

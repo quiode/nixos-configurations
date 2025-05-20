@@ -26,6 +26,11 @@ in {
         vimAlias = true;
         vimdiffAlias = true;
         defaultEditor = true;
+
+        colorschemes.catppuccin = {
+          enable = true;
+          settings.flavour = "mocha";
+        };
       };
     });
   };
