@@ -19,6 +19,11 @@ in {
         users = config.modules.users.main;
       };
 
+      neovim = {
+        enable = true;
+        users = config.modules.users.main;
+      };
+
       wormhole = {
         enable = true;
         users = config.modules.users.main;
@@ -122,11 +127,6 @@ in {
 
     git = {
       enable = true;
-    };
-
-    vim = {
-      enable = true;
-      defaultEditor = true;
     };
 
     nh = {
