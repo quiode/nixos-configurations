@@ -20,6 +20,10 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # nixvim, for better vim configuration
+    nixvim.url = "github:nix-community/nixvim/nixos-24.11";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
     # Systems, gets a list of systems, allows easy overriding
     systems.url = "github:nix-systems/x86_64-linux";
   };

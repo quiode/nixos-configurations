@@ -25,11 +25,11 @@ inputs: let
         (args.specialArgs or {});
       modules = concatLists [
         # Home Manager
-        (singleton
-          inputs.home-manager.nixosModules.default)
+        (singleton inputs.home-manager.nixosModules.default)
         # Agenix
-        (singleton
-          inputs.agenix.nixosModules.default)
+        (singleton inputs.agenix.nixosModules.default)
+        # nixvim
+        (singleton inputs.nixvim.nixosModules.default)
         # This is used to pre-emptively set the hostPlatform for nixpkgs.
         # Also, we set the system hostname here.
         (singleton {
