@@ -26,93 +26,103 @@ in {
         enable = true;
         package = vscodium;
         mutableExtensionsDir = false;
-        # TODO: create profiles when avaiable and move special extensions there
-        extensions = with vscode-marketplace; [
-          jnoortheen.nix-ide
-          vscodevim.vim
-          ms-azuretools.vscode-docker
-          esbenp.prettier-vscode
-          ms-python.python
-          ms-python.vscode-pylance
-          nuxtr.nuxtr-vscode
-          vue.volar
-          ultram4rine.vscode-choosealicense
-          myriad-dreamin.tinymist
-          tomoki1207.pdf # pdf viewer
-          streetsidesoftware.code-spell-checker # spellcheck
-          streetsidesoftware.code-spell-checker-german # spellcheck - german addon
-          edwinhuish.better-comments-next
-          catppuccin.catppuccin-vsc
-          pkief.material-icon-theme
-        ];
-        userSettings = {
-          # General Settings
-          files.autoSave = "onFocusChange";
-          window.zoomLevel = 1.5;
-          workbench = {
-            iconTheme = "material-icon-theme";
-            colorTheme = "Catppuccin Mocha";
-          };
-          editor = {
-            wordWrap = "wordWrapColumn";
-            wordWrapColumn = 120;
-          };
 
-          # Nix
-          nix = {
-            enableLanguageServer = true;
-            serverPath = "nil"; # or "nixd"
-            serverSettings = {
-              # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
-              nil = {
-                formatting = {
-                  command = ["alejandra"];
+        profiles = {
+          # TODO: split up into separate profiles
+          default = {
+            # don't check
+            enableExtensionUpdateCheck = false;
+            enableUpdateCheck = false;
+
+            extensions = with vscode-marketplace; [
+              jnoortheen.nix-ide
+              vscodevim.vim
+              ms-azuretools.vscode-docker
+              esbenp.prettier-vscode
+              ms-python.python
+              ms-python.vscode-pylance
+              nuxtr.nuxtr-vscode
+              vue.volar
+              ultram4rine.vscode-choosealicense
+              myriad-dreamin.tinymist
+              tomoki1207.pdf # pdf viewer
+              streetsidesoftware.code-spell-checker # spellcheck
+              streetsidesoftware.code-spell-checker-german # spellcheck - german addon
+              edwinhuish.better-comments-next
+              catppuccin.catppuccin-vsc
+              pkief.material-icon-theme
+            ];
+
+            userSettings = {
+              # General Settings
+              files.autoSave = "onFocusChange";
+              window.zoomLevel = 1.5;
+              workbench = {
+                iconTheme = "material-icon-theme";
+                colorTheme = "Catppuccin Mocha";
+              };
+              editor = {
+                wordWrap = "wordWrapColumn";
+                wordWrapColumn = 120;
+              };
+
+              # Nix
+              nix = {
+                enableLanguageServer = true;
+                serverPath = "nil"; # or "nixd"
+                serverSettings = {
+                  # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
+                  nil = {
+                    formatting = {
+                      command = ["alejandra"];
+                    };
+                  };
                 };
               };
+
+              # Git
+              git = {
+                autofetch = true;
+                enableSmartCommit = true;
+                confirmSync = false;
+                replaceTagsWhenPull = true;
+              };
+
+              # Vim
+              vim = {
+                useSystemClipboard = true;
+                useCtrlKeys = false;
+              };
+
+              # Formatting
+              "[json]" = {
+                "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              };
+              "[jsonc]" = {
+                "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              };
+              "[dockercompose]" = {
+                "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
+              };
+              "[vue]" = {
+                "editor.defaultFormatter" = "Vue.volar";
+              };
+              "[scss]" = {
+                "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              };
+              "[typescript]" = {
+                "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              };
+
+              # License Extension
+              license = {
+                default = "mit";
+                author = "Dominik Schwaiger";
+              };
+
+              cSpell.language = "en,de-DE";
             };
           };
-
-          # Git
-          git = {
-            autofetch = true;
-            enableSmartCommit = true;
-            confirmSync = false;
-            replaceTagsWhenPull = true;
-          };
-
-          # Vim
-          vim = {
-            useSystemClipboard = true;
-            useCtrlKeys = false;
-          };
-
-          # Formatting
-          "[json]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "[jsonc]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "[dockercompose]" = {
-            "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
-          };
-          "[vue]" = {
-            "editor.defaultFormatter" = "Vue.volar";
-          };
-          "[scss]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "[typescript]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-
-          # License Extension
-          license = {
-            default = "mit";
-            author = "Dominik Schwaiger";
-          };
-
-          cSpell.language = "en,de-DE";
         };
       };
     });
