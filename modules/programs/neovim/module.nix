@@ -17,12 +17,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.nvf.enable = true;
+    programs.nvf = {
+      enable = true;
+      enableManpages = true;
+    };
 
     home-manager.users = genAttrs cfg.users (username: {
       programs.nvf = {
         enable = true;
         defaultEditor = true;
+        enableManpages = true;
 
         settings = {
           vim = {
