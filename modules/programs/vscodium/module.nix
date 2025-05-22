@@ -168,6 +168,11 @@ in {
                 };
               };
           };
+
+          empty = {
+            extensions = [];
+            userSettings = {};
+          };
         };
       };
     });
