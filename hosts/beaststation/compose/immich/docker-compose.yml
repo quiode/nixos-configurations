@@ -19,6 +19,8 @@ services:
             - driver: cdi
               device_ids:
                 - nvidia.com/gpu=all
+              capabilities:
+                - gpu
     volumes:
       - /hdd/non-critical/immich/data:/usr/src/app/upload
       - /hdd/critical/immich/data/library:/usr/src/app/upload/library
@@ -56,6 +58,8 @@ services:
             - driver: cdi
               device_ids:
                 - nvidia.com/gpu=all
+              capabilities:
+                - gpu
     volumes:
       - model-cache:/cache
       - /etc/localtime:/etc/localtime:ro
