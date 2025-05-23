@@ -30,7 +30,7 @@ in {
         profiles = let
           commonExtensions = with vscode-marketplace; [
             vscodevim.vim
-            ms-azuretools.vscode-docker
+            ms-azuretools.vscode-containers
             esbenp.prettier-vscode
             ultram4rine.vscode-choosealicense
             tomoki1207.pdf # pdf viewer
