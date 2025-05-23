@@ -16,10 +16,9 @@ services:
       resources:
         reservations:
           devices:
-            - driver: nvidia
-              count: 1
-              capabilities:
-                - gpu
+            - driver: cdi
+              device_ids:
+                - nvidia.com/gpu=all
     volumes:
       - /hdd/non-critical/immich/data:/usr/src/app/upload
       - /hdd/critical/immich/data/library:/usr/src/app/upload/library
@@ -54,10 +53,9 @@ services:
       resources:
         reservations:
           devices:
-            - driver: nvidia
-              count: 1
-              capabilities:
-                - gpu
+            - driver: cdi
+              device_ids:
+                - nvidia.com/gpu=all
     volumes:
       - model-cache:/cache
       - /etc/localtime:/etc/localtime:ro
