@@ -2,7 +2,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: 'jellyfin'
-    group_add: # by id as these may not exist within the container. Needed to provide permissions to the VAAPI Devices
+    group_add:
+      # by id as these may not exist within the container. Needed to provide permissions to the VAAPI Devices
       - '107' #render
       - '44' #video
     # Network mode of 'host' exposes the ports on the host. This is needed for DLNA access.
@@ -14,7 +15,15 @@ services:
       - cache:/cache # store the cache on a named volume so it is stored on the ssd instead of hdd
       - /etc/localtime:/etc/localtime:ro
     restart: always
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              device_ids:
+                - nvidia.com/gpu=all
+              capabilities:
+                - gpu
     networks:
       - jellyfin-internal
       - jellyfin-external
@@ -194,6 +203,7 @@ services:
 
 volumes:
   cache:
+
 
 networks:
   jellyfin-internal:

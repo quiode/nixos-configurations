@@ -7,7 +7,15 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     tty: true
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              device_ids:
+                - nvidia.com/gpu=all
+              capabilities:
+                - gpu
     networks:
       - ollama-internal
 
@@ -32,7 +40,15 @@ services:
       OPENID_REDIRECT_URI: https://chat.dominik-schwaiger.ch/oauth/oidc/callback
     env_file:
       - /ssd/critical/open-webui/secrets.env
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              device_ids:
+                - nvidia.com/gpu=all
+              capabilities:
+                - gpu
     volumes:
       - /hdd/critical/open-webui:/app/backend/data
       - /ssd/non-critical/open-webui/cache:/app/backend/data/cache
