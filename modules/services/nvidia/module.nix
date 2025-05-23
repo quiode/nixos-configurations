@@ -11,10 +11,9 @@
 in {
   options.modules.services.nvidia.enable = mkEnableOption "enable nvidia gpu support and tools";
 
-   virtualisation.docker.package = pkgs.docker_25;
-
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = ["nvidia"];
+    virtualisation.docker.package = pkgs.docker_25;
 
     hardware = {
       nvidia = {
