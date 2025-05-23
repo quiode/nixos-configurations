@@ -49,9 +49,9 @@ in {
         enable = true;
         enable32Bit = true; # needed for docker nvidia enable
       };
-    };
 
-    virtualisation.docker.enableNvidia = true;
+      nvidia-container-toolkit.enable = true;
+    };
 
     environment.systemPackages = [
       nvtopPackages.full
