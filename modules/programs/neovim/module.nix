@@ -49,6 +49,9 @@ in {
             };
 
             languages = {
+              enableFormat = true;
+              enableTreesitter = true;
+
               nix = {
                 enable = true;
 
@@ -63,6 +66,22 @@ in {
                   package = pkgs.nil;
                   server = "nil";
                 };
+              };
+
+              yaml = {
+                enable = true;
+                lsp.enable = true;
+              };
+
+              markdown = {
+                enable = true;
+                lsp.enable = true;
+                extensions.render-markdown-nvim.enable = true;
+              };
+
+              bash = {
+                enable = true;
+                lsp.enable = true;
               };
             };
 

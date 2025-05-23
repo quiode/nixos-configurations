@@ -12,6 +12,9 @@
 in {
   environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
 
+  # for general icons
+  fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono];
+
   modules = {
     programs = {
       zsh = {
