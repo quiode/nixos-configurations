@@ -52,8 +52,6 @@ services:
     # Example tag: ${IMMICH_VERSION:-release}-cuda
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-cuda
     deploy:
-      restart_policy:
-        condition: any
       resources:
         reservations:
           devices:
@@ -68,6 +66,7 @@ services:
     env_file:
       - /ssd/critical/immich/secrets.env
       - .env
+    restart: always
     healthcheck:
       disable: false
     networks:
