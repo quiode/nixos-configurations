@@ -13,7 +13,6 @@ in {
 
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = ["nvidia"];
-    virtualisation.docker.package = pkgs.docker_25;
 
     hardware = {
       nvidia = {
