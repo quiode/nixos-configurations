@@ -66,6 +66,20 @@
       system: import ./packages pkgsFor.${system}
     );
 
+    # do some basic checks
+    checks = eachSystem (system: let
+      pkgs = pkgsFor.${system};
+    in {
+      formatting =
+        pkgs.runCommand "formatting" {
+          src = ./.;
+          nativeBuildInputs = with pkgs; [alejandra];
+        } ''
+          alejandra -c .
+          touch "$out"
+        '';
+    });
+
     # loads hosts
     nixosConfigurations = import ./hosts inputs;
   };

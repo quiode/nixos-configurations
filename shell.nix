@@ -28,5 +28,19 @@ mkShellNoCC {
         nh os switch
       '';
     })
+
+    (writeShellApplication {
+      name = "push";
+      text = ''
+        nix flake check && git push
+      '';
+    })
+
+    (writeShellApplication {
+      name = "format";
+      text = ''
+        alejandra .
+      '';
+    })
   ];
 }
