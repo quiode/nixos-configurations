@@ -83,6 +83,33 @@ in {
                 enable = true;
                 lsp.enable = true;
               };
+
+              html = {
+                enable = true;
+                lsp.enable = true;
+                treesitter.autotagHtml = true;
+              };
+
+              tailwind = {
+                enable = true;
+                lsp.enable = true;
+              };
+
+              css = {
+                enable = true;
+                lsp.enable = true;
+              };
+
+              ts = {
+                enable = true;
+                lsp.enable = true;
+                extensions.ts-error-translator.enable = true;
+              };
+            };
+
+            treesitter = {
+              enable = true;
+              context.enable = true;
             };
 
             # autocompletion (ctrl + space)
