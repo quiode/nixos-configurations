@@ -21,7 +21,8 @@ in {
       programs = {
         atuin = {
           enable = true;
-          # daemon.enable = true; # is currently unstable
+          daemon.enable = true; # is currently unstable
+
           settings = {
             dialect = "uk";
             auto_sync = true;
