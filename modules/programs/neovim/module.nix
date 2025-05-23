@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib) genAttrs;
@@ -38,6 +39,39 @@ in {
               name = "catppuccin";
               style = "mocha";
             };
+
+            lsp = {
+              formatOnSave = true;
+              inlayHints.enable = true;
+
+              # code actions
+              lightbulb.enable = true;
+            };
+
+            languages = {
+              nix = {
+                enable = true;
+
+                format = {
+                  enable = true;
+                  package = pkgs.alejandra;
+                  type = "alejandra";
+                };
+
+                lsp = {
+                  enable = true;
+                  package = pkgs.nil;
+                  server = "nil";
+                };
+              };
+            };
+
+            # autocompletion (ctrl + space)
+            mini.completion.enable = true;
+
+            # multi-purpose search and picker utility
+            # use "<space>ff" to open basic
+            telescope.enable = true;
           };
         };
       };
