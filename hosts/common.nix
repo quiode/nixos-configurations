@@ -7,7 +7,7 @@
   ...
 }: let
   inherit (pkgs) lix;
-  inherit (inputs) nix-vscode-extensions nixpkgs-unstable nixvim;
+  inherit (inputs) nix-vscode-extensions nixpkgs-unstable nvf;
   stateVersion = "24.11";
 in {
   environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
@@ -71,14 +71,6 @@ in {
     # home manager config for all users
     sharedModules = [
       (_: {
-        nixpkgs = {
-          config = {
-            allowUnfree = true;
-            # Workaround for https://github.com/nix-community/home-manager/issues/2942
-            allowUnfreePredicate = _: true;
-          };
-        };
-
         home.stateVersion = stateVersion;
 
         programs.home-manager.enable = true;
@@ -87,8 +79,8 @@ in {
         systemd.user.startServices = "sd-switch";
       })
 
-      # enable nixvim option for all users
-      nixvim.homeManagerModules.default
+      # enable nvf option for all users
+      nvf.homeManagerModules.default
     ];
   };
 

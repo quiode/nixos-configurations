@@ -17,19 +17,28 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.nixvim.enable = true;
+    programs.nvf = {
+      enable = true;
+      enableManpages = true;
+    };
 
     home-manager.users = genAttrs cfg.users (username: {
-      programs.nixvim = {
+      programs.nvf = {
         enable = true;
-        viAlias = true;
-        vimAlias = true;
-        vimdiffAlias = true;
         defaultEditor = true;
+        enableManpages = true;
 
-        colorschemes.catppuccin = {
-          enable = true;
-          settings.flavour = "mocha";
+        settings = {
+          vim = {
+            viAlias = true;
+            vimAlias = true;
+
+            theme = {
+              enable = true;
+              name = "catppuccin";
+              style = "mocha";
+            };
+          };
         };
       };
     });

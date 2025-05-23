@@ -26,93 +26,153 @@ in {
         enable = true;
         package = vscodium;
         mutableExtensionsDir = false;
-        # TODO: create profiles when avaiable and move special extensions there
-        extensions = with vscode-marketplace; [
-          jnoortheen.nix-ide
-          vscodevim.vim
-          ms-azuretools.vscode-docker
-          esbenp.prettier-vscode
-          ms-python.python
-          ms-python.vscode-pylance
-          nuxtr.nuxtr-vscode
-          vue.volar
-          ultram4rine.vscode-choosealicense
-          myriad-dreamin.tinymist
-          tomoki1207.pdf # pdf viewer
-          streetsidesoftware.code-spell-checker # spellcheck
-          streetsidesoftware.code-spell-checker-german # spellcheck - german addon
-          edwinhuish.better-comments-next
-          catppuccin.catppuccin-vsc
-          pkief.material-icon-theme
-        ];
-        userSettings = {
-          # General Settings
-          files.autoSave = "onFocusChange";
-          window.zoomLevel = 1.5;
-          workbench = {
-            iconTheme = "material-icon-theme";
-            colorTheme = "Catppuccin Mocha";
+
+        profiles = let
+          commonExtensions = with vscode-marketplace; [
+            vscodevim.vim
+            ms-azuretools.vscode-docker
+            esbenp.prettier-vscode
+            ultram4rine.vscode-choosealicense
+            tomoki1207.pdf # pdf viewer
+            streetsidesoftware.code-spell-checker # spellcheck
+            streetsidesoftware.code-spell-checker-german # spellcheck - german addon
+            edwinhuish.better-comments-next
+            catppuccin.catppuccin-vsc
+            pkief.material-icon-theme
+          ];
+
+          commonSettings = {
+            # General Settings
+            files.autoSave = "onFocusChange";
+            window.zoomLevel = 1.5;
+            workbench = {
+              iconTheme = "material-icon-theme";
+              colorTheme = "Catppuccin Mocha";
+            };
+            editor = {
+              wordWrap = "wordWrapColumn";
+              wordWrapColumn = 120;
+            };
+
+            # Git
+            git = {
+              autofetch = true;
+              enableSmartCommit = true;
+              confirmSync = false;
+              replaceTagsWhenPull = true;
+            };
+
+            # Vim
+            vim = {
+              useSystemClipboard = true;
+              useCtrlKeys = false;
+            };
+
+            # Formatting
+            "[json]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[jsonc]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[dockercompose]" = {
+              "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
+            };
+            "[scss]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[typescript]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+
+            # License Extension
+            license = {
+              default = "mit";
+              author = "Dominik Schwaiger";
+            };
+
+            cSpell.language = "en,de-DE";
           };
-          editor = {
-            wordWrap = "wordWrapColumn";
-            wordWrapColumn = 120;
+        in {
+          default = {
+            # don't check
+            enableExtensionUpdateCheck = false;
+            enableUpdateCheck = false;
+
+            extensions = commonExtensions;
+
+            userSettings = commonSettings;
           };
 
-          # Nix
-          nix = {
-            enableLanguageServer = true;
-            serverPath = "nil"; # or "nixd"
-            serverSettings = {
-              # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
-              nil = {
-                formatting = {
-                  command = ["alejandra"];
+          vue = {
+            extensions =
+              commonExtensions
+              ++ (with vscode-marketplace; [
+                nuxtr.nuxtr-vscode
+                vue.volar
+              ]);
+
+            userSettings =
+              commonSettings
+              // {
+                "[vue]" = {
+                  "editor.defaultFormatter" = "Vue.volar";
                 };
               };
-            };
           };
 
-          # Git
-          git = {
-            autofetch = true;
-            enableSmartCommit = true;
-            confirmSync = false;
-            replaceTagsWhenPull = true;
+          python = {
+            extensions =
+              commonExtensions
+              ++ (with vscode-marketplace; [
+                ms-python.python
+                ms-python.vscode-pylance
+              ]);
+
+            userSettings = commonSettings // {};
           };
 
-          # Vim
-          vim = {
-            useSystemClipboard = true;
-            useCtrlKeys = false;
+          typst = {
+            extensions =
+              commonExtensions
+              ++ (with vscode-marketplace; [
+                myriad-dreamin.tinymist
+                tomoki1207.pdf # pdf viewer
+              ]);
+
+            userSettings = commonSettings // {};
           };
 
-          # Formatting
-          "[json]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "[jsonc]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "[dockercompose]" = {
-            "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
-          };
-          "[vue]" = {
-            "editor.defaultFormatter" = "Vue.volar";
-          };
-          "[scss]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "[typescript]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          nix = {
+            extensions =
+              commonExtensions
+              ++ (with vscode-marketplace; [
+                jnoortheen.nix-ide
+              ]);
+
+            userSettings =
+              commonSettings
+              // {
+                # Nix
+                nix = {
+                  enableLanguageServer = true;
+                  serverPath = "nil"; # or "nixd"
+                  serverSettings = {
+                    # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
+                    nil = {
+                      formatting = {
+                        command = ["alejandra"];
+                      };
+                    };
+                  };
+                };
+              };
           };
 
-          # License Extension
-          license = {
-            default = "mit";
-            author = "Dominik Schwaiger";
+          empty = {
+            extensions = [];
+            userSettings = {};
           };
-
-          cSpell.language = "en,de-DE";
         };
       };
     });
