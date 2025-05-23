@@ -12,13 +12,14 @@ services:
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
-    resources:
-      reservations:
-        devices:
-          - driver: nvidia
-            count: 1
-            capabilities:
-              - gpu
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
     volumes:
       - /hdd/non-critical/immich/data:/usr/src/app/upload
       - /hdd/critical/immich/data/library:/usr/src/app/upload/library
