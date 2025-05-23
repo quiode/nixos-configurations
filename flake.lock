@@ -188,16 +188,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1747825515,
-        "narHash": "sha256-BWpMQymVI73QoKZdcVCxUCCK3GNvr/xa2Dc4DM1o2BE=",
-        "owner": "nixos",
+        "lastModified": 1748013818,
+        "narHash": "sha256-eMRb4o+Y4oBD+/xwq1KrmVI68Zq/xmNAqXO0+PFCNik=",
+        "owner": "quiode",
         "repo": "nixpkgs",
-        "rev": "cd2812de55cf87df88a9e09bf3be1ce63d50c1a6",
+        "rev": "e73ff9830f21d0132d197c09e6e345d0aaedc03f",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-25.05",
+        "owner": "quiode",
+        "ref": "docker-hotfix",
         "repo": "nixpkgs",
         "type": "github"
       }

@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib.options) mkEnableOption;
@@ -13,6 +14,7 @@ in {
     virtualisation = {
       docker = {
         enable = true;
+        package = pkgs.docker_28; # TODO: remove when nvidia fixed upstream
         autoPrune = {
           enable = true;
           flags = ["--all"];
