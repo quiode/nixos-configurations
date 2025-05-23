@@ -72,7 +72,7 @@ in {
             "spotify.desktop"
             "org.gnome.Console.desktop"
             "org.gnome.Nautilus.desktop"
-            "signal-desktop.desktop"
+            "signal.desktop"
           ]
           ++ (
             if config.modules.programs.vscodium.enable
