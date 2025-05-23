@@ -12,7 +12,13 @@ services:
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
-    runtime: nvidia
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 1
+            capabilities:
+              - gpu
     volumes:
       - /hdd/non-critical/immich/data:/usr/src/app/upload
       - /hdd/critical/immich/data/library:/usr/src/app/upload/library
@@ -43,7 +49,14 @@ services:
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
     # Example tag: ${IMMICH_VERSION:-release}-cuda
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-cuda
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
     volumes:
       - model-cache:/cache
       - /etc/localtime:/etc/localtime:ro
