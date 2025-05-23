@@ -86,7 +86,6 @@ in {
 
               html = {
                 enable = true;
-                lsp.enable = true;
                 treesitter.autotagHtml = true;
               };
 
