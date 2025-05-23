@@ -76,7 +76,7 @@ in {
               "editor.defaultFormatter" = "esbenp.prettier-vscode";
             };
             "[dockercompose]" = {
-              "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
+              "editor.defaultFormatter" = "ms-azuretools.vscode-containers";
             };
             "[scss]" = {
               "editor.defaultFormatter" = "esbenp.prettier-vscode";
