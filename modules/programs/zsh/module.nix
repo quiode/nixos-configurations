@@ -46,17 +46,17 @@ in {
           oh-my-zsh = {
             enable = true;
             theme = "bira"; # jispwoso also nice
-            plugins = ["extract" "colorize" "globalias" "autojump"];
+            plugins = ["extract" "colorize" "globalias"];
           };
         };
 
-        autojump = {
+        zoxide = {
           enable = true;
-          enableZshIntegration = true;
+          options = ["--cmd cd"];
         };
-
-        atuin.enableZshIntegration = true;
       };
+
+      home.shell.enableZshIntegration = true;
     });
 
     environment = {
