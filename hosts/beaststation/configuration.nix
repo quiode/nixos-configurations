@@ -12,9 +12,6 @@ in {
   age.secrets = {
     # password for mail
     beaststation_mail_password.file = ../../secrets/beaststation_mail_password.age;
-
-    # croc secrets, used in docker and cli
-    croc.file = ../../secrets/croc.age;
   };
 
   environment = {

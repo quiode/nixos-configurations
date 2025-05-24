@@ -23,11 +23,7 @@ in {
 
     home-manager.users = genAttrs cfg.users (username: {config, ...}: {
       home.shellAliases = {
-        croc = ''source ${config.age.secrets.croc.path} && croc --relay "croc.dominik-schwaiger.ch"'';
-      };
-
-      age.secrets.croc = {
-        file = ../../../secrets/croc.age;
+        croc = ''croc --relay "croc.dominik-schwaiger.ch"'';
       };
     });
   };
