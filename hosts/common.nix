@@ -7,7 +7,7 @@
   ...
 }: let
   inherit (pkgs) lix;
-  inherit (inputs) nix-vscode-extensions nixpkgs-unstable nvf;
+  inherit (inputs) nix-vscode-extensions nixpkgs-unstable nvf agenix;
   stateVersion = "24.11";
 in {
   environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
@@ -23,6 +23,11 @@ in {
       };
 
       neovim = {
+        enable = true;
+        users = config.modules.users.main;
+      };
+
+      croc = {
         enable = true;
         users = config.modules.users.main;
       };
@@ -79,6 +84,9 @@ in {
 
       # enable nvf option for all users
       nvf.homeManagerModules.default
+
+      # enable agenix for all users
+      agenix.homeManagerModules.default
     ];
   };
 

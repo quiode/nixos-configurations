@@ -16,4 +16,5 @@ let
   all = users ++ systems;
 in {
   "beaststation_mail_password.age".publicKeys = all;
+  "croc.age".publicKeys = all;
 }
