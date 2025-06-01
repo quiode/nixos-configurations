@@ -38,6 +38,9 @@ in {
           gravatar
           wallpaper-slideshow
           clipboard-history
+          do-not-disturb-while-screen-sharing-or-recording
+          dim-completed-calendar-events
+          system-monitor
         ])
         ++ [gnome-tweaks];
 
