@@ -1,6 +1,6 @@
 services:
   stalwart:
-    image: stalwartlabs/mail-server
+    image: stalwartlabs/stalwart:v0.12
     container_name: stalwart
     ports:
       - 25:25 # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
@@ -13,7 +13,7 @@ services:
       - stalwart
     restart: always
     volumes:
-      - /ssd/critical/stalwart:/opt/stalwart-mail
+      - /ssd/critical/stalwart:/opt/stalwart
       - /etc/localtime:/etc/localtime:ro
       - certs:/data/certs:ro # certs from traefik
     labels:
