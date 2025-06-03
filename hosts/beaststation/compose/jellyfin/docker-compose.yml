@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:10
     container_name: 'jellyfin'
     group_add:
       # by id as these may not exist within the container. Needed to provide permissions to the VAAPI Devices
@@ -65,7 +65,7 @@ services:
       traefik.docker.network: jellyfin
 
   jellyseerr:
-    image: fallenbagel/jellyseerr
+    image: fallenbagel/jellyseerr:2.5.2
     container_name: jellyseerr
     depends_on:
       - jellyfin
