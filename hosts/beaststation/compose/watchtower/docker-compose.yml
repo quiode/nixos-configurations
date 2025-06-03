@@ -1,6 +1,6 @@
 services:
   watchtower:
-    image: "containrrr/watchtower"
+    image: containrrr/watchtower:1.7.1
     container_name: watchtower
     restart: always
     command: --cleanup --schedule "0 0 3 * * *"
