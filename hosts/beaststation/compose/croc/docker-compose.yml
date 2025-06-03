@@ -1,7 +1,7 @@
 services:
   croc:
     container_name: croc
-    image: schollz/croc
+    image: schollz/croc:10
     ports:
       - 9009-9013:9009-9013
     restart: always
