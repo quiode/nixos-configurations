@@ -3,7 +3,7 @@ services:
     container_name: minecraft
     ports:
       - 25565:25565
-    image: 'itzg/minecraft-server'
+    image: itzg/minecraft-server
     volumes:
       - /ssd/critical/minecraft/server:/data
       - /etc/localtime:/etc/localtime:ro
@@ -22,7 +22,7 @@ services:
 
   minecraft-backup:
     container_name: minecraft-backup
-    image: 'itzg/mc-backup'
+    image: itzg/mc-backup
     environment:
       BACKUP_INTERVAL: '2h'
       RCON_HOST: minecraft
