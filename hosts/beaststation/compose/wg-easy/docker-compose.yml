@@ -5,7 +5,10 @@ services:
     environment:
       INSECURE: true
     networks:
-      - wg-easy
+      wg-easy: {}
+      wg:
+        ipv4_address: 10.42.42.42
+        ipv6_address: fdcc:ad94:bacf:61a3::2a
     ports:
       - 51820:51820/udp
     restart: always
@@ -21,6 +24,7 @@ services:
     volumes:
       - /ssd/critical/wg-easy:/etc/wireguard
       - /etc/localtime:/etc/localtime:ro
+      - /lib/modules:/lib/modules:ro
     labels:
       traefik.enable: true
       traefik.docker.network: wg-easy
@@ -34,3 +38,12 @@ networks:
   wg-easy:
     name: wg-easy
     external: true
+
+  wg:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.42.42.0/24
+        - subnet: fdcc:ad94:bacf:61a3::/64
