@@ -26,7 +26,7 @@ x-env: &env
 services:
   nextcloud:
     <<: *env
-    image: nextcloud:production-apache
+    image: nextcloud:31.0.5-apache
     restart: always
     container_name: nextcloud
     depends_on:
@@ -53,7 +53,7 @@ services:
   # cron job to allow nextcloud to use cron (instead of custom image https://github.com/nextcloud/docker/blob/master/.examples/docker-compose/insecure/mariadb/apache/docker-compose.yml)
   nextcloud-cron:
     <<: *env
-    image: 'nextcloud:production-apache'
+    image: nextcloud:31.0.5-apache
     restart: always
     container_name: nextcloud-cron
     volumes:
@@ -70,7 +70,7 @@ services:
       - nextcloud
 
   onlyoffice:
-    image: onlyoffice/documentserver
+    image: onlyoffice/documentserver:8.3
     container_name: onlyoffice
     restart: always
     depends_on:
