@@ -5,16 +5,16 @@ services:
     restart: always
     cap_add:
       - NET_ADMIN
+      - SYS_MODULE
     ports:
       # WireGuard port, needs to match the port in wg-portal interface config (add one port mapping for each interface)
       - 51820:51820/udp
-    sysctls:
-      net.ipv4.conf.all.src_valid_mark: 1
     volumes:
       # host path : container path
       - /ssd/critical/wireguard/data:/app/data
       - /ssd/critical/wireguard/config:/app/config
       - /etc/localtime:/etc/localtime:ro
+      - /lib/modules:/lib/modules:ro
     networks:
       - wireguard
     labels:
@@ -24,6 +24,13 @@ services:
       traefik.http.routers.wireguard.tls: true
       traefik.http.routers.wireguard.tls.certresolver: letsencrypt
       traefik.http.services.wireguard.loadbalancer.server.port: 8888
+    sysctls:
+      net.ipv4.ip_forward: 1
+      net.ipv4.conf.all.src_valid_mark: 1
+      net.ipv6.conf.all.disable_ipv6: 0
+      net.ipv6.conf.all.forwarding: 1
+      net.ipv6.conf.default.forwarding: 1
+
 
 networks:
   wireguard:
