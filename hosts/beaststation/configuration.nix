@@ -78,8 +78,8 @@ in {
       };
     };
 
-    # enable remote unlocking by ssh, so that zfs datasets can be encrypted on boot
     kernelModules = [
+      # enable remote unlocking by ssh, so that zfs datasets can be encrypted on boot
       "r8169"
       # Modules needed for wireguard
       "wireguard"
@@ -88,6 +88,7 @@ in {
       "iptable_filter"
       "ip6table_filter"
     ];
+    # enable remote unlocking by ssh, so that zfs datasets can be encrypted on boot
     kernelParams = ["ip=dhcp"];
 
     initrd = {
