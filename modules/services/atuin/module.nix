@@ -21,7 +21,6 @@ in {
       programs = {
         atuin = {
           enable = true;
-          daemon.enable = true; # is currently unstable
 
           settings = {
             dialect = "uk";
