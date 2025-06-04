@@ -41,7 +41,7 @@ services:
       - radarr
       - sonarr
       - prowlarr
-      - wg-easy
+      - wireguard
       - stalwart
       - atuin
 
@@ -116,8 +116,8 @@ networks:
   prowlarr:
     name: prowlarr
 
-  wg-easy:
-    name: wg-easy
+  wireguard:
+    name: wireguard
 
   stalwart:
     name: stalwart

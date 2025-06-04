@@ -96,15 +96,6 @@ in {
     efi.canTouchEfiVariables = true;
   };
 
-  boot.kernelModules = [
-    # Modules needed for wireguard / wg-easy
-    "wireguard"
-    "iptable_nat"
-    "ip6table_nat"
-    "iptable_filter"
-    "ip6table_filter"
-  ];
-
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [
     "nix-command"

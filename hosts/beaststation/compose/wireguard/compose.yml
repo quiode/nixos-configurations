@@ -1,0 +1,31 @@
+services:
+  wireguard:
+    image: wgportal/wg-portal:v2
+    container_name: wireguard
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    ports:
+      # WireGuard port, needs to match the port in wg-portal interface config (add one port mapping for each interface)
+      - 51820:51820/udp
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+    volumes:
+      # host path : container path
+      - /ssd/critical/wireguard/data:/app/data
+      - /ssd/critical/wireguard/config:/app/config
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - wireguard
+    labels:
+      traefik.enable: true
+      traefik.docker.network: wireguard
+      traefik.http.routers.wireguard.rule: Host(`vpn.dominik-schwaiger.ch`)
+      traefik.http.routers.wireguard.tls: true
+      traefik.http.routers.wireguard.tls.certresolver: letsencrypt
+      traefik.http.services.wireguard.loadbalancer.server.port: 8888
+
+networks:
+  wireguard:
+    name: wireguard
+    external: true

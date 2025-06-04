@@ -116,7 +116,7 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/prowlarr/config`
 - `/ssd/critical/gitlab/registry/database`
 - `/ssd/critical/factorio`
-- `/ssd/critical/wg-easy`
+- `/ssd/critical/wireguard`
 - `/ssd/critical/stalwart`
 - `/ssd/critical/atuin/config`
 - `/ssd/critical/atuin/database`
@@ -134,7 +134,7 @@ Critical data (which should be snapshotted more often and also should be backed 
 - 389 (LDAP Authentik)
 - 636 (LDAP Authentik)
 - 34197 (Factorio)
-- 51820 (wg-easy (VPN))
+- 51820 (wireguard (VPN))
 - 25 (SMTP - explicit TLS via STARTTLS, authentication disabled; use port 465/587 instead)
 - 143 (IMAP4 - explicit TLS via STARTTLS)
 - 465 (ESMTP - implicit TLS)
