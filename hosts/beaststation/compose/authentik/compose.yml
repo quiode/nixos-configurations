@@ -34,7 +34,7 @@ services:
       timeout: 3s
 
   authentik_ldap:
-    image: ghcr.io/goauthentik/ldap:2025.4
+    image: ghcr.io/goauthentik/ldap:2025.6
     container_name: authentik_ldap
     restart: always
     ports:
@@ -48,7 +48,7 @@ services:
       AUTHENTIK_INSECURE: 'false'
 
   authentik:
-    image: ghcr.io/goauthentik/server:2025.4
+    image: ghcr.io/goauthentik/server:2025.6
     restart: always
     container_name: authentik
     command: server
@@ -78,7 +78,7 @@ services:
       traefik.docker.network: authentik
 
   worker:
-    image: ghcr.io/goauthentik/server:2025.4
+    image: ghcr.io/goauthentik/server:2025.6
     restart: always
     container_name: authentik_worker
     command: worker
