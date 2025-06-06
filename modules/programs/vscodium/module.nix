@@ -39,6 +39,7 @@ in {
             edwinhuish.better-comments-next
             catppuccin.catppuccin-vsc
             pkief.material-icon-theme
+            jnoortheen.nix-ide
           ];
 
           commonSettings = {
@@ -92,6 +93,20 @@ in {
             };
 
             cSpell.language = "en,de-DE";
+
+            # Nix
+            nix = {
+              enableLanguageServer = true;
+              serverPath = "nil"; # or "nixd"
+              serverSettings = {
+                # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
+                nil = {
+                  formatting = {
+                    command = ["alejandra"];
+                  };
+                };
+              };
+            };
           };
         in {
           default = {
@@ -141,32 +156,6 @@ in {
               ]);
 
             userSettings = commonSettings // {};
-          };
-
-          nix = {
-            extensions =
-              commonExtensions
-              ++ (with vscode-marketplace; [
-                jnoortheen.nix-ide
-              ]);
-
-            userSettings =
-              commonSettings
-              // {
-                # Nix
-                nix = {
-                  enableLanguageServer = true;
-                  serverPath = "nil"; # or "nixd"
-                  serverSettings = {
-                    # check https://github.com/oxalica/nil/blob/main/docs/configuration.md for all options available
-                    nil = {
-                      formatting = {
-                        command = ["alejandra"];
-                      };
-                    };
-                  };
-                };
-              };
           };
 
           empty = {
