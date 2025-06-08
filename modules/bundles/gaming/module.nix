@@ -21,6 +21,17 @@ in {
   config = mkIf cfg.enable {
     programs.steam.enable = true;
 
+    # steam ports for local file sharing
+    networking.firewall = {
+      allowedTCPPorts = [27040];
+      allowedUDPPortRanges = [
+        {
+          from = 27031;
+          to = 27036;
+        }
+      ];
+    };
+
     environment.systemPackages = with pkgs; [
       vesktop
       prismlauncher # for minecraft
