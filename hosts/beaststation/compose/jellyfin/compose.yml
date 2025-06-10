@@ -65,7 +65,7 @@ services:
       traefik.docker.network: jellyfin
 
   jellyseerr:
-    image: fallenbagel/jellyseerr:2.5.2
+    image: fallenbagel/jellyseerr:2.6.0
     container_name: jellyseerr
     depends_on:
       - jellyfin
