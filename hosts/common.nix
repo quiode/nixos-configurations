@@ -46,7 +46,7 @@ in {
 
   nixpkgs.
     overlays = [
-    # make unstable nixpkgs avaiable
+    # make unstable nixpkgs available
     (final: prev: {
       unstable = nixpkgs-unstable.legacyPackages.${final.system};
     })
