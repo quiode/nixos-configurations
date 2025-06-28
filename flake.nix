@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:quiode/nixpkgs/docker-hotfix"; # TODO: remove when fixed upstream (https://github.com/NixOS/nixpkgs/issues/353059)
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Unstable Nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
