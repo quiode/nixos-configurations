@@ -70,7 +70,7 @@ services:
       - nextcloud
 
   onlyoffice:
-    image: onlyoffice/documentserver:8.3
+    image: onlyoffice/documentserver
     container_name: onlyoffice
     restart: always
     depends_on:
