@@ -42,5 +42,12 @@ mkShellNoCC {
         alejandra .
       '';
     })
+
+    (writeShellApplication {
+      name = "occ";
+      text = ''
+        sudo docker exec --user www-data nextcloud php occ
+      '';
+    })
   ];
 }
