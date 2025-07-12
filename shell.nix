@@ -46,7 +46,7 @@ mkShellNoCC {
     (writeShellApplication {
       name = "occ";
       text = ''
-        sudo docker exec --user www-data nextcloud php occ
+        sudo docker exec --user www-data nextcloud php occ "$@"
       '';
     })
   ];
