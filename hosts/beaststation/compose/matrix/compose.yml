@@ -1,6 +1,6 @@
 services:
   matrix:
-    image: matrixdotorg/synapse:v1.133.0
+    image: matrixdotorg/synapse:v1.134.0
     hostname: matrix.dominik-schwaiger.ch
     container_name: matrix
     restart: always
