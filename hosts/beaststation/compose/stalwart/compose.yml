@@ -1,6 +1,6 @@
 services:
   stalwart:
-    image: stalwartlabs/stalwart:v0.13.0
+    image: stalwartlabs/stalwart:v0.13.1
     container_name: stalwart
     ports:
       - 25:25 # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
