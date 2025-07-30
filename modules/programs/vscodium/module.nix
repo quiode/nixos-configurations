@@ -131,7 +131,7 @@ in {
               commonSettings
               // {
                 "[vue]" = {
-                  "editor.defaultFormatter" = "Vue.volar";
+                  "editor.defaultFormatter" = "esbenp.prettier-vscode";
                 };
               };
           };
