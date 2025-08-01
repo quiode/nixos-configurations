@@ -33,7 +33,7 @@
 
     # nvf, for better vim configuration
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:notashelf/nvf/0e8c165a8ae5edd46336730f5a7f51a5f7f368e2"; # TODO: when fixed, pin to current version
 
       inputs = {
         nixpkgs.follows = "nixpkgs";

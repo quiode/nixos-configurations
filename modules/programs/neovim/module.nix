@@ -19,13 +19,13 @@ in {
 
   config = mkIf cfg.enable {
     programs.nvf = {
-      enable = false; # TODO: enable when fixed
+      enable = true;
       enableManpages = true;
     };
 
     home-manager.users = genAttrs cfg.users (username: {
       programs.nvf = {
-        enable = false; # TODO: enable when fixed
+        enable = true;
         defaultEditor = true;
         enableManpages = true;
 
