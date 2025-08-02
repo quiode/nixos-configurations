@@ -8,7 +8,13 @@
   inherit (lib.modules) mkIf;
   cfg = config.modules.services.printing;
 in {
-  options.modules.services.printing.enable = mkEnableOption "Enable Printing";
+  options.modules.services.printing = {
+    enable = mkEnableOption "Enable Printing";
+
+    printers = {
+      canon.enable = mkEnableOption "Enable specific support for Canon Printers";
+    };
+  };
 
   config = mkIf cfg.enable {
     services = {
@@ -26,7 +32,7 @@ in {
           BrowseProtocols all
         '';
 
-        drivers = with pkgs; [gutenprint gutenprintBin canon-cups-ufr2 cups-bjnp cups-filters cnijfilter2];
+        drivers = with pkgs; [gutenprint] ++ lib.optionals cfg.printers.canon.enable [canon-cups-ufr2 cnijfilter2 cups-bjnp gutenprintBin cups-filters];
       };
 
       # IPP Everywhere protocol
