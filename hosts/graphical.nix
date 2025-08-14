@@ -7,7 +7,7 @@
   modules = {
     boot.plymouth.enable = true;
 
-    # todo: merge with graphical as they both are the same?
+    # TODO: merge with graphical as they both are the same?
     desktop = {
       enable = true;
       users = config.modules.users.main;
