@@ -26,20 +26,27 @@ in {
 
   config = mkIf cfg.enable {
     modules = {
+      bundles.photography.enable = true;
+
       # TODO: make more generic
       desktop.gnome = mkIf (cfg.manager == "gnome") {
         enable = true;
         users = cfg.users;
       };
+
       programs = {
         vscodium = {
           enable = true;
           users = config.modules.users.main;
         };
+
+        libreoffice.enable = true;
       };
+
+      services.vm.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [spotify nextcloud-client thunderbird immich-cli signal-desktop qbittorrent];
+    environment.systemPackages = with pkgs; [spotify nextcloud-client thunderbird immich-cli signal-desktop qbittorrent pdfsam-basic marktext];
 
     hardware = {
       graphics = {

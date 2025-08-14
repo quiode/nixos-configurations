@@ -7,26 +7,19 @@
   modules = {
     boot.plymouth.enable = true;
 
-    bundles.photography.enable = true;
-
+    # todo: merge with graphical as they both are the same?
     desktop = {
       enable = true;
       users = config.modules.users.main;
     };
 
     programs = {
-      libreoffice.enable = true;
       localsend.enable = true;
-      vscodium = {
-        enable = true;
-        users = config.modules.users.main;
-      };
       wireguard.enable = true;
     };
 
     services = {
       docker.enable = true;
-      vm.enable = true;
       printing = {
         enable = true;
       };
@@ -39,6 +32,4 @@
   };
 
   networking.networkmanager.enable = true;
-
-  environment.systemPackages = with pkgs; [pdfsam-basic];
 }
