@@ -46,7 +46,16 @@ in {
       services.vm.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [spotify nextcloud-client thunderbird immich-cli signal-desktop qbittorrent pdfsam-basic marktext];
+    environment.systemPackages = with pkgs; [
+      spotify
+      nextcloud-client
+      thunderbird
+      immich-cli
+      signal-desktop
+      qbittorrent
+      pdfsam-basic
+      marktext # TODO: create home-manager module or somehow manage settings
+    ];
 
     hardware = {
       graphics = {
