@@ -34,7 +34,7 @@ services:
       timeout: 3s
 
   authentik_ldap:
-    image: ghcr.io/goauthentik/ldap:2025.6
+    image: ghcr.io/goauthentik/ldap:${AUTHENTIK_VERSION}
     container_name: authentik_ldap
     restart: always
     ports:
@@ -43,12 +43,13 @@ services:
     env_file:
       - /ssd/critical/authentik/secrets.env
       - /ssd/critical/authentik/ldap-secrets.env
+      - .env
     environment:
       AUTHENTIK_HOST: https://auth.dominik-schwaiger.ch
       AUTHENTIK_INSECURE: 'false'
 
   authentik:
-    image: ghcr.io/goauthentik/server:2025.6
+    image: ghcr.io/goauthentik/server:${AUTHENTIK_VERSION}
     restart: always
     container_name: authentik
     command: server
@@ -65,6 +66,7 @@ services:
       - /ssd/critical/authentik/custom-templates:/templates
     env_file:
       - /ssd/critical/authentik/secrets.env
+      - .env
     depends_on:
       - postgresql
       - redis
@@ -78,7 +80,7 @@ services:
       traefik.docker.network: authentik
 
   worker:
-    image: ghcr.io/goauthentik/server:2025.6
+    image: ghcr.io/goauthentik/server:${AUTHENTIK_VERSION}
     restart: always
     container_name: authentik_worker
     command: worker
@@ -99,6 +101,7 @@ services:
       - /ssd/critical/authentik/custom-templates:/templates
     env_file:
       - /ssd/critical/authentik/secrets.env
+      - .env
     depends_on:
       - postgresql
       - redis
