@@ -14,6 +14,8 @@ in {
     keyd # to minitor key press event, used with keyd service below
   ];
 
+  time.timeZone = lib.mkForce "Australia/Sydney";
+
   services = {
     # for ROG Laptop
     supergfxd.enable = true;
