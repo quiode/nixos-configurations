@@ -16,6 +16,11 @@ in {
 
   time.timeZone = lib.mkForce "Australia/Sydney";
 
+  modules.bundles.gaming = {
+    enable = true;
+    users = config.modules.users.main;
+  };
+
   services = {
     # for ROG Laptop
     supergfxd.enable = true;
