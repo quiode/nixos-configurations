@@ -158,6 +158,16 @@ in {
             userSettings = commonSettings // {};
           };
 
+          rust = {
+            extensions =
+              commonExtensions
+              ++ (with vscode-marketplace; [
+                rust-lang.rust-analyzer
+              ]);
+
+            userSettings = commonSettings // {};
+          };
+
           empty = {
             extensions = [];
             userSettings = {};
