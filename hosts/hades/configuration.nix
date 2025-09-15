@@ -12,6 +12,7 @@ in {
   environment.systemPackages = with pkgs; [
     xournalpp
     keyd # to minitor key press event, used with keyd service below
+    wireshark-qt # for COMP4336
   ];
 
   time.timeZone = lib.mkForce "Australia/Sydney";
