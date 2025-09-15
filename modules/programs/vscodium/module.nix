@@ -142,6 +142,7 @@ in {
               ++ (with vscode-marketplace; [
                 ms-python.python
                 ms-python.vscode-pylance
+                ms-toolsai.jupyter
               ]);
 
             userSettings = commonSettings // {};

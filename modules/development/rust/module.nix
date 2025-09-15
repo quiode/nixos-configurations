@@ -11,6 +11,6 @@ in {
   options.modules.development.rust.enable = mkEnableOption "Enable Rust Toolchain";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [rustup jetbrains.rust-rover];
+    environment.systemPackages = with pkgs; [gcc rustup jetbrains.rust-rover];
   };
 }

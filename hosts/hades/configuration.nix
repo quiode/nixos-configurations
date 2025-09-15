@@ -23,8 +23,9 @@ in {
       users = config.modules.users.main;
     };
 
-    development.rust = {
-      enable = true;
+    development = {
+      rust.enable = true;
+      python.enable = true;
     };
   };
 
