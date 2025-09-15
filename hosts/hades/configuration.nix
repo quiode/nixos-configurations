@@ -17,9 +17,15 @@ in {
 
   time.timeZone = lib.mkForce "Australia/Sydney";
 
-  modules.bundles.gaming = {
-    enable = true;
-    users = config.modules.users.main;
+  modules = {
+    bundles.gaming = {
+      enable = true;
+      users = config.modules.users.main;
+    };
+
+    development.rust = {
+      enable = true;
+    }
   };
 
   services = {
