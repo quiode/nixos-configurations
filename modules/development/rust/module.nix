@@ -8,9 +8,9 @@
   inherit (lib.modules) mkIf;
   cfg = config.modules.development.rust;
 in {
-  options.modules.developement.rust.enable = mkEnableOption "Enable Rust Toolchain";
+  options.modules.development.rust.enable = mkEnableOption "Enable Rust Toolchain";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [git rustc cargo gcc rustfmt clippy];
+    environment.systemPackages = with pkgs; [rustup jetbrains.rust-rover];
   };
 }

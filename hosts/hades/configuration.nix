@@ -25,7 +25,7 @@ in {
 
     development.rust = {
       enable = true;
-    }
+    };
   };
 
   services = {
