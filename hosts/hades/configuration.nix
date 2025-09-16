@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  self,
   ...
 }: let
   inherit (lib) genAttrs;
@@ -9,11 +10,15 @@
 in {
   boot.initrd.luks.devices."luks-e33fcdd4-9e85-413e-bd46-6f141716d32a".device = "/dev/disk/by-uuid/e33fcdd4-9e85-413e-bd46-6f141716d32a";
 
-  environment.systemPackages = with pkgs; [
-    xournalpp
-    keyd # to minitor key press event, used with keyd service below
-    wireshark-qt # for COMP4336
-  ];
+  environment.systemPackages =
+    (with pkgs; [
+      xournalpp
+      keyd # to minitor key press event, used with keyd service below
+      wireshark-qt # for COMP4336
+    ])
+    ++ (with self.packages.${pkgs.stdenv.system}; [
+      cserun # for COMP6991
+    ]);
 
   time.timeZone = lib.mkForce "Australia/Sydney";
 
