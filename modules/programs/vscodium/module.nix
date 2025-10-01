@@ -8,8 +8,9 @@
   inherit (lib.types) listOf str;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) vscodium nil vscode-marketplace;
+  inherit (pkgs) vscodium nil forVSCodeVersion;
   cfg = config.modules.programs.vscodium;
+  extensions = (forVSCodeVersion vscodium.version).vscode-marketplace;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
   options.modules.programs.vscodium.users = mkOption {
@@ -28,7 +29,7 @@ in {
         mutableExtensionsDir = false;
 
         profiles = let
-          commonExtensions = with vscode-marketplace; [
+          commonExtensions = with extensions; [
             vscodevim.vim
             ms-azuretools.vscode-containers
             esbenp.prettier-vscode
@@ -122,7 +123,7 @@ in {
           vue = {
             extensions =
               commonExtensions
-              ++ (with vscode-marketplace; [
+              ++ (with extensions; [
                 nuxtr.nuxtr-vscode
                 vue.volar
               ]);
@@ -139,7 +140,7 @@ in {
           python = {
             extensions =
               commonExtensions
-              ++ (with vscode-marketplace; [
+              ++ (with extensions; [
                 ms-python.python
                 ms-python.vscode-pylance
                 ms-toolsai.jupyter
@@ -151,7 +152,7 @@ in {
           typst = {
             extensions =
               commonExtensions
-              ++ (with vscode-marketplace; [
+              ++ (with extensions; [
                 myriad-dreamin.tinymist
                 tomoki1207.pdf # pdf viewer
               ]);
@@ -162,7 +163,7 @@ in {
           rust = {
             extensions =
               commonExtensions
-              ++ (with vscode-marketplace; [
+              ++ (with extensions; [
                 rust-lang.rust-analyzer
               ]);
 

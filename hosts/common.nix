@@ -60,9 +60,6 @@ in {
       fastfetch = prev.fastfetch.override {
         zfsSupport = config.modules.services.zfs.enable;
       };
-
-      # use unstable vscodium so that the extensions are up-to-date
-      vscodium = final.unstable.vscodium;
     })
   ];
 
