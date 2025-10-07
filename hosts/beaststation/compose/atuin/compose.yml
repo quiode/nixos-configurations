@@ -27,7 +27,7 @@ services:
       traefik.http.services.atuin.loadbalancer.server.port: 8888
 
   atuin-db:
-    image: pgautoupgrade/pgautoupgrade:alpine
+    image: pgautoupgrade/pgautoupgrade:17-alpine
     container_name: atuin-database
     restart: always
     env_file:

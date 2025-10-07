@@ -1,6 +1,6 @@
 services:
   postgresql:
-    image: pgautoupgrade/pgautoupgrade:alpine
+    image: pgautoupgrade/pgautoupgrade:17-alpine
     container_name: authentik_postgres
     restart: always
     networks:
