@@ -43,6 +43,12 @@
 
     # Systems, gets a list of systems, allows easy overriding
     systems.url = "github:nix-systems/x86_64-linux";
+
+    # rust-overlay: for easier rust management
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
