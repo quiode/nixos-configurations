@@ -24,7 +24,7 @@ in {
 
   modules = {
     bundles.gaming = {
-      enable = true;
+      enable = false;
       users = config.modules.users.main;
     };
 
