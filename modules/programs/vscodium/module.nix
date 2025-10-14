@@ -49,7 +49,7 @@ in {
             window.zoomLevel = 1.5;
             workbench = {
               iconTheme = "material-icon-theme";
-              colorTheme = "Catppuccin Mocha";
+              colorTheme = "Visual Studio Dark"; # TODO: currently catppuccin is weird, change back when active line is NOT a bright red color (old value: "Catppuccin Mocha")
             };
             editor = {
               wordWrap = "wordWrapColumn";
