@@ -39,7 +39,7 @@ in {
             streetsidesoftware.code-spell-checker-german # spellcheck - german addon
             edwinhuish.better-comments-next
             catppuccin.catppuccin-vsc
-            pkief.material-icon-theme
+            catppuccin.catppuccin-vsc-icons
             jnoortheen.nix-ide
           ];
 
@@ -48,12 +48,13 @@ in {
             files.autoSave = "onFocusChange";
             window.zoomLevel = 1.5;
             workbench = {
-              iconTheme = "material-icon-theme";
-              colorTheme = "Visual Studio Dark"; # TODO: currently catppuccin is weird, change back when active line is NOT a bright red color (old value: "Catppuccin Mocha")
+              iconTheme = "catppuccin-mocha";
+              colorTheme = "Default Dark Modern"; # TODO: currently catppuccin is weird, change back when active line is NOT a bright red color (old value: "Catppuccin Mocha", "Default Dark Modern")
             };
             editor = {
               wordWrap = "wordWrapColumn";
               wordWrapColumn = 120;
+              semanticHighlighting.enabled = true;
             };
 
             # Git
