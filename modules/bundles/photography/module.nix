@@ -16,6 +16,6 @@ in {
 
     modules.services.vm.enable = true; # enable vm to install windows for adobe lightroom
 
-    environment.systemPackages = with pkgs; [geeqie identity gimp gthumb];
+    environment.systemPackages = with pkgs; [geeqie identity gimp gthumb photocollage];
   };
 }
