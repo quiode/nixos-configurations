@@ -1,6 +1,6 @@
 services:
   postgresql:
-    image: pgautoupgrade/pgautoupgrade:17-alpine
+    image: pgautoupgrade/pgautoupgrade:18-alpine
     container_name: authentik_postgres
     restart: always
     networks:
@@ -12,7 +12,7 @@ services:
       retries: 5
       timeout: 5s
     volumes:
-      - /ssd/critical/authentik/database:/var/lib/postgresql/data
+      - /ssd/critical/authentik/database:/var/lib/postgresql
     env_file:
       - /ssd/critical/authentik/secrets.env
     environment:
