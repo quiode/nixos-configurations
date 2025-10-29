@@ -19,20 +19,6 @@ services:
       POSTGRES_USER: authentik
       POSTGRES_DB: authentik
 
-  redis:
-    image: redis:alpine
-    container_name: authentik_redis
-    command: --save 60 1 --loglevel warning
-    restart: always
-    networks:
-      - authentik-internal
-    healthcheck:
-      test: [ 'CMD-SHELL', 'redis-cli ping | grep PONG' ]
-      start_period: 20s
-      interval: 30s
-      retries: 5
-      timeout: 3s
-
   authentik_ldap:
     image: ghcr.io/goauthentik/ldap:${AUTHENTIK_VERSION}
     container_name: authentik_ldap
@@ -57,7 +43,6 @@ services:
       - authentik-internal
       - authentik-external
     environment:
-      AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
@@ -69,7 +54,6 @@ services:
       - .env
     depends_on:
       - postgresql
-      - redis
       - authentik_ldap
     labels:
       traefik.http.routers.authentik.rule: Host(`auth.dominik-schwaiger.ch`)
@@ -85,7 +69,6 @@ services:
     container_name: authentik_worker
     command: worker
     environment:
-      AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
@@ -104,7 +87,6 @@ services:
       - .env
     depends_on:
       - postgresql
-      - redis
     networks:
       - authentik-internal
 
