@@ -17,6 +17,7 @@ in {
           with python-pkgs; [
             jupyter
             pandas
+            tabulate
             numpy
             matplotlib
             scikit-learn
