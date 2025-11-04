@@ -10,7 +10,7 @@
   inherit (lib.modules) mkIf;
   inherit (pkgs) vscodium nil forVSCodeVersion;
   cfg = config.modules.programs.vscodium;
-  extensions = (forVSCodeVersion vscodium.version).vscode-marketplace;
+  extensions = ((forVSCodeVersion vscodium.version).usingFixesFrom pkgs).vscode-marketplace;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
   options.modules.programs.vscodium.users = mkOption {
@@ -144,7 +144,13 @@ in {
               ++ (with extensions; [
                 ms-python.python
                 ms-python.vscode-pylance
+                # Jupyter + Additional Extensions
                 ms-toolsai.jupyter
+                ms-toolsai.jupyter-keymap
+                ms-toolsai.jupyter-renderers
+                ms-toolsai.vscode-jupyter-cell-tags
+                ms-toolsai.vscode-jupyter-slideshow
+                ms-toolsai.vscode-jupyter-powertoys
               ]);
 
             userSettings = commonSettings // {};
