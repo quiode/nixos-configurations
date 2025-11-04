@@ -16,6 +16,7 @@ in {
         (python-pkgs:
           with python-pkgs; [
             jupyter
+            pandas
             numpy
             matplotlib
             scikit-learn
