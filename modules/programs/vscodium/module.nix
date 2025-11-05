@@ -63,6 +63,7 @@ in {
               enableSmartCommit = true;
               confirmSync = false;
               replaceTagsWhenPull = true;
+              openRepositoryInParentFolders = "always";
             };
 
             # Vim
