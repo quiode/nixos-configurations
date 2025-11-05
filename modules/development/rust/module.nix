@@ -14,7 +14,6 @@ in {
     environment.systemPackages = with pkgs; [
       gcc
       (rust-bin.stable.latest.default.override {extensions = ["rust-src"];})
-      jetbrains.rust-rover
     ];
   };
 }
