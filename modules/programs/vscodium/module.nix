@@ -8,9 +8,9 @@
   inherit (lib.types) listOf str;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) vscodium nil forVSCodeVersion;
+  inherit (pkgs) vscodium nil nix4vscode;
   cfg = config.modules.programs.vscodium;
-  extensions = ((forVSCodeVersion vscodium.version).usingFixesFrom pkgs).vscode-marketplace;
+  getExtensions = nix4vscode.forVscodeVersion vscodium.version;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
   options.modules.programs.vscodium.users = mkOption {
@@ -29,18 +29,18 @@ in {
         mutableExtensionsDir = false;
 
         profiles = let
-          commonExtensions = with extensions; [
-            vscodevim.vim
-            ms-azuretools.vscode-containers
-            esbenp.prettier-vscode
-            ultram4rine.vscode-choosealicense
-            tomoki1207.pdf # pdf viewer
-            streetsidesoftware.code-spell-checker # spellcheck
-            streetsidesoftware.code-spell-checker-german # spellcheck - german addon
-            edwinhuish.better-comments-next
-            catppuccin.catppuccin-vsc
-            catppuccin.catppuccin-vsc-icons
-            jnoortheen.nix-ide
+          commonExtensions = getExtensions [
+            "vscodevim.vim"
+            "ms-azuretools.vscode-containers"
+            "esbenp.prettier-vscode"
+            "ultram4rine.vscode-choosealicense"
+            "tomoki1207.pdf" # pdf viewer
+            "streetsidesoftware.code-spell-checker" # spellcheck
+            "streetsidesoftware.code-spell-checker-german" # spellcheck - german addon
+            "edwinhuish.better-comments-next"
+            "catppuccin.catppuccin-vsc"
+            "catppuccin.catppuccin-vsc-icons"
+            "jnoortheen.nix-ide"
           ];
 
           commonSettings = {
@@ -124,9 +124,9 @@ in {
           vue = {
             extensions =
               commonExtensions
-              ++ (with extensions; [
-                nuxtr.nuxtr-vscode
-                vue.volar
+              ++ (getExtensions [
+                "nuxtr.nuxtr-vscode"
+                "vue.volar"
               ]);
 
             userSettings =
@@ -141,16 +141,16 @@ in {
           python = {
             extensions =
               commonExtensions
-              ++ (with extensions; [
-                ms-python.python
-                ms-python.vscode-pylance
+              ++ (getExtensions [
+                "ms-python.python"
+                "ms-python.vscode-pylance"
                 # Jupyter + Additional Extensions
-                ms-toolsai.jupyter
-                ms-toolsai.jupyter-keymap
-                ms-toolsai.jupyter-renderers
-                ms-toolsai.vscode-jupyter-cell-tags
-                ms-toolsai.vscode-jupyter-slideshow
-                ms-toolsai.vscode-jupyter-powertoys
+                "ms-toolsai.jupyter"
+                "ms-toolsai.jupyter-keymap"
+                "ms-toolsai.jupyter-renderers"
+                "ms-toolsai.vscode-jupyter-cell-tags"
+                "ms-toolsai.vscode-jupyter-slideshow"
+                "ms-toolsai.vscode-jupyter-powertoys"
               ]);
 
             userSettings = commonSettings // {};
@@ -159,9 +159,9 @@ in {
           typst = {
             extensions =
               commonExtensions
-              ++ (with extensions; [
-                myriad-dreamin.tinymist
-                tomoki1207.pdf # pdf viewer
+              ++ (getExtensions [
+                "myriad-dreamin.tinymist"
+                "tomoki1207.pdf" # pdf viewer
               ]);
 
             userSettings = commonSettings // {};
@@ -170,8 +170,8 @@ in {
           rust = {
             extensions =
               commonExtensions
-              ++ (with extensions; [
-                rust-lang.rust-analyzer
+              ++ (getExtensions [
+                "rust-lang.rust-analyzer"
               ]);
 
             userSettings = commonSettings // {};
