@@ -31,6 +31,12 @@ in {
 
         settings = {
           vim = {
+            clipboard = {
+              enable = true;
+              providers.xclip.enable = true;
+              registers = "unnamedplus";
+            };
+
             viAlias = true;
             vimAlias = true;
 
