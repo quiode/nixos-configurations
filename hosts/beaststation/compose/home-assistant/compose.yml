@@ -2,7 +2,7 @@ services:
   home-assistant:
     container_name: home-assistant
     hostname: home.dominik-schwaiger.ch
-    image: ghcr.io/home-assistant/home-assistant:2025.10
+    image: ghcr.io/home-assistant/home-assistant:2025.11
     depends_on:
       - esphome
     volumes:
