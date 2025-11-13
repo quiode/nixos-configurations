@@ -174,7 +174,6 @@ in {
               commonExtensions
               ++ (getExtensions [
                 "rust-lang.rust-analyzer"
-                "vadimcn.vscode-lldb"
               ]);
 
             userSettings = commonSettings // {};
