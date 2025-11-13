@@ -173,7 +173,8 @@ in {
             extensions =
               commonExtensions
               ++ (getExtensions [
-                "rust-lang.rust-analyzer"
+                "rust-lang.rust-analyzer" # intellisense
+                "vadimcn.vscode-lldb" # debugging
               ]);
 
             userSettings = commonSettings // {};
