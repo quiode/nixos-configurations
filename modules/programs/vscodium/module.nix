@@ -8,7 +8,7 @@
   inherit (lib.types) listOf str;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) vscodium nil nix4vscode;
+  inherit (pkgs) vscodium nil lldb nix4vscode;
   cfg = config.modules.programs.vscodium;
   getExtensions = nix4vscode.forVscodeVersion vscodium.version;
 in {
@@ -20,7 +20,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [vscodium nil];
+    environment.systemPackages = [
+      vscodium
+      nil
+      lldb # needed for debugging (rust)
+    ];
 
     home-manager.users = genAttrs cfg.users (username: {
       programs.vscode = {
@@ -174,7 +178,7 @@ in {
               commonExtensions
               ++ (getExtensions [
                 "rust-lang.rust-analyzer" # intellisense
-                "vadimcn.vscode-lldb" # debugging
+                "webfreak.debug" # debugging
               ]);
 
             userSettings = commonSettings // {};
