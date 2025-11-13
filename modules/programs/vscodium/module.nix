@@ -8,9 +8,9 @@
   inherit (lib.types) listOf str;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) vscodium-fhs nil nix4vscode;
+  inherit (pkgs) vscodium nil nix4vscode;
   cfg = config.modules.programs.vscodium;
-  getExtensions = nix4vscode.forVscodeVersion vscodium-fhs.version;
+  getExtensions = nix4vscode.forVscodeVersion vscodium.version;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
   options.modules.programs.vscodium.users = mkOption {
@@ -20,12 +20,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [vscodium-fhs nil];
+    environment.systemPackages = [vscodium nil];
 
     home-manager.users = genAttrs cfg.users (username: {
       programs.vscode = {
         enable = true;
-        package = vscodium-fhs;
+        package = vscodium;
         mutableExtensionsDir = false;
 
         profiles = let
