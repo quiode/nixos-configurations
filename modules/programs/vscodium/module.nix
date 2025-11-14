@@ -155,7 +155,11 @@ in {
                 "ms-toolsai.vscode-jupyter-powertoys"
               ]);
 
-            userSettings = commonSettings // {};
+            userSettings =
+              commonSettings
+              // {
+                jupyter.askForKernelRestart = false;
+              };
           };
 
           typst = {
