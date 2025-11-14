@@ -29,7 +29,7 @@ in {
     };
 
     development = {
-      rust.enable = true;
+      rust.enable = false;
       python.enable = true;
     };
   };
