@@ -30,7 +30,7 @@ in {
 
     development = {
       rust.enable = false;
-      python.enable = true;
+      python.enable = false;
     };
   };
 
