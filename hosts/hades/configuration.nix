@@ -48,7 +48,7 @@ in {
       enable = true;
       keyboards = {
         built-in = {
-          ids = ["0b05:19b6:42ab166f"];
+          ids = ["*"];
           settings = {
             "meta+shift" = {
               "s" = "print";
