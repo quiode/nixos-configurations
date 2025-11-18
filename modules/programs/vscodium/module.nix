@@ -146,6 +146,7 @@ in {
               ++ (getExtensions [
                 "ms-python.python"
                 "ms-python.vscode-pylance"
+                "ms-python.autopep8"
                 # Jupyter + Additional Extensions
                 "ms-toolsai.jupyter"
                 "ms-toolsai.jupyter-keymap"
