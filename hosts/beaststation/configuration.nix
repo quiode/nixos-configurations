@@ -22,7 +22,6 @@ in {
       speedtest-cli
       pciutils
       usbutils
-      iptables # wg-easy
     ];
 
     # custom /etc stuff
