@@ -33,7 +33,5 @@ services:
 
 networks:
   wireguard:
-    interface_name: eth0
-    gw_priority: 1
     name: wireguard
     external: true
