@@ -22,6 +22,12 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [vscodium nil];
 
+    # use vscode as diff tool in git
+    programs.git.config = {
+      diff.tool = "vscode";
+      difftool.vscode.cmd = "codium --wait --diff $LOCAL $REMOTE";
+    };
+
     home-manager.users = genAttrs cfg.users (username: {
       programs.vscode = {
         enable = true;
