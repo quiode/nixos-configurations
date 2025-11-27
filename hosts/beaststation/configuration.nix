@@ -83,7 +83,6 @@ in {
       "r8169"
       # Modules needed for wireguard / wg-easy
       "wireguard"
-      "ip_tables"
       "iptable_nat"
       "ip6table_nat"
       "iptable_filter"
