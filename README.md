@@ -4,6 +4,10 @@ This Repository contains all my NixOS configuration files for my Computers, Lapt
 
 ## Structure
 
+### `flakes`
+
+This directory contains useful flakes for different kind of development environments.
+
 ### `packages`
 
 Contains custom packages not in `nixpkgs`.
