@@ -32,6 +32,16 @@ in {
       rust.enable = false;
       python.enable = false;
     };
+
+    desktop = {
+      enable = true;
+      users = config.modules.users.main;
+    };
+
+    users.quio = {
+      enable = true;
+      main = true;
+    };
   };
 
   # automatic screen rotation

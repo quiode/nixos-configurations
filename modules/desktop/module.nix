@@ -41,9 +41,17 @@ in {
         };
 
         libreoffice.enable = true;
+        localsend.enable = true;
+        wireguard.enable = true;
       };
 
-      services.vm.enable = true;
+      services = {
+        vm.enable = true;
+        docker.enable = true;
+        printing.enable = true;
+      };
+
+      boot.plymouth.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -86,6 +94,8 @@ in {
     };
 
     programs.firefox.enable = true;
+
+    networking.networkmanager.enable = true;
 
     home-manager.users = genAttrs cfg.users (username: {
       services = {
