@@ -62,7 +62,7 @@ in {
       signal-desktop
       qbittorrent
       pdfsam-basic
-      marktext # TODO: create home-manager module or somehow manage settings
+      marktext
     ];
 
     hardware = {
