@@ -54,9 +54,9 @@ in {
             # General Settings
             files.autoSave = "onFocusChange";
             window.zoomLevel = 1.5;
+            "workbench.iconTheme" = "catppuccin-mocha"; # writing it like this fixes a bug that it tries to insert itself at the end of the document if done normally
             workbench = {
-              iconTheme = "catppuccin-mocha";
-              colorTheme = "Default Dark Modern"; # TODO: currently catppuccin is weird, change back when active line is NOT a bright red color (old value: "Catppuccin Mocha", "Default Dark Modern")
+              colorTheme = "Catppuccin Mocha";
             };
             editor = {
               wordWrap = "wordWrapColumn";

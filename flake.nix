@@ -34,7 +34,7 @@
 
     # nvf, for better vim configuration
     nvf = {
-      url = "github:notashelf/nvf"; # TODO: when fixed, pin to current version
+      url = "github:notashelf/nvf";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
