@@ -34,6 +34,9 @@ in {
     };
   };
 
+  # automatic screen rotation
+  hardware.sensor.iio.enable = true;
+
   services = {
     # for ROG Laptop
     supergfxd.enable = true;

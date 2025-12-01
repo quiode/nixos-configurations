@@ -29,12 +29,16 @@ in {
       desktopManager.gnome.enable = true;
     };
 
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = "adwaita-dark";
+    };
+
     environment = with pkgs; {
       systemPackages =
         (with gnomeExtensions; [
-          tray-icons-reloaded
           removable-drive-menu
-          gsconnect
           gravatar
           wallpaper-slideshow
           clipboard-history
