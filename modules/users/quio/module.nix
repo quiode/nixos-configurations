@@ -40,21 +40,27 @@ in {
       programs = {
         git = {
           enable = true;
-          userName = "Dominik Schwaiger";
-          userEmail = "mail@dominik-schwaiger.ch";
-          signing = {
-            signByDefault = true;
-            key = "D9FE 655C CD52 8F80 3D27 8F75 F7E7 E19B C69F 7DF5";
-          };
-          extraConfig = {
+
+          settings = {
+            user = {
+              name = "Dominik Schwaiger";
+              email = "mail@dominik-schwaiger.ch";
+            };
+
             pull.rebase = true;
             push.autoSetupRemote = true;
             init.defaultBranch = "main";
+          };
+
+          signing = {
+            signByDefault = true;
+            key = "D9FE 655C CD52 8F80 3D27 8F75 F7E7 E19B C69F 7DF5";
           };
         };
 
         ssh = {
           enable = true;
+          enableDefaultConfig = false;
           matchBlocks = {
             home = {
               hostname = "dominik-schwaiger.ch";

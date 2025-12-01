@@ -1,7 +1,6 @@
 # Contains shared configuration for all systems that are mainly graphical, so laptop, pc, etc.
 {
   config,
-  pkgs,
   ...
 }: {
   modules = {

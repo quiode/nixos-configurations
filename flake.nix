@@ -3,14 +3,14 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # Unstable Nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,7 +34,7 @@
 
     # nvf, for better vim configuration
     nvf = {
-      url = "github:notashelf/nvf/0e8c165a8ae5edd46336730f5a7f51a5f7f368e2"; # TODO: when fixed, pin to current version
+      url = "github:notashelf/nvf"; # TODO: when fixed, pin to current version
 
       inputs = {
         nixpkgs.follows = "nixpkgs";

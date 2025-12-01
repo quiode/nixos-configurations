@@ -6,11 +6,10 @@
   config,
   ...
 }: let
-  inherit (pkgs) lix;
   inherit (inputs) nix4vscode nixpkgs-unstable nvf agenix rust-overlay;
   stateVersion = "24.11";
 in {
-  environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.system}; []);
+  environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${stdenv.hostPlatform.system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; []);
 
   # for general icons
   fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono];
@@ -42,7 +41,7 @@ in {
   };
 
   # use lix instead of nix. ask vali why lix is better
-  nix.package = lix;
+  nix.package = pkgs.lix;
 
   nixpkgs.
     overlays = [
@@ -100,7 +99,6 @@ in {
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
-    "repl-flake"
   ];
 
   networking.firewall.enable = true;

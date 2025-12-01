@@ -16,7 +16,7 @@ in {
       keyd # to minitor key press event, used with keyd service below
       wireshark-qt # for COMP4336
     ])
-    ++ (with self.packages.${pkgs.stdenv.system}; [
+    ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; [
       cserun # for COMP6991
     ]);
 
