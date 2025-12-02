@@ -48,7 +48,6 @@ in {
             "catppuccin.catppuccin-vsc-icons"
             "jnoortheen.nix-ide"
             "tamasfe.even-better-toml"
-            "saoudrizwan.claude-dev"
           ];
 
           commonSettings = {
