@@ -48,6 +48,7 @@ in {
             "catppuccin.catppuccin-vsc-icons"
             "jnoortheen.nix-ide"
             "tamasfe.even-better-toml"
+            "saoudrizwan.claude-dev"
           ];
 
           commonSettings = {
@@ -63,6 +64,8 @@ in {
               wordWrapColumn = 120;
               semanticHighlighting.enabled = true;
             };
+            telemetry.telemetryLevel = "all"; # better support for nix :D
+            terminal.integrated.defaultProfile.linux = "zsh";
 
             # Git
             git = {
