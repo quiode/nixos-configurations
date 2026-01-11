@@ -17,7 +17,7 @@
     # VS Code Extensions
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable"; # TODO: revert when upstream is fixed (commit e24a734 in nixpkgs)
       inputs.systems.follows = "systems";
     };
 
@@ -34,7 +34,7 @@
 
     # nvf, for better vim configuration
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:notashelf/nvf/v0.8";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";

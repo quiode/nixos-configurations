@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }: let
   inherit (lib) genAttrs;
@@ -54,6 +53,8 @@ in {
               lightbulb.enable = true;
             };
 
+            formatter.conform-nvim.enable = true;
+
             languages = {
               enableFormat = true;
               enableTreesitter = true;
@@ -63,14 +64,12 @@ in {
 
                 format = {
                   enable = true;
-                  package = pkgs.alejandra;
-                  type = "alejandra";
+                  type = ["alejandra"];
                 };
 
                 lsp = {
                   enable = true;
-                  package = pkgs.nil;
-                  server = "nil";
+                  servers = ["nil"];
                 };
               };
 
