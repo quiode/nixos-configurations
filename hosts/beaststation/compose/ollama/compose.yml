@@ -20,7 +20,7 @@ services:
       - ollama-internal
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:0.6-cuda
+    image: ghcr.io/open-webui/open-webui:0.7-cuda
     container_name: open-webui
     networks:
       - ollama-internal
