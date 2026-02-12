@@ -20,8 +20,6 @@ in {
       cserun # for COMP6991
     ]);
 
-  time.timeZone = lib.mkForce "Australia/Sydney";
-
   modules = {
     bundles.gaming = {
       enable = false;
