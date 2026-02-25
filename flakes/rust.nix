@@ -25,7 +25,7 @@
       };
     in {
       default = with pkgs;
-        pkgs.mkShellNoCC {
+        mkShellNoCC {
           buildInputs = [
             openssl
             pkg-config
