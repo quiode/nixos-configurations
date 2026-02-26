@@ -19,6 +19,11 @@
       default = with pkgs;
         mkShellNoCC {
           packages = [typst git tinymist];
+
+          # fixes dates in typst
+          shellHook = ''
+            unset SOURCE_DATE_EPOCH
+          '';
         };
     });
   };
