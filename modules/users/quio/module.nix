@@ -79,12 +79,6 @@ in {
               port = 2222;
               user = "domina";
             };
-
-            unsw = {
-              hostname = "cse.unsw.edu.au";
-              port = 22;
-              user = "z5717821";
-            };
           };
         };
       };

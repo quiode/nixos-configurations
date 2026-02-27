@@ -14,11 +14,9 @@ in {
     (with pkgs; [
       xournalpp
       keyd # to minitor key press event, used with keyd service below
-      wireshark-qt # for COMP4336
     ])
     ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; [
-      cserun # for COMP6991
-    ]);
+      ]);
 
   modules = {
     bundles.gaming = {
@@ -27,8 +25,7 @@ in {
     };
 
     development = {
-      rust.enable = false;
-      python.enable = false;
+      miri.enable = true; # TODO: disable when done with Miri
     };
 
     desktop = {
