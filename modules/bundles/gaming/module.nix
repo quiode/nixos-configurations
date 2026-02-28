@@ -34,7 +34,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       vesktop
-      prismlauncher # for minecraft
+      prismlauncher # for Minecraft
       steam-run # to run steam games manually
     ];
 
