@@ -6,7 +6,7 @@
   config,
   ...
 }: let
-  inherit (inputs) nix4vscode nixpkgs-unstable nvf agenix rust-overlay;
+  inherit (inputs) nix4vscode nixpkgs-unstable nvf agenix;
   stateVersion = "24.11";
 in {
   environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${stdenv.hostPlatform.system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; []);
@@ -52,9 +52,6 @@ in {
 
     # Import all vscode extensions
     nix4vscode.overlays.default
-
-    # rust-overlay
-    rust-overlay.overlays.default
 
     # use unstable for some packages instead of stable
     (final: prev: {
