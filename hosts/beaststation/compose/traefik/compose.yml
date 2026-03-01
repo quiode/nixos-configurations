@@ -37,7 +37,7 @@ services:
       - matrix
       - esphome
       - authentik
-      - jellyseerr
+      - seerr
       - radarr
       - sonarr
       - prowlarr
@@ -104,8 +104,8 @@ networks:
   authentik:
     name: authentik
 
-  jellyseerr:
-    name: jellyseerr
+  seerr:
+    name: seerr
 
   radarr:
     name: radarr

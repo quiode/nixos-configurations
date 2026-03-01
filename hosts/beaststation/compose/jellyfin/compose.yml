@@ -64,30 +64,37 @@ services:
       traefik.http.services.jellyfin.loadBalancer.passHostHeader: true
       traefik.docker.network: jellyfin
 
-  jellyseerr:
-    image: fallenbagel/jellyseerr
-    container_name: jellyseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:v3.1.0
+    container_name: seerr
     depends_on:
       - jellyfin
       - sonarr
       - radarr
     networks:
-      - jellyseerr
+      - seerr
       - jellyfin-internal
     environment:
       LOG_LEVEL: debug
       PORT: 5055 #optional
+    init: true
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /ssd/critical/jellyseerr/config:/app/config
+      - /ssd/critical/seerr/config:/app/config
     restart: always
     labels:
       traefik.enable: true
-      traefik.docker.network: jellyseerr
-      traefik.http.routers.jellyseerr.rule: Host(`jellyseerr.dominik-schwaiger.ch`)
-      traefik.http.routers.jellyseerr.tls: true
-      traefik.http.routers.jellyseerr.tls.certresolver: letsencrypt
-      traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
+      traefik.docker.network: seerr
+      traefik.http.routers.seerr.rule: Host(`jellyseerr.dominik-schwaiger.ch`) || Host(`seerr.dominik-schwaiger.ch`) # TODO: jellyseerr only for backwards compatibility after rename, change when everyone changed to seerr website
+      traefik.http.routers.seerr.tls: true
+      traefik.http.routers.seerr.tls.certresolver: letsencrypt
+      traefik.http.services.seerr.loadbalancer.server.port: 5055
 
   sonarr:
     image: lscr.io/linuxserver/sonarr
@@ -212,8 +219,8 @@ networks:
     name: jellyfin
     external: true
 
-  jellyseerr:
-    name: jellyseerr
+  seerr:
+    name: seerr
     external: true
 
   qbittorrent:
