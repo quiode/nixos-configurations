@@ -46,7 +46,6 @@ in {
           oh-my-zsh = {
             enable = true;
             theme = "bira"; # jispwoso also nice
-            plugins = ["extract" "colorize" "globalias"];
           };
         };
 
