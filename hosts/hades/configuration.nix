@@ -24,10 +24,6 @@ in {
       users = config.modules.users.main;
     };
 
-    development = {
-      miri.enable = true; # TODO: disable when done with Miri
-    };
-
     desktop = {
       enable = true;
       users = config.modules.users.main;
