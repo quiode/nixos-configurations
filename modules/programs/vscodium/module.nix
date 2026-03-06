@@ -66,6 +66,7 @@ in {
             telemetry.telemetryLevel = "all"; # better support for nix :D
             terminal.integrated.defaultProfile.linux = "zsh";
             update.showReleaseNotes = false; # don't show release notes after update
+            security.workspace.trust.untrustedFiles = "open";
 
             # Git
             git = {
