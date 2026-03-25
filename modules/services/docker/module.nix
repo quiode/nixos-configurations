@@ -16,6 +16,8 @@ in {
         enable = true;
         autoPrune = {
           enable = true;
+          randomizedDelaySec = "1h";
+          dates = "daily";
           flags = ["--all"];
         };
 
