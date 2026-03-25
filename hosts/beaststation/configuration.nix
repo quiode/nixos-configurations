@@ -62,6 +62,8 @@ in {
 
   # Use the grub EFI boot loader.
   boot = {
+    kernelPackages = pkgs.linuxPackages_lts; # set lts kernel, as this is a server (less problems with nvidia and zfs)
+
     loader = {
       systemd-boot.enable = mkForce false; # disable systemd boot (comes from common config)
       grub = {
