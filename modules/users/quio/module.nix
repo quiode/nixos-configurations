@@ -79,6 +79,12 @@ in {
               port = 2222;
               user = "domina";
             };
+
+            euler = {
+              hostname = "euler.ethz.ch";
+              port = 22;
+              user = "dschwaiger";
+            };
           };
         };
       };
