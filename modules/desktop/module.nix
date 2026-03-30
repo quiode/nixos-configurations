@@ -63,6 +63,7 @@ in {
       qbittorrent
       pdfsam-basic
       marktext
+      openconnect
     ];
 
     hardware = {
@@ -95,7 +96,10 @@ in {
 
     programs.firefox.enable = true;
 
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+      enable = true;
+      plugins = with pkgs; [networkmanager-openconnect];
+    };
 
     home-manager.users = genAttrs cfg.users (username: {
       services = {
