@@ -8,11 +8,6 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
 
 ## Secrets
 
-- **Watchtower**
-  - `REPO_PASSWORD`
-    - password for docker repo
-  - `WATCHTOWER_NOTIFICATION_URL`
-    - telegram url (token) for watchtower bot
 - **Common Database Secret**
   - `DB_PW`
     - password for databases
