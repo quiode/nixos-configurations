@@ -226,9 +226,7 @@ in {
         "rpool/ssd/critical" = critical;
         "rpool/ssd/non-critical" = non-critical;
         "rpool/home" = critical;
-        "rpool/nix" = non-critical;
         "rpool/root" = non-critical;
-        "rpool/var" = non-critical;
       };
     };
 
