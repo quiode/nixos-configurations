@@ -4,11 +4,21 @@
   pkgs,
   ...
 }: let
-  inherit (lib.options) mkEnableOption;
+  inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
+  inherit (lib) types;
   cfg = config.modules.services.docker;
 in {
   options.modules.services.docker.enable = mkEnableOption "Docker";
+  options.modules.services.docker.deletionFrequency = mkOption {
+    default = "weekly";
+    type = types.str;
+    description = ''
+      Specification (in the format described by
+      {manpage}`systemd.time(7)`) of the time at
+      which the automatic docker prune will occur.
+    '';
+  };
 
   config = mkIf cfg.enable {
     virtualisation = {
@@ -17,7 +27,7 @@ in {
         autoPrune = {
           enable = true;
           randomizedDelaySec = "1h";
-          dates = "daily";
+          dates = cfg.deletionFrequency;
           flags = ["--all"];
         };
 

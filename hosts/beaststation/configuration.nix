@@ -44,7 +44,10 @@ in {
 
       nvidia.enable = true;
 
-      docker.enable = true;
+      docker = {
+        enable = true;
+        deletionFrequency = "daily";
+      };
     };
 
     users = {
