@@ -85,6 +85,12 @@ in {
               port = 22;
               user = "dschwaiger";
             };
+            
+            vsos = {
+              hostname = "dschwaiger.vsos.ethz.ch";
+              port = 22;
+              user = "ubuntu";
+            };
           };
         };
       };
