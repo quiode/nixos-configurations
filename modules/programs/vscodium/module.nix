@@ -48,6 +48,8 @@ in {
             "catppuccin.catppuccin-vsc-icons"
             "jnoortheen.nix-ide"
             "tamasfe.even-better-toml"
+            "gitHub.copilot"
+            "gitHub.copilot-chat"
           ];
 
           commonSettings = {
@@ -67,6 +69,9 @@ in {
             terminal.integrated.defaultProfile.linux = "zsh";
             update.showReleaseNotes = false; # don't show release notes after update
             security.workspace.trust.untrustedFiles = "open";
+
+            # AI
+            chat.disableAIFeatures = false;
 
             # Git
             git = {
