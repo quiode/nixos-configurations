@@ -69,6 +69,7 @@ in {
             terminal.integrated.defaultProfile.linux = "zsh";
             update.showReleaseNotes = false; # don't show release notes after update
             security.workspace.trust.untrustedFiles = "open";
+            workbench.editor.empty.hint = "hidden";
 
             # AI
             chat.disableAIFeatures = false;
