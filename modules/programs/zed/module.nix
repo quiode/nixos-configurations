@@ -51,6 +51,12 @@ in {
             };
           };
 
+          tabs = {
+            file_icons = true;
+            git_status = true;
+            show_diagnostics = "errors";
+          };
+
           theme = {
             mode = "system";
             light = "Catppuccin Latte";
