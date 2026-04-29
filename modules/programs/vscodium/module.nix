@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib) genAttrs;
-  inherit (lib.types) listOf str;
+  inherit (lib) genAttrs types;
+  inherit (types) listOf;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   inherit (pkgs) vscodium nil nix4vscode;
@@ -13,17 +13,22 @@
   getExtensions = nix4vscode.forVscodeVersion vscodium.version;
 in {
   options.modules.programs.vscodium.enable = mkEnableOption "VSCodium";
+  options.modules.programs.vscodium.difftool = mkOption {
+    type = types.bool;
+    default = true;
+    description = "Use VSCodium as diff tool in git";
+  };
   options.modules.programs.vscodium.users = mkOption {
     example = "[quio, domina, ...]";
     description = "The user for which a home manager configuration should be created.";
-    type = listOf str;
+    type = listOf types.str;
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [vscodium nil];
 
     # use vscode as diff tool in git
-    programs.git.config = {
+    programs.git.config = mkIf cfg.difftool {
       diff.tool = "vscode";
       difftool.vscode.cmd = "codium --wait --diff $LOCAL $REMOTE";
     };

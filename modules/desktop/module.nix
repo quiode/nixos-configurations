@@ -38,6 +38,12 @@ in {
         vscodium = {
           enable = true;
           users = config.modules.users.main;
+          difftool = false;
+        };
+
+        zed = {
+          enable = true;
+          users = config.modules.users.main;
         };
 
         libreoffice.enable = true;
