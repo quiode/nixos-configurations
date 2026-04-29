@@ -9,6 +9,7 @@
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   cfg = config.modules.programs.zed;
+  zed-editor = pkgs.unstable.zed-editor; # TODO: use stable when 1.0 in stable
 in {
   options.modules.programs.zed.enable = mkEnableOption "Zed Editor";
   options.modules.programs.zed.difftool = mkOption {
@@ -23,7 +24,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.zed-editor];
+    environment.systemPackages = [zed-editor];
 
     # use zed as diff tool in git
     programs.git.config = mkIf cfg.difftool {
@@ -34,8 +35,9 @@ in {
     home-manager.users = genAttrs cfg.users (username: {
       programs.zed-editor = {
         enable = true;
-        extensions = ["nix" "catppuccin" "catppuccin-icons" "toml" "java" "dockerfile" "typst" "make" "gitlab-ci-ls"];
-        extraPackages = [pkgs.gitlab-ci-ls];
+        package = zed-editor;
+        extensions = ["nix" "catppuccin" "catppuccin-icons" "toml" "java" "dockerfile" "typst" "make" "gitlab-ci-ls" "xml"];
+        extraPackages = with pkgs; [gitlab-ci-ls nil jdt-language-server rust-analyzer];
         mutableUserSettings = false;
         mutableUserDebug = false;
         mutableUserKeymaps = false;
@@ -90,6 +92,13 @@ in {
                 formatting = {
                   command = ["alejandra" "--quiet" "--"];
                 };
+              };
+            };
+            jdtls = {
+              settings = {
+                jdtls_launcher = "${pkgs.jdt-language-server}/bin/jdtls";
+                jdk_auto_download = false;
+                lombok_support = true;
               };
             };
           };
