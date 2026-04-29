@@ -8,7 +8,6 @@
   inherit (types) listOf;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) zed-editor;
   cfg = config.modules.programs.zed;
 in {
   options.modules.programs.zed.enable = mkEnableOption "Zed Editor";
@@ -24,7 +23,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [zed-editor];
+    environment.systemPackages = [pkgs.zed-editor];
 
     # use zed as diff tool in git
     programs.git.config = mkIf cfg.difftool {
@@ -36,6 +35,7 @@ in {
       programs.zed-editor = {
         enable = true;
         extensions = ["nix" "catppuccin" "catppuccin-icons" "toml" "java" "dockerfile" "typst" "make"];
+        extraPackages = [];
         mutableUserSettings = false;
         mutableUserDebug = false;
         mutableUserKeymaps = false;
@@ -45,6 +45,11 @@ in {
           auto_update = false;
           base_keymap = "VSCode";
           autosave = "on_focus_change";
+          terminal = {
+            shell = {
+              program = "zsh";
+            };
+          };
 
           theme = {
             mode = "system";
