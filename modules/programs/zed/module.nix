@@ -34,8 +34,8 @@ in {
     home-manager.users = genAttrs cfg.users (username: {
       programs.zed-editor = {
         enable = true;
-        extensions = ["nix" "catppuccin" "catppuccin-icons" "toml" "java" "dockerfile" "typst" "make"];
-        extraPackages = [];
+        extensions = ["nix" "catppuccin" "catppuccin-icons" "toml" "java" "dockerfile" "typst" "make" "gitlab-ci-ls"];
+        extraPackages = [pkgs.gitlab-ci-ls];
         mutableUserSettings = false;
         mutableUserDebug = false;
         mutableUserKeymaps = false;
@@ -73,6 +73,7 @@ in {
             };
             nil = {
               initialization_options = {
+                autoArchive = true;
                 formatting = {
                   command = ["alejandra" "--quiet" "--"];
                 };
@@ -88,6 +89,7 @@ in {
 
           language_models = {
             openai_compatible = {
+              # TODO: finish setup, save TOKEN in local dotenv
               sph = {
                 api_url = "https://litellm.sph-prod.ethz.ch/v1";
                 available_models = [];
