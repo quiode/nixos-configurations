@@ -36,9 +36,8 @@ in {
 
       programs = {
         vscodium = {
-          enable = true;
+          enable = false;
           users = config.modules.users.main;
-          difftool = false;
         };
 
         zed = {
