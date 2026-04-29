@@ -195,7 +195,8 @@ in {
               commonExtensions
               ++ (getExtensions [
                 "rust-lang.rust-analyzer"
-              ]);
+              ])
+              ++ [pkgs.vscode-extensions.vadimcn.vscode-lldb]; # needs a patch
 
             userSettings = commonSettings // {};
           };
