@@ -70,6 +70,13 @@ in {
           };
 
           lsp = {
+            yaml-language-server = {
+              settings = {
+                yaml = {
+                  customTags = ["!reference sequence"];
+                };
+              };
+            };
             rust-analyzer = {
               initialization_options = {
                 check = {
