@@ -36,12 +36,12 @@ in {
 
       programs = {
         vscodium = {
-          enable = false;
+          enable = true;
           users = config.modules.users.main;
         };
 
         zed = {
-          enable = true;
+          enable = false;
           users = config.modules.users.main;
         };
 

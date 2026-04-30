@@ -8,8 +8,8 @@
   inherit (types) listOf;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
+  inherit (pkgs) zed-editor;
   cfg = config.modules.programs.zed;
-  zed-editor = pkgs.unstable.zed-editor; # TODO: use stable when 1.0 in stable
 in {
   options.modules.programs.zed.enable = mkEnableOption "Zed Editor";
   options.modules.programs.zed.difftool = mkOption {
