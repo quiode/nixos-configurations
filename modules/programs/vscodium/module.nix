@@ -8,7 +8,7 @@
   inherit (types) listOf;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) vscodium nil nix4vscode;
+  inherit (pkgs) vscodium nil nix4vscode vscode-extensions;
   cfg = config.modules.programs.vscodium;
   getExtensions = nix4vscode.forVscodeVersion vscodium.version;
 in {
@@ -40,22 +40,25 @@ in {
         mutableExtensionsDir = false;
 
         profiles = let
-          commonExtensions = getExtensions [
-            "vscodevim.vim"
-            "ms-azuretools.vscode-containers"
-            "esbenp.prettier-vscode"
-            "ultram4rine.vscode-choosealicense"
-            "tomoki1207.pdf" # pdf viewer
-            "streetsidesoftware.code-spell-checker" # spellcheck
-            "streetsidesoftware.code-spell-checker-german" # spellcheck - german addon
-            "edwinhuish.better-comments-next"
-            "catppuccin.catppuccin-vsc"
-            "catppuccin.catppuccin-vsc-icons"
-            "jnoortheen.nix-ide"
-            "tamasfe.even-better-toml"
-            "gitHub.copilot"
-            "gitHub.copilot-chat"
-          ];
+          commonExtensions =
+            (getExtensions [
+              "ultram4rine.vscode-choosealicense"
+              "edwinhuish.better-comments-next"
+            ])
+            ++ (with vscode-extensions; [
+              vscodevim.vim
+              ms-azuretools.vscode-containers
+              esbenp.prettier-vscode
+              tomoki1207.pdf # pdf viewer
+              streetsidesoftware.code-spell-checker # spellcheck
+              streetsidesoftware.code-spell-checker-german # spellcheck - german addon
+              catppuccin.catppuccin-vsc
+              catppuccin.catppuccin-vsc-icons
+              jnoortheen.nix-ide
+              tamasfe.even-better-toml
+              github.copilot
+              github.copilot-chat
+            ]);
 
           commonSettings = {
             # General Settings
@@ -149,7 +152,9 @@ in {
               commonExtensions
               ++ (getExtensions [
                 "nuxtr.nuxtr-vscode"
-                "vue.volar"
+              ])
+              ++ (with vscode-extensions; [
+                vue.volar
               ]);
 
             userSettings =
@@ -165,16 +170,18 @@ in {
             extensions =
               commonExtensions
               ++ (getExtensions [
-                "ms-python.python"
-                "ms-python.vscode-pylance"
                 "ms-python.autopep8"
-                # Jupyter + Additional Extensions
-                "ms-toolsai.jupyter"
-                "ms-toolsai.jupyter-keymap"
-                "ms-toolsai.jupyter-renderers"
-                "ms-toolsai.vscode-jupyter-cell-tags"
-                "ms-toolsai.vscode-jupyter-slideshow"
                 "ms-toolsai.vscode-jupyter-powertoys"
+              ])
+              ++ (with vscode-extensions; [
+                ms-python.python
+                ms-python.vscode-pylance
+                # Jupyter + Additional Extensions
+                ms-toolsai.jupyter
+                ms-toolsai.jupyter-keymap
+                ms-toolsai.jupyter-renderers
+                ms-toolsai.vscode-jupyter-cell-tags
+                ms-toolsai.vscode-jupyter-slideshow
               ]);
 
             userSettings =
@@ -185,24 +192,19 @@ in {
           };
 
           typst = {
-            extensions =
-              commonExtensions
-              ++ (getExtensions [
-                "myriad-dreamin.tinymist"
-                "tomoki1207.pdf" # pdf viewer
-              ]);
+            extensions = commonExtensions ++ (with vscode-extensions; [myriad-dreamin.tinymist tomoki1207.pdf]);
 
             userSettings = commonSettings // {};
           };
 
           rust = {
-            extensions =
-              commonExtensions
-              ++ (getExtensions [
-                "rust-lang.rust-analyzer"
-              ])
-              ++ [pkgs.vscode-extensions.vadimcn.vscode-lldb]; # needs a patch
+            extensions = commonExtensions ++ (with vscode-extensions; [vadimcn.vscode-lldb rust-lang.rust-analyzer]);
 
+            userSettings = commonSettings // {};
+          };
+
+          java = {
+            extensions = commonExtensions ++ (with vscode-extensions; [vscjava.vscode-java-pack]);
             userSettings = commonSettings // {};
           };
 
