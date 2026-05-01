@@ -192,19 +192,38 @@ in {
           };
 
           typst = {
-            extensions = commonExtensions ++ (with vscode-extensions; [myriad-dreamin.tinymist tomoki1207.pdf]);
+            extensions =
+              commonExtensions
+              ++ (with vscode-extensions; [
+                myriad-dreamin.tinymist
+                tomoki1207.pdf
+              ]);
 
             userSettings = commonSettings // {};
           };
 
           rust = {
-            extensions = commonExtensions ++ (with vscode-extensions; [vadimcn.vscode-lldb rust-lang.rust-analyzer]);
+            extensions =
+              commonExtensions
+              ++ (with vscode-extensions; [
+                vadimcn.vscode-lldb
+                rust-lang.rust-analyzer
+              ]);
 
             userSettings = commonSettings // {};
           };
 
           java = {
-            extensions = commonExtensions ++ (with vscode-extensions; [vscjava.vscode-java-pack]);
+            extensions =
+              commonExtensions
+              ++ (with vscode-extensions; [
+                redhat.java
+                vscjava.vscode-java-debug
+                vscjava.vscode-java-test
+                vscjava.vscode-maven
+                vscjava.vscode-gradle
+                vscjava.vscode-java-dependency
+              ]);
             userSettings = commonSettings // {};
           };
 
