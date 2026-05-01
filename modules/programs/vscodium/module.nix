@@ -224,7 +224,11 @@ in {
                 vscjava.vscode-gradle
                 vscjava.vscode-java-dependency
               ]);
-            userSettings = commonSettings // {};
+            userSettings =
+              commonSettings
+              // {
+                redhat.telemetry.enabled = true;
+              };
           };
 
           empty = {
