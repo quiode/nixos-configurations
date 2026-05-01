@@ -150,11 +150,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777521128,
-        "narHash": "sha256-O+6vmFmbqNtCBXnhrUrySAN+3jLlKgeQRjWUdpcZbss=",
+        "lastModified": 1777608230,
+        "narHash": "sha256-ozX8IQpzrwZsh4Kw+zQnwoOOnj+QTBmfV2dqLMEB898=",
         "owner": "nix-community",
         "repo": "nix4vscode",
-        "rev": "f252b271a425f7c951b222e6c94ccdf5b6f5eff0",
+        "rev": "12f1bcf38e54e5eea86bc91f1787022367279de8",
         "type": "github"
       },
       "original": {
