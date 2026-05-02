@@ -58,6 +58,7 @@ in {
               tamasfe.even-better-toml
               github.copilot
               github.copilot-chat
+              foxundermoon.shell-format
             ]);
 
           commonSettings = {
