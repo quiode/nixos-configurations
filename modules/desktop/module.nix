@@ -41,7 +41,7 @@ in {
         };
 
         zed = {
-          enable = true;
+          enable = false;
           difftool = false;
           users = config.modules.users.main;
         };
