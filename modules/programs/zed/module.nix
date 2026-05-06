@@ -8,7 +8,7 @@
   inherit (types) listOf;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
-  inherit (pkgs) zed-editor;
+  inherit (pkgs.unstable) zed-editor;
   cfg = config.modules.programs.zed;
 in {
   options.modules.programs.zed.enable = mkEnableOption "Zed Editor";
@@ -25,6 +25,12 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [zed-editor];
+
+    # TODO: remove, needed as extensions are not properly packaged
+    programs.nix-ld = {
+      enable = true;
+      libraries = [];
+    };
 
     # use zed as diff tool in git
     programs.git.config = mkIf cfg.difftool {
@@ -53,6 +59,10 @@ in {
             };
           };
 
+          project_panel = {
+            dock = "left";
+          };
+
           tabs = {
             file_icons = true;
             git_status = true;
@@ -69,6 +79,10 @@ in {
             mode = "system";
             light = "Catppuccin Latte";
             dark = "Catppuccin Mocha";
+          };
+
+          file_types = {
+            Dockerfile = ["Dockerfile.*"];
           };
 
           lsp = {
@@ -96,7 +110,6 @@ in {
             };
             jdtls = {
               settings = {
-                jdtls_launcher = "${pkgs.jdt-language-server}/bin/jdtls";
                 jdk_auto_download = false;
                 lombok_support = true;
               };
