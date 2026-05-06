@@ -53,7 +53,6 @@ in {
     # Import all vscode extensions
     nix4vscode.overlays.default
 
-    # use unstable for some packages instead of stable
     (final: prev: {
       # enable zfs support, if needed
       fastfetch = prev.fastfetch.override {
