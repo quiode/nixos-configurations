@@ -100,19 +100,22 @@ in {
 
             # Formatting
             "[json]" = {
-              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              editor.defaultFormatter = "esbenp.prettier-vscode";
             };
             "[jsonc]" = {
-              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              editor.defaultFormatter = "esbenp.prettier-vscode";
             };
             "[dockercompose]" = {
-              "editor.defaultFormatter" = "ms-azuretools.vscode-containers";
+              editor.defaultFormatter = "ms-azuretools.vscode-containers";
+            };
+            "[dockerfile]" = {
+              editor.defaultFormatter = "ms-azuretools.vscode-containers";
             };
             "[scss]" = {
-              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              editor.defaultFormatter = "esbenp.prettier-vscode";
             };
             "[typescript]" = {
-              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+              editor.defaultFormatter = "esbenp.prettier-vscode";
             };
 
             # License Extension
