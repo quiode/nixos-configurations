@@ -214,7 +214,11 @@ in {
                 rust-lang.rust-analyzer
               ]);
 
-            userSettings = commonSettings // {};
+            userSettings =
+              commonSettings
+              // {
+                rust-analyzer.check.command = "clippy";
+              };
           };
 
           java = {
