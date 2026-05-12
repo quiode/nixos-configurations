@@ -58,6 +58,7 @@ in {
               tamasfe.even-better-toml
               github.copilot
               github.copilot-chat
+              anthropic.claude-code
               foxundermoon.shell-format
             ]);
 

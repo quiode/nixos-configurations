@@ -34,6 +34,11 @@ in {
       fastfetch.enable = true;
     };
 
+    development.claude = {
+      enable = true;
+      users = config.modules.users.main;
+    };
+
     services.atuin = {
       enable = true;
       users = config.modules.users.main;
