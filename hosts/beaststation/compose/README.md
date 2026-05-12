@@ -54,6 +54,9 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
 - **Open WebUI**
   - `OAUTH_CLIENT_ID`
   - `OAUTH_CLIENT_SECRET`
+- **Meridian**
+  - `ANTHROPIC_API_KEY`
+    - Anthropic API key for Claude access
 - **Factorio**
   - `USERNAME`
   - `TOKEN`

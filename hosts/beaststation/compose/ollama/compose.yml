@@ -30,7 +30,6 @@ services:
       CUSTOM_NAME: Chat
       USE_CUDA_DOCKER: true
       OLLAMA_BASE_URL: http://ollama:11434
-      ENABLE_OPENAI_API: false
       ENABLE_LOGIN_FORM: false
       ENABLE_OAUTH_SIGNUP: true
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: true
@@ -55,6 +54,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - ollama
+      - meridian
     restart: always
     labels:
       traefik.enable: true
@@ -62,6 +62,17 @@ services:
       traefik.http.routers.ollama.rule: Host(`chat.dominik-schwaiger.ch`)
       traefik.http.routers.ollama.tls: true
       traefik.http.routers.ollama.tls.certresolver: letsencrypt
+
+  meridian:
+    image: ghcr.io/rynfar/meridian:1.29
+    container_name: meridian
+    env_file:
+      - /ssd/critical/meridian/secrets.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - ollama-internal
+    restart: always
 
 networks:
   ollama-internal:
