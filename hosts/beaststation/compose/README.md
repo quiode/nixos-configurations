@@ -54,10 +54,6 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
 - **Open WebUI**
   - `OAUTH_CLIENT_ID`
   - `OAUTH_CLIENT_SECRET`
-- **Meridian**
-  - `MERIDIAN_PROFILES`
-    - JSON array with the OAuth token, e.g. `[{"id":"claude","oauthToken":"sk-ant-oat01-..."}]`
-    - obtain the token with `claude setup-token`
 - **Factorio**
   - `USERNAME`
   - `TOKEN`
@@ -103,6 +99,7 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/home-assistant/config`
 - `/hdd/critical/home-assistant/backups`
 - `/ssd/critical/home-assistant/esphome`
+- `/hdd/critical/meridian`
 - `/hdd/critical/matrix/data/media`
 - `/ssd/critical/matrix/data`
 - `/ssd/critical/matrix/db`

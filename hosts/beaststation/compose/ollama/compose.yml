@@ -66,11 +66,8 @@ services:
   meridian:
     image: ghcr.io/rynfar/meridian:1.29
     container_name: meridian
-    environment:
-      MERIDIAN_DEFAULT_PROFILE: claude
-    env_file:
-      - /ssd/critical/meridian/secrets.env
     volumes:
+      - /hdd/critical/meridian:/home/claude/.claude
       - /etc/localtime:/etc/localtime:ro
     networks:
       - ollama-internal
