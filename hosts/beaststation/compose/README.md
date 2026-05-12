@@ -55,8 +55,9 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
   - `OAUTH_CLIENT_ID`
   - `OAUTH_CLIENT_SECRET`
 - **Meridian**
-  - `CLAUDE_CODE_OAUTH_TOKEN`
-    - obtain with `claude setup-token`
+  - `MERIDIAN_PROFILES`
+    - JSON array with the OAuth token, e.g. `[{"id":"claude","oauthToken":"sk-ant-oat01-..."}]`
+    - obtain the token with `claude setup-token`
 - **Factorio**
   - `USERNAME`
   - `TOKEN`
