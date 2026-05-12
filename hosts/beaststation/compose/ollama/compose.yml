@@ -67,7 +67,7 @@ services:
     image: ghcr.io/rynfar/meridian:1.29
     container_name: meridian
     volumes:
-      - /hdd/critical/meridian:/home/claude/.claude
+      - /hdd/critical/meridian:/home/claude
       - /etc/localtime:/etc/localtime:ro
     networks:
       - ollama-internal
