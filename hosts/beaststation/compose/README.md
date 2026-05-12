@@ -55,8 +55,8 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
   - `OAUTH_CLIENT_ID`
   - `OAUTH_CLIENT_SECRET`
 - **Meridian**
-  - `ANTHROPIC_API_KEY`
-    - Anthropic API key for Claude access
+  - `CLAUDE_CODE_OAUTH_TOKEN`
+    - obtain with `claude setup-token`
 - **Factorio**
   - `USERNAME`
   - `TOKEN`
