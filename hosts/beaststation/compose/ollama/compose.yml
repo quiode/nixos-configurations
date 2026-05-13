@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama
+    image: ollama/ollama:0.23.3
     container_name: ollama
     volumes:
       - /hdd/non-critical/ollama:/root/.ollama
@@ -55,6 +55,7 @@ services:
     depends_on:
       - ollama
       - meridian
+      - open-terminal
     restart: always
     labels:
       traefik.enable: true
@@ -62,6 +63,21 @@ services:
       traefik.http.routers.ollama.rule: Host(`chat.dominik-schwaiger.ch`)
       traefik.http.routers.ollama.tls: true
       traefik.http.routers.ollama.tls.certresolver: letsencrypt
+
+  open-terminal:
+    image: ghcr.io/open-webui/open-terminal:0.11
+    container_name: open-terminal
+    networks:
+      - ollama-internal
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      OPEN_TERMINAL_MULTI_USER: true
+      OPEN_TERMINAL_API_KEY: open-terminal # local-only, no real secret needed
+      OPEN_TERMINAL_PACKAGES: ""
+      OPEN_TERMINAL_PIP_PACKAGES: ""
+      OPEN_TERMINAL_NPM_PACKAGES: ""
+    restart: always
 
   meridian:
     image: ghcr.io/rynfar/meridian:1.29
