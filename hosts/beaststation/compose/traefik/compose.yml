@@ -22,7 +22,7 @@ services:
       traefik.http.routers.dashboard.tls: true
       traefik.http.routers.dashboard.tls.certresolver: letsencrypt
       traefik.enable: true
-    mem_limit: 2g
+    mem_limit: 2g # FIXME: remove this and find out why traefik uses too much memory
     networks:
       - nextcloud
       - dominik-schwaiger
