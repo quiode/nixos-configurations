@@ -40,9 +40,3 @@ certificatesResolvers:
       storage: "/etc/certs/acme.json"
       httpChallenge:
         entryPoint: "web"
-
-experimental:
-  plugins:
-    simplecache:
-      moduleName: "github.com/traefik/plugin-simplecache"
-      version: "v0.2.1"
