@@ -22,6 +22,7 @@ services:
       traefik.http.routers.dashboard.tls: true
       traefik.http.routers.dashboard.tls.certresolver: letsencrypt
       traefik.enable: true
+    mem_limit: 2g
     networks:
       - nextcloud
       - dominik-schwaiger
