@@ -83,6 +83,7 @@ in {
 
             # AI
             chat.disableAIFeatures = false;
+            claudeCode.preferredLocation = "sidebar";
 
             # Git
             git = {
