@@ -11,8 +11,6 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - /etc/localtime:/etc/localtime:ro
       - acme:/etc/certs # for sharing certs with other services
-      # For External Services
-      - /hdd/non-critical/dominik-schwaiger.ch/cache:/hdd/non-critical/dominik-schwaiger.ch/cache # for caching the personal website
     labels:
       traefik.http.middlewares.authentik.forwardauth.address: http://authentik:9000/outpost.goauthentik.io/auth/traefik
       traefik.http.middlewares.authentik.forwardauth.trustForwardHeader: true
