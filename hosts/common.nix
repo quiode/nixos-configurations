@@ -128,6 +128,7 @@ in {
 
     git = {
       enable = true;
+      lfs.enable = true;
     };
 
     nh = {
