@@ -60,6 +60,7 @@ in {
               github.copilot-chat
               anthropic.claude-code
               foxundermoon.shell-format
+              mkhl.direnv
             ]);
 
           commonSettings = {

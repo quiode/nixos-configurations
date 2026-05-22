@@ -126,6 +126,8 @@ in {
   programs = {
     gnupg.agent.enable = true;
 
+    direnv.enable = true;
+
     git = {
       enable = true;
       lfs.enable = true;
