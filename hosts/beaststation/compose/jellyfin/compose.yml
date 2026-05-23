@@ -65,7 +65,7 @@ services:
       traefik.docker.network: jellyfin
 
   seerr:
-    image: ghcr.io/seerr-team/seerr:v3.1.0
+    image: ghcr.io/seerr-team/seerr:v3.2.0
     container_name: seerr
     depends_on:
       - jellyfin
