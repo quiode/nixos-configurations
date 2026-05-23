@@ -80,7 +80,7 @@ services:
     restart: always
 
   meridian:
-    image: ghcr.io/rynfar/meridian:1.42
+    image: ghcr.io/rynfar/meridian
     container_name: meridian
     volumes:
       - /hdd/critical/meridian:/home/claude
