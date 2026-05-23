@@ -1,6 +1,6 @@
 services:
   stalwart:
-    image: stalwartlabs/stalwart:v0.15.5
+    image: stalwartlabs/stalwart:v0.16
     container_name: stalwart
     ports:
       - 25:25 # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
@@ -13,7 +13,8 @@ services:
       - stalwart
     restart: always
     volumes:
-      - /ssd/critical/stalwart:/opt/stalwart
+      - /ssd/critical/stalwart/config:/etc/stalwart
+      - /ssd/critical/stalwart/data:/var/lib/stalwart
       - /etc/localtime:/etc/localtime:ro
       - certs:/data/certs:ro # certs from traefik
     labels:
@@ -23,6 +24,24 @@ services:
       traefik.http.routers.stalwart.tls: true
       traefik.http.routers.stalwart.tls.certresolver: letsencrypt
       traefik.http.services.stalwart.loadbalancer.server.port: 8080
+
+  stalwart-old:
+    image: stalwartlabs/stalwart:v0.15.5
+    container_name: stalwart-old
+    networks:
+      - stalwart
+    restart: always
+    volumes:
+      - /ssd/critical/stalwart/old:/opt/stalwart
+      - /etc/localtime:/etc/localtime:ro
+      - certs:/data/certs:ro # certs from traefik
+    labels:
+      traefik.enable: true
+      traefik.docker.network: stalwart
+      traefik.http.routers.stalwart-old.rule: Host(`stalwart-old.dominik-schwaiger.ch`)
+      traefik.http.routers.stalwart-old.tls: true
+      traefik.http.routers.stalwart-old.tls.certresolver: letsencrypt
+      traefik.http.services.stalwart-old.loadbalancer.server.port: 8080
 
 volumes:
   certs:
