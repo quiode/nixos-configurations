@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.23.3
+    image: ollama/ollama:0.24.0
     container_name: ollama
     volumes:
       - /hdd/non-critical/ollama:/root/.ollama
