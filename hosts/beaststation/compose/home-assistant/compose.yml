@@ -8,7 +8,6 @@ services:
     volumes:
       - /ssd/critical/home-assistant/config:/config
       - /hdd/critical/home-assistant/backups:/config/backups
-      - ./configuration.yaml:/config/configuration.yaml:ro
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: always
