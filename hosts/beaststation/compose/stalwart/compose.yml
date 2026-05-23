@@ -9,6 +9,8 @@ services:
       - 587:587 # ESMTP (explicit TLS => STARTTLS)
       - 993:993 # IMAP4 (implicit TLS)
       - 4190:4190 # ManageSieve (Sieve scripts)
+    environment:
+      RUST_LOG: "stalwart=debug"
     networks:
       - stalwart
     restart: always
