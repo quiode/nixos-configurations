@@ -16,16 +16,15 @@ services:
       - /ssd/critical/stalwart/etc:/etc/stalwart
       - /ssd/critical/stalwart/data:/var/lib/stalwart
       - /etc/localtime:/etc/localtime:ro
-      - certs:/data/certs:ro # certs from traefik
     environment:
       STALWART_PUBLIC_URL: https://mail.dominik-schwaiger.ch
     labels:
       traefik.enable: true
       traefik.docker.network: stalwart
-      traefik.http.routers.stalwart.rule: Host(`mail.dominik-schwaiger.ch`) || Host(`autodiscover.dominik-schwaiger.ch`) || Host(`autoconfig.dominik-schwaiger.ch`) || Host(`smtp.dominik-schwaiger.ch`) || Host(`imap.dominik-schwaiger.ch`) || Host(`mta-sts.dominik-schwaiger.ch`)
-      traefik.http.routers.stalwart.tls: true
-      traefik.http.routers.stalwart.tls.certresolver: letsencrypt
-      traefik.http.services.stalwart.loadbalancer.server.port: 8080
+      traefik.tcp.routers.stalwart.rule: HostSNI(`mail.dominik-schwaiger.ch`) || HostSNI(`autodiscover.dominik-schwaiger.ch`) || HostSNI(`autoconfig.dominik-schwaiger.ch`) || HostSNI(`smtp.dominik-schwaiger.ch`) || HostSNI(`imap.dominik-schwaiger.ch`) || HostSNI(`mta-sts.dominik-schwaiger.ch`)
+      traefik.tcp.routers.stalwart.entrypoints: websecure
+      traefik.tcp.routers.stalwart.tls.passthrough: true
+      traefik.tcp.services.stalwart.loadbalancer.server.port: 443
 
   stalwart-old:
     image: stalwartlabs/stalwart:v0.15.5
