@@ -18,11 +18,6 @@ services:
       traefik.http.routers.website.rule: Host(`dominik-schwaiger.ch`)
       traefik.http.routers.website.tls: true
       traefik.http.routers.website.tls.certresolver: letsencrypt
-      # Images Router (For Caching)
-      traefik.http.routers.website-images.rule: Host(`dominik-schwaiger.ch`) && PathPrefix(`/_ipx`)
-      traefik.http.routers.website-images.tls: true
-      traefik.http.routers.website-images.tls.certresolver: letsencrypt
-      traefik.http.routers.website-images.middlewares: website-image-cache@docker
 
 networks:
   dominik-schwaiger:
