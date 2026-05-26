@@ -9,7 +9,6 @@ services:
       - 587:587 # ESMTP (explicit TLS => STARTTLS)
       - 993:993 # IMAP4 (implicit TLS)
       - 4190:4190 # ManageSieve (Sieve scripts)
-      - 8080:8080 # Stalwart web admin (temporary, for initial setup)
     networks:
       - stalwart
     restart: always
@@ -22,10 +21,17 @@ services:
     labels:
       traefik.enable: true
       traefik.docker.network: stalwart
+      # Stalwart handles TLS itself
       traefik.tcp.routers.stalwart.rule: HostSNI(`mail.dominik-schwaiger.ch`) || HostSNI(`autodiscover.dominik-schwaiger.ch`) || HostSNI(`autoconfig.dominik-schwaiger.ch`) || HostSNI(`smtp.dominik-schwaiger.ch`) || HostSNI(`imap.dominik-schwaiger.ch`) || HostSNI(`mta-sts.dominik-schwaiger.ch`)
       traefik.tcp.routers.stalwart.entrypoints: websecure
       traefik.tcp.routers.stalwart.tls.passthrough: true
       traefik.tcp.services.stalwart.loadbalancer.server.port: 443
+      # Recovery Admin Interface
+      traefik.http.routers.stalwart-admin.rule: Host(`mail-admin.dominik-schwaiger.ch`)
+      traefik.http.routers.stalwart-admin.entrypoints: websecure
+      traefik.http.routers.stalwart-admin.tls: true
+      traefik.http.routers.stalwart-admin.tls.certresolver: letsencrypt
+      traefik.http.services.stalwart-admin.loadbalancer.server.port: 8080
 
   stalwart-old:
     image: stalwartlabs/stalwart:v0.15.5
