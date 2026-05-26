@@ -104,7 +104,8 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/matrix/data`
 - `/ssd/critical/matrix/db`
 - `/ssd/critical/authentik/database`
-- `/ssd/critical/authentik/media`
+- `/ssd/critical/authentik/data`
+- `/ssd/critical/authentik/certs`
 - `/ssd/critical/authentik/custom-templates`
 - `/ssd/critical/seerr/config`
 - `/ssd/critical/sonarr/config`

@@ -50,7 +50,7 @@ services:
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
     volumes:
-      - /ssd/critical/authentik/media:/media
+      - /ssd/critical/authentik/data:/data
       - /ssd/critical/authentik/custom-templates:/templates
       - /etc/localtime:/etc/localtime:ro
     env_file:
@@ -84,7 +84,8 @@ services:
     # (1000:1000 by default)
     user: root
     volumes:
-      - /ssd/critical/authentik/media:/media
+      - /ssd/critical/authentik/data:/data
+      - /ssd/critical/authentik/certs:/certs
       - /ssd/critical/authentik/custom-templates:/templates
       - /etc/localtime:/etc/localtime:ro
     env_file:
