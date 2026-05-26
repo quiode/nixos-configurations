@@ -26,6 +26,7 @@ services:
       traefik.tcp.routers.stalwart.entrypoints: websecure
       traefik.tcp.routers.stalwart.tls.passthrough: true
       traefik.tcp.services.stalwart.loadbalancer.server.port: 443
+      traefik.tcp.services.stalwart.loadbalancer.proxyProtocol.version: 2
       # Recovery Admin Interface
       traefik.http.routers.stalwart-admin.rule: Host(`mail-admin.dominik-schwaiger.ch`)
       traefik.http.routers.stalwart-admin.entrypoints: websecure
