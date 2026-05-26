@@ -25,6 +25,10 @@ services:
       traefik.tcp.routers.stalwart.entrypoints: websecure
       traefik.tcp.routers.stalwart.tls.passthrough: true
       traefik.tcp.services.stalwart.loadbalancer.server.port: 443
+      # Recovery HTTP router
+      traefik.http.routers.stalwart-http.rule: Host(`mail.dominik-schwaiger.ch`) || Host(`autodiscover.dominik-schwaiger.ch`) || Host(`autoconfig.dominik-schwaiger.ch`) || Host(`smtp.dominik-schwaiger.ch`) || Host(`imap.dominik-schwaiger.ch`) || Host(`mta-sts.dominik-schwaiger.ch`)
+      traefik.http.routers.stalwart-http.entrypoints: web
+      traefik.http.services.stalwart-http.loadbalancer.server.port: 8080
 
   stalwart-old:
     image: stalwartlabs/stalwart:v0.15.5
