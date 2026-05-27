@@ -65,7 +65,7 @@ services:
     env_file:
       - /ssd/critical/cloudflare-ddns/secrets.env
     environment:
-      DOMAINS: dominik-schwaiger.ch
+      DOMAINS: dominik-schwaiger.ch,mail.dominik-schwaiger.ch
       PROXIED: "false"
       IP6_PROVIDER: none
 
