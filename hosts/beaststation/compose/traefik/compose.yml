@@ -76,6 +76,9 @@ services:
     restart: always
     depends_on:
       - traefik
+    environment:
+      CERTIFICATE_FILE_NAME: fullchain
+      PRIVATE_KEY_FILE_NAME: privkey
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
