@@ -31,6 +31,22 @@ services:
     restart: always
     depends_on:
       - prometheus
+    env_file:
+      - /ssd/critical/grafana/secrets.env
+    environment:
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+      GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
+      GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email entitlements"
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://auth.dominik-schwaiger.ch/application/o/authorize/"
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://auth.dominik-schwaiger.ch/application/o/token/"
+      GF_AUTH_GENERIC_OAUTH_API_URL: "https://auth.dominik-schwaiger.ch/application/o/userinfo/"
+      GF_AUTH_SIGNOUT_REDIRECT_URL: "https://auth.dominik-schwaiger.ch/application/o/grafana/end-session/"
+      # Optionally enable auto-login (bypasses Grafana login screen)
+      GF_AUTH_OAUTH_AUTO_LOGIN: "true"
+      # Optionally map user entitlements to Grafana roles
+      GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(entitlements[*], 'Grafana Admins') && 'Admin' || contains(entitlements[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+      # Required if Grafana is running behind a reverse proxy
+      GF_SERVER_ROOT_URL: "https://grafana.dominik-schwaiger.ch"
     volumes:
       - /ssd/critical/grafana:/var/lib/grafana
       - /etc/localtime:/etc/localtime:ro
