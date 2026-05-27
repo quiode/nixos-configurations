@@ -69,6 +69,10 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
     POSTGRES_PASSWORD=${ATUIN_DB_PASSWORD}
     ATUIN_DB_URI=postgres://atuin:${ATUIN_DB_PASSWORD}@atuin-db/atuin
   ```
+- **Stalwart** (`metrics-secrets.env`)
+  - `STALWART_METRICS_PASSWORD`
+    - password for Prometheus to scrape Stalwart metrics (username: `prometheus`)
+    - also loaded by Prometheus via the same file
 
 ## Bind Volumes
 

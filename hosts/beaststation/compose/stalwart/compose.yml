@@ -11,7 +11,10 @@ services:
       - 4190:4190 # ManageSieve (Sieve scripts)
     networks:
       - stalwart
+      - monitoring
     restart: always
+    env_file:
+      - /ssd/critical/stalwart/metrics-secrets.env
     volumes:
       - /ssd/critical/stalwart/etc:/etc/stalwart
       - /ssd/critical/stalwart/data:/var/lib/stalwart
@@ -37,4 +40,8 @@ services:
 networks:
   stalwart:
     name: stalwart
+    external: true
+
+  monitoring:
+    name: monitoring
     external: true
