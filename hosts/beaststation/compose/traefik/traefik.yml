@@ -38,5 +38,15 @@ certificatesResolvers:
     acme:
       email: "mail@dominik-schwaiger.ch"
       storage: "/etc/certs/acme.json"
-      httpChallenge:
-        entryPoint: "web"
+      dnsChallenge:
+        provider: infomaniak
+
+tls:
+  stores:
+    default:
+      defaultGeneratedCert:
+        resolver: letsencrypt
+        domain:
+          main: "dominik-schwaiger.ch"
+          sans:
+            - "*.dominik-schwaiger.ch"

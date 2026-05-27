@@ -16,23 +16,24 @@ services:
       - /ssd/critical/stalwart/etc:/etc/stalwart
       - /ssd/critical/stalwart/data:/var/lib/stalwart
       - /etc/localtime:/etc/localtime:ro
+      - certs:/data/certs:ro
     environment:
       STALWART_PUBLIC_URL: https://mail.dominik-schwaiger.ch
     labels:
       traefik.enable: true
       traefik.docker.network: stalwart
-      # Stalwart handles TLS itself
-      traefik.tcp.routers.stalwart.rule: HostSNI(`mail.dominik-schwaiger.ch`) || HostSNI(`autodiscover.dominik-schwaiger.ch`) || HostSNI(`autoconfig.dominik-schwaiger.ch`) || HostSNI(`smtp.dominik-schwaiger.ch`) || HostSNI(`imap.dominik-schwaiger.ch`) || HostSNI(`mta-sts.dominik-schwaiger.ch`)
-      traefik.tcp.routers.stalwart.entrypoints: websecure
-      traefik.tcp.routers.stalwart.tls.passthrough: true
-      traefik.tcp.services.stalwart.loadbalancer.server.port: 443
-      traefik.tcp.services.stalwart.loadbalancer.proxyProtocol.version: 2
-      # Recovery Admin Interface
-      traefik.http.routers.stalwart-admin.rule: Host(`mail-admin.dominik-schwaiger.ch`)
-      traefik.http.routers.stalwart-admin.entrypoints: websecure
-      traefik.http.routers.stalwart-admin.tls: true
-      traefik.http.routers.stalwart-admin.tls.certresolver: letsencrypt
-      traefik.http.services.stalwart-admin.loadbalancer.server.port: 8080
+      # Admin UI (port 8080) via Traefik TLS
+      traefik.http.routers.stalwart.rule: Host(`mail-admin.dominik-schwaiger.ch`)
+      traefik.http.routers.stalwart.entrypoints: websecure
+      traefik.http.routers.stalwart.tls: true
+      traefik.http.routers.stalwart.tls.certresolver: letsencrypt
+      traefik.http.services.stalwart.loadbalancer.server.port: 8080
+      # HTTPS (Stalwart handles TLS itself) via TCP passthrough
+      traefik.tcp.routers.stalwart-https.rule: HostSNI(`mail.dominik-schwaiger.ch`) || HostSNI(`autodiscover.dominik-schwaiger.ch`) || HostSNI(`autoconfig.dominik-schwaiger.ch`) || HostSNI(`smtp.dominik-schwaiger.ch`) || HostSNI(`imap.dominik-schwaiger.ch`) || HostSNI(`mta-sts.dominik-schwaiger.ch`)
+      traefik.tcp.routers.stalwart-https.entrypoints: websecure
+      traefik.tcp.routers.stalwart-https.tls.passthrough: true
+      traefik.tcp.services.stalwart-https.loadbalancer.server.port: 443
+      traefik.tcp.services.stalwart-https.loadbalancer.proxyProtocol.version: 2
 
   stalwart-old:
     image: stalwartlabs/stalwart:v0.15.5
