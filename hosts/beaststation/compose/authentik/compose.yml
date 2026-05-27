@@ -46,6 +46,7 @@ services:
     networks:
       - authentik-internal
       - authentik-external
+      - monitoring
     environment:
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
@@ -107,4 +108,8 @@ networks:
 
   authentik-external:
     name: authentik
+    external: true
+
+  monitoring:
+    name: monitoring
     external: true
