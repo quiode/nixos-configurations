@@ -11,10 +11,11 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - /etc/localtime:/etc/localtime:ro
       - acme:/etc/certs # for sharing certs with other services
-    env_file:
-      - /ssd/critical/traefik/secrets.env
-    environment:
-      LEGO_DISABLE_CNAME_SUPPORT: "true"
+    # TODO: re-enable when switching to dnsChallenge (see traefik.yml)
+    # env_file:
+    #   - /ssd/critical/traefik/secrets.env
+    # environment:
+    #   LEGO_DISABLE_CNAME_SUPPORT: "true"
     labels:
       traefik.http.middlewares.authentik.forwardauth.address: http://authentik:9000/outpost.goauthentik.io/auth/traefik
       traefik.http.middlewares.authentik.forwardauth.trustForwardHeader: true
@@ -26,10 +27,10 @@ services:
       traefik.http.routers.dashboard.tls: true
       traefik.http.routers.dashboard.tls.certresolver: letsencrypt
       traefik.enable: true
-      # Wildcard certificate for *.dominik-schwaiger.ch
-      traefik.tls.stores.default.defaultgeneratedcert.resolver: letsencrypt
-      traefik.tls.stores.default.defaultgeneratedcert.domain.main: dominik-schwaiger.ch
-      traefik.tls.stores.default.defaultgeneratedcert.domain.sans: "*.dominik-schwaiger.ch"
+      # TODO: re-enable when switching to dnsChallenge (see traefik.yml)
+      # traefik.tls.stores.default.defaultgeneratedcert.resolver: letsencrypt
+      # traefik.tls.stores.default.defaultgeneratedcert.domain.main: dominik-schwaiger.ch
+      # traefik.tls.stores.default.defaultgeneratedcert.domain.sans: "*.dominik-schwaiger.ch"
     mem_limit: 2g # FIXME: remove this and find out why traefik uses too much memory
     networks:
       - nextcloud
