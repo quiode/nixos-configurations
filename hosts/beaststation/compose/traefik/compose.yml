@@ -53,6 +53,21 @@ services:
       - stalwart
       - atuin
 
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:1.16.2
+    container_name: cloudflare-ddns
+    restart: always
+    read_only: true
+    cap_drop:
+      - all
+    security_opt:
+      - no-new-privileges:true
+    env_file:
+      - /ssd/critical/traefik/secrets.env
+    environment:
+      DOMAINS: dominik-schwaiger.ch
+      PROXIED: "false"
+
   traefik-certs-dumper:
     image: ghcr.io/kereis/traefik-certs-dumper
     container_name: traefik-certs-dumper
