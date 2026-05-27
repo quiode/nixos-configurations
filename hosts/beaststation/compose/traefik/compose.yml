@@ -54,7 +54,7 @@ services:
       - atuin
 
   cloudflare-ddns:
-    image: favonia/cloudflare-ddns:1.16.2
+    image: favonia/cloudflare-ddns
     container_name: cloudflare-ddns
     restart: always
     read_only: true
