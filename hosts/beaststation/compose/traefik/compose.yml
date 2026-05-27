@@ -24,6 +24,10 @@ services:
       traefik.http.routers.dashboard.tls: true
       traefik.http.routers.dashboard.tls.certresolver: letsencrypt
       traefik.enable: true
+      # Wildcard certificate for *.dominik-schwaiger.ch
+      traefik.tls.stores.default.defaultgeneratedcert.resolver: letsencrypt
+      traefik.tls.stores.default.defaultgeneratedcert.domain.main: dominik-schwaiger.ch
+      traefik.tls.stores.default.defaultgeneratedcert.domain.sans: "*.dominik-schwaiger.ch"
     mem_limit: 2g # FIXME: remove this and find out why traefik uses too much memory
     networks:
       - nextcloud
