@@ -29,4 +29,5 @@ scrape_configs:
 
   - job_name: vaultwarden
     static_configs:
-      - targets: ['vaultwarden:9090']
+      - targets: ['vaultwarden:80']
+    metrics_path: /metrics
