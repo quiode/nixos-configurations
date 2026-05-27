@@ -67,6 +67,7 @@ services:
     environment:
       DOMAINS: dominik-schwaiger.ch
       PROXIED: "false"
+      IP6_PROVIDER: none
 
   traefik-certs-dumper:
     image: ghcr.io/kereis/traefik-certs-dumper
