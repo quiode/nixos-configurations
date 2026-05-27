@@ -7,8 +7,6 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.path=/prometheus
       - --storage.tsdb.retention.time=30d
-    extra_hosts:
-      - host.docker.internal:host-gateway
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - /hdd/non-critical/prometheus:/prometheus
@@ -70,7 +68,8 @@ services:
     command:
       - --path.rootfs=/host
     pid: host
-    network_mode: host
+    networks:
+      - monitoring-internal
     volumes:
       - /:/host:ro,rslave
       - /etc/localtime:/etc/localtime:ro
