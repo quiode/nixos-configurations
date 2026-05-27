@@ -32,6 +32,7 @@ services:
       traefik.tcp.routers.stalwart-https.entrypoints: websecure
       traefik.tcp.routers.stalwart-https.tls.passthrough: true
       traefik.tcp.services.stalwart-https.loadbalancer.server.port: 443
+      traefik.tcp.services.stalwart-https.loadbalancer.proxyProtocol.version: 2
 
   stalwart-old:
     image: stalwartlabs/stalwart:v0.15.5
