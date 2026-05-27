@@ -38,8 +38,5 @@ certificatesResolvers:
     acme:
       email: "mail@dominik-schwaiger.ch"
       storage: "/etc/certs/acme.json"
-      httpChallenge:
-        entryPoint: web
-      # TODO: switch to dnsChallenge for wildcard support once lego fixes the Infomaniak provider bug (APIResponse[string] vs integer record ID in CreateDNSRecord)
-      # dnsChallenge:
-      #   provider: infomaniak
+      dnsChallenge:
+        provider: cloudflare
