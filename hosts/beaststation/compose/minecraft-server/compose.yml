@@ -16,9 +16,12 @@ services:
       OVERRIDE_ICON: 'true'
       ICON: 'https://raw.githubusercontent.com/quiode/beaststation-config/main/compose/minecraft-server/crystal_kontur_lila_moon.png'
       SERVER_NAME: 'Crystal'
+      ENABLE_QUERY: 'true'
     tty: true
     stdin_open: true
     restart: always
+    networks:
+      - minecraft-internal
 
   minecraft-backup:
     container_name: minecraft-backup
@@ -34,3 +37,25 @@ services:
       - /hdd/non-critical/minecraft/backups:/backups
       - /ssd/critical/minecraft/server:/data:ro
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - minecraft-internal
+
+  mc-monitor:
+    image: itzg/mc-monitor:0.16.6
+    container_name: mc-monitor
+    restart: always
+    command: export-for-prometheus
+    environment:
+      EXPORT_SERVERS: minecraft
+    depends_on:
+      - minecraft
+    networks:
+      - minecraft-internal
+      - monitoring
+
+networks:
+  minecraft-internal:
+
+  monitoring:
+    name: monitoring
+    external: true
