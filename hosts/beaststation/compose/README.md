@@ -47,11 +47,9 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
   - `DB_PASSWORD`
     - password for immich db
       `POSTGRES_PASSWORD="${DB_PASSWORD}"`
-<!-- TODO: re-enable when switching to dnsChallenge (lego Infomaniak bug: APIResponse integer vs string)
 - **Traefik**
-  - `INFOMANIAK_ACCESS_TOKEN`
-    - API token for Infomaniak DNS challenge (generate at manager.infomaniak.com/v3/infomaniak-api with DNS and Domain permissions)
--->
+  - `CF_DNS_API_TOKEN`
+    - Cloudflare API token with DNS edit permissions for dns challenge (generate at dash.cloudflare.com/profile/api-tokens)
 - **Authentik**
   - `AUTHENTIK_EMAIL__PASSWORD`
   - `POSTGRES_PASSWORD`
@@ -118,9 +116,7 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/prowlarr/config`
 - `/ssd/critical/gitlab/registry/database`
 - `/ssd/critical/factorio`
-<!-- TODO: re-enable when switching to dnsChallenge (see Traefik secrets above)
 - `/ssd/critical/traefik`
--->
 - `/ssd/critical/wireguard`
 - `/ssd/critical/stalwart`
 - `/ssd/critical/atuin/config`
