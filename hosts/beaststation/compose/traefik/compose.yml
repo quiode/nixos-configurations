@@ -14,7 +14,7 @@ services:
     env_file:
       - /ssd/critical/traefik/secrets.env
     environment:
-      LEGO_EXPERIMENTAL_CNAME_SUPPORT: "true"
+      LEGO_DISABLE_CNAME_SUPPORT: "true"
     labels:
       traefik.http.middlewares.authentik.forwardauth.address: http://authentik:9000/outpost.goauthentik.io/auth/traefik
       traefik.http.middlewares.authentik.forwardauth.trustForwardHeader: true
