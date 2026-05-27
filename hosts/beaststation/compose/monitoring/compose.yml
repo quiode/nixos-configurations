@@ -7,11 +7,9 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.path=/prometheus
       - --storage.tsdb.retention.time=30d
-      - --config.expand-env=true
-    env_file:
-      - /ssd/critical/stalwart/metrics-secrets.env
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - /ssd/critical/stalwart/metrics-password:/etc/prometheus/stalwart-password:ro
       - /hdd/non-critical/prometheus:/prometheus
       - /etc/localtime:/etc/localtime:ro
     networks:

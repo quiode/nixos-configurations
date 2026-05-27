@@ -33,4 +33,4 @@ scrape_configs:
     metrics_path: /metrics/prometheus
     basic_auth:
       username: prometheus
-      password: ${STALWART_METRICS_PASSWORD}
+      password_file: /etc/prometheus/stalwart-password
