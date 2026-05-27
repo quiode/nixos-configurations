@@ -34,29 +34,6 @@ services:
       traefik.tcp.services.stalwart-https.loadbalancer.server.port: 443
       traefik.tcp.services.stalwart-https.loadbalancer.proxyProtocol.version: 2
 
-  stalwart-old:
-    image: stalwartlabs/stalwart:v0.15.5
-    container_name: stalwart-old
-    networks:
-      - stalwart
-    restart: always
-    volumes:
-      - /ssd/critical/stalwart/old:/opt/stalwart
-      - /etc/localtime:/etc/localtime:ro
-      - certs:/data/certs:ro # certs from traefik
-    labels:
-      traefik.enable: true
-      traefik.docker.network: stalwart
-      traefik.http.routers.stalwart-old.rule: Host(`stalwart-old.dominik-schwaiger.ch`)
-      traefik.http.routers.stalwart-old.tls: true
-      traefik.http.routers.stalwart-old.tls.certresolver: letsencrypt
-      traefik.http.services.stalwart-old.loadbalancer.server.port: 8080
-
-volumes:
-  certs:
-    name: traefik_certs
-    external: true
-
 networks:
   stalwart:
     name: stalwart
