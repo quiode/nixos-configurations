@@ -86,7 +86,7 @@ services:
     user: root
     volumes:
       - /ssd/critical/authentik/data:/data
-      - /ssd/critical/authentik/certs:/certs
+      - certs:/certs/traefik:ro
       - /ssd/critical/authentik/custom-templates:/templates
       - /etc/localtime:/etc/localtime:ro
     env_file:
