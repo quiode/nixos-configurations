@@ -33,6 +33,9 @@ entryPoints:
         writeTimeout: "15m"
         idleTimeout: "15m"
 
+metrics:
+  prometheus: {}
+
 certificatesResolvers:
   letsencrypt:
     acme:
