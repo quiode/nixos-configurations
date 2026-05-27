@@ -12,6 +12,9 @@ global:
   sendAnonymousUsage: true
 
 entryPoints:
+  metrics:
+    address: ":8082"
+
   web:
     address: ":80"
     http:
@@ -34,7 +37,8 @@ entryPoints:
         idleTimeout: "15m"
 
 metrics:
-  prometheus: {}
+  prometheus:
+    entryPoint: metrics
 
 certificatesResolvers:
   letsencrypt:
