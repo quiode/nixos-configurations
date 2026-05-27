@@ -16,7 +16,6 @@ services:
       - /ssd/critical/stalwart/etc:/etc/stalwart
       - /ssd/critical/stalwart/data:/var/lib/stalwart
       - /etc/localtime:/etc/localtime:ro
-      - certs:/data/certs:ro
     environment:
       STALWART_PUBLIC_URL: https://mail.dominik-schwaiger.ch
     labels:
