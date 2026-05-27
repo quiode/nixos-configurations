@@ -123,6 +123,8 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/stalwart`
 - `/ssd/critical/atuin/config`
 - `/ssd/critical/atuin/database`
+- `/ssd/critical/grafana`
+- `/hdd/non-critical/prometheus`
 
 ### Other
 

@@ -52,6 +52,7 @@ services:
       - wireguard
       - stalwart
       - atuin
+      - monitoring
 
   cloudflare-ddns:
     image: favonia/cloudflare-ddns
@@ -151,3 +152,6 @@ networks:
 
   atuin:
     name: atuin
+
+  monitoring:
+    name: monitoring
