@@ -6,8 +6,11 @@ services:
     volumes:
       - /ssd/critical/vaultwarden:/data
       - /etc/localtime:/etc/localtime:ro
+    environment:
+      ENABLE_METRICS: 'true'
     networks:
       - vaultwarden
+      - monitoring
     labels:
       traefik.enable: true
       traefik.docker.network: vaultwarden
@@ -18,4 +21,8 @@ services:
 networks:
   vaultwarden:
     name: vaultwarden
+    external: true
+
+  monitoring:
+    name: monitoring
     external: true
