@@ -10,6 +10,7 @@ services:
     networks:
       - matrix-internal
       - matrix-external
+      - monitoring
     depends_on:
       - db
     volumes:
@@ -44,4 +45,8 @@ networks:
 
   matrix-external:
     name: matrix
+    external: true
+
+  monitoring:
+    name: monitoring
     external: true

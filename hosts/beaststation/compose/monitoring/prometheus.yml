@@ -42,3 +42,8 @@ scrape_configs:
   - job_name: immich-microservices
     static_configs:
       - targets: ['immich_server:8082']
+
+  - job_name: synapse
+    metrics_path: /_synapse/metrics
+    static_configs:
+      - targets: ['matrix:9000']
