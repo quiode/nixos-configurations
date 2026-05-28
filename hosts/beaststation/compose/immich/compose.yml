@@ -30,6 +30,8 @@ services:
     env_file:
       - /ssd/critical/immich/secrets.env
       - .env
+    environment:
+      IMMICH_TELEMETRY_INCLUDE: 'all'
     depends_on:
       - redis
       - database
@@ -39,6 +41,7 @@ services:
     networks:
       - immich-internal
       - immich-external
+      - monitoring
     labels:
       traefik.enable: true
       traefik.docker.network: immich
@@ -110,4 +113,8 @@ networks:
 
   immich-external:
     name: immich
+    external: true
+
+  monitoring:
+    name: monitoring
     external: true

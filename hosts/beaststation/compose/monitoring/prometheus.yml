@@ -34,3 +34,11 @@ scrape_configs:
     basic_auth:
       username: prometheus
       password_file: /etc/prometheus/stalwart-password
+
+  - job_name: immich-api
+    static_configs:
+      - targets: ['immich_server:8081']
+
+  - job_name: immich-microservices
+    static_configs:
+      - targets: ['immich_server:8082']
