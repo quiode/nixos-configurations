@@ -1,4 +1,5 @@
 services:
+  # TODO: enable metrics for: wg-easy(https://wg-easy.github.io/wg-easy/development/advanced/metrics/prometheus)
   prometheus:
     image: prom/prometheus:v3.11.3
     container_name: prometheus
