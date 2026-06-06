@@ -54,8 +54,6 @@ in {
     };
 
     # TODO: workaround for https://github.com/NixOS/nixpkgs/issues/451912 — CDI generator races nvidia module load
-    # On headless systems (no X), nvidia modules aren't auto-loaded, so the CDI generator fails with "Driver Not Loaded"
-    boot.kernelModules = ["nvidia" "nvidia-modeset" "nvidia-uvm" "nvidia-drm"];
     systemd.services.nvidia-container-toolkit-cdi-generator = {
       after = ["dev-nvidia0.device"];
       wants = ["dev-nvidia0.device"];
