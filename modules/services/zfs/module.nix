@@ -25,6 +25,7 @@ in {
       supportedFilesystems = ["zfs"];
 
       zfs = {
+        forceImportRoot = false;
         extraPools = cfg.pools;
       };
     };

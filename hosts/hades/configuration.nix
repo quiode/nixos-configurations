@@ -41,10 +41,7 @@ in {
   services = {
     # for ROG Laptop
     supergfxd.enable = true;
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
+    asusd.enable = true;
 
     # Fix Keyboard
     xserver.xkb.model = "asus_laptop";

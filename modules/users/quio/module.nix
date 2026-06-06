@@ -61,35 +61,35 @@ in {
         ssh = {
           enable = true;
           enableDefaultConfig = false;
-          matchBlocks = {
+          settings = {
             home = {
-              hostname = "dominik-schwaiger.ch";
-              port = 2222;
-              user = "domina";
+              HostName = "dominik-schwaiger.ch";
+              Port = 2222;
+              User = "domina";
             };
 
             home-root = {
-              hostname = "dominik-schwaiger.ch";
-              port = 2222;
-              user = "root";
+              HostName = "dominik-schwaiger.ch";
+              Port = 2222;
+              User = "root";
             };
 
             backup = {
-              hostname = "yniederer.ch";
-              port = 2222;
-              user = "domina";
+              HostName = "yniederer.ch";
+              Port = 2222;
+              User = "domina";
             };
 
             euler = {
-              hostname = "euler.ethz.ch";
-              port = 22;
-              user = "dschwaiger";
+              HostName = "euler.ethz.ch";
+              Port = 22;
+              User = "dschwaiger";
             };
 
             vsos = {
-              hostname = "dschwaiger.vsos.ethz.ch";
-              port = 22;
-              user = "ubuntu";
+              HostName = "dschwaiger.vsos.ethz.ch";
+              Port = 22;
+              User = "ubuntu";
             };
           };
         };

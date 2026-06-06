@@ -25,18 +25,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [vscodium nil];
+    environment.systemPackages = [nil];
 
-    # use vscode as diff tool in git
+    # use vscodium as diff tool in git
     programs.git.config = mkIf cfg.difftool {
-      diff.tool = "vscode";
-      difftool.vscode.cmd = "codium --wait --diff $LOCAL $REMOTE";
+      diff.tool = "vscodium";
+      difftool.vscodium.cmd = "codium --wait --diff $LOCAL $REMOTE";
     };
 
     home-manager.users = genAttrs cfg.users (username: {
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
-        package = vscodium;
         mutableExtensionsDir = false;
 
         profiles = let
@@ -44,6 +43,7 @@ in {
             (getExtensions [
               "ultram4rine.vscode-choosealicense"
               "edwinhuish.better-comments-next"
+              "github.copilot-chat"
             ])
             ++ (with vscode-extensions; [
               vscodevim.vim
@@ -56,8 +56,6 @@ in {
               catppuccin.catppuccin-vsc-icons
               jnoortheen.nix-ide
               tamasfe.even-better-toml
-              github.copilot
-              github.copilot-chat
               anthropic.claude-code
               foxundermoon.shell-format
               mkhl.direnv

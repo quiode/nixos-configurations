@@ -96,12 +96,27 @@ in {
 
     initrd = {
       availableKernelModules = ["r8169"];
+
+      systemd = {
+        enable = true;
+        # Write the ZFS unlock command to root's profile so it runs automatically
+        # when an admin SSHs in during boot; killall zfs unblocks systemd's wait
+        services.zfs-setup-unlock = {
+          wantedBy = ["initrd.target"];
+          before = ["initrd.target"];
+          unitConfig.DefaultDependencies = false;
+          script = ''
+            echo "zpool import -a && zfs load-key -a && killall zfs" >> /root/.profile
+          '';
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+          };
+        };
+      };
+
       network = {
         enable = true;
-        postCommands = ''
-          # Import all pools and Add the load-key command to the .profile
-          echo "zpool import -a && zfs load-key -a && killall zfs" >> /root/.profile
-        '';
 
         # should be the same settings as the normal ssh configuration
         ssh = {
