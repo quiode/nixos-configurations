@@ -6,7 +6,10 @@
         pools = ["hdd"];
       };
 
-      nvidia.enable = true;
+      nvidia = {
+        enable = true;
+        branch = "legacy_580"; # GTX 1070 (Pascal)
+      };
     };
 
     bundles.gaming = {

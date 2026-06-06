@@ -5,11 +5,20 @@
   ...
 }: let
   inherit (pkgs) nvtopPackages;
-  inherit (lib.options) mkEnableOption;
+  inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
+  inherit (lib.types) str;
   cfg = config.modules.services.nvidia;
 in {
-  options.modules.services.nvidia.enable = mkEnableOption "enable nvidia gpu support and tools";
+  options.modules.services.nvidia = {
+    enable = mkEnableOption "enable nvidia gpu support and tools";
+
+    branch = mkOption {
+      type = str;
+      default = "stable";
+      description = "The nvidia driver branch to use (see hardware.nvidia.branch).";
+    };
+  };
 
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = ["nvidia"];
@@ -40,10 +49,7 @@ in {
         # Enable the Nvidia settings menu,
         # accessible via `nvidia-settings`.
         nvidiaSettings = true;
-
-        # Optionally, you may need to select the appropriate driver version for your specific GPU.
-        # Pascal GPUs (GTX 10xx, GTX 9xx) are no longer supported by the stable driver; use the 580.xx legacy branch
-        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+        branch = cfg.branch;
       };
 
       graphics = {

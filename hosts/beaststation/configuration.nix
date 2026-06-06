@@ -42,7 +42,10 @@ in {
         pools = ["virt" "hdd"];
       };
 
-      nvidia.enable = true;
+      nvidia = {
+        enable = true;
+        branch = "legacy_580"; # GTX 1050 Ti (Pascal)
+      };
 
       docker = {
         enable = true;
