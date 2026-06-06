@@ -53,6 +53,12 @@ in {
       nvidia-container-toolkit.enable = true;
     };
 
+    # TODO: workaround for https://github.com/NixOS/nixpkgs/issues/451912 — CDI generator races nvidia module load
+    systemd.services.nvidia-container-toolkit-cdi-generator = {
+      after = ["dev-nvidia0.device"];
+      wants = ["dev-nvidia0.device"];
+    };
+
     environment.systemPackages = [
       nvtopPackages.full
     ];
