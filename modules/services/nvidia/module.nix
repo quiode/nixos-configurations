@@ -42,7 +42,8 @@ in {
         nvidiaSettings = true;
 
         # Optionally, you may need to select the appropriate driver version for your specific GPU.
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        # Pascal GPUs (GTX 10xx, GTX 9xx) are no longer supported by the stable driver; use the 580.xx legacy branch
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       };
 
       graphics = {
