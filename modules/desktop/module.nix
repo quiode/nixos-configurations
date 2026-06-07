@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) genAttrs;
-  inherit (lib.types) listOf str;
+  inherit (lib.types) listOf str enum;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   cfg = config.modules.desktop;
@@ -13,7 +13,7 @@ in {
   options.modules.desktop = {
     enable = mkEnableOption "Desktop";
     manager = mkOption {
-      type = str;
+      type = enum ["gnome"];
       default = "gnome";
       description = "The wm, de, etc. to use. Has to be an existing option under `desktop`.";
     };
@@ -28,9 +28,11 @@ in {
     modules = {
       bundles.photography.enable = true;
 
-      desktop.${cfg.manager} = {
-        enable = true;
-        users = cfg.users;
+      desktop = {
+        gnome = mkIf (cfg.manager == "gnome") {
+          enable = true;
+          users = cfg.users;
+        };
       };
 
       programs = {
