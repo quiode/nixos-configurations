@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin:10.11.8 # TODO: set to 10 again when problem is fixed: https://github.com/jellyfin/jellyfin-plugin-ldapauth/issues/216
+    image: jellyfin/jellyfin:10.11.11
     container_name: 'jellyfin'
     group_add:
       # by id as these may not exist within the container. Needed to provide permissions to the VAAPI Devices
