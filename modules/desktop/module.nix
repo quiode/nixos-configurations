@@ -28,8 +28,7 @@ in {
     modules = {
       bundles.photography.enable = true;
 
-      # TODO: make more generic
-      desktop.gnome = mkIf (cfg.manager == "gnome") {
+      desktop.${cfg.manager} = {
         enable = true;
         users = cfg.users;
       };
