@@ -1,7 +1,7 @@
 services:
   # TODO: enable metrics for: wg-easy(https://wg-easy.github.io/wg-easy/development/advanced/metrics/prometheus)
   prometheus:
-    image: prom/prometheus:v3.11.3
+    image: prom/prometheus:v3.12.0
     container_name: prometheus
     restart: always
     command:
