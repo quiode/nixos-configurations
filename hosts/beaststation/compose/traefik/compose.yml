@@ -53,6 +53,7 @@ services:
       - stalwart
       - atuin
       - monitoring
+      - ocis
 
   cloudflare-ddns:
     image: favonia/cloudflare-ddns
@@ -155,3 +156,6 @@ networks:
 
   monitoring:
     name: monitoring
+
+  ocis:
+    name: ocis

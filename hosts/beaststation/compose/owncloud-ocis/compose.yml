@@ -1,0 +1,28 @@
+# ownCloud Infinite Scale (oCIS)
+# https://owncloud.dev/ocis/getting-started/#docker
+services:
+  ocis:
+    image: owncloud/ocis:8.0.4
+    container_name: owncloud-ocis
+    restart: always
+    environment:
+      OCIS_URL: https://files.dominik-schwaiger.ch
+      PROXY_TLS: "false"
+    volumes:
+      - /ssd/critical/ocis/config:/etc/ocis
+      - /hdd/critical/ocis/data:/var/lib/ocis
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - ocis
+    labels:
+      traefik.enable: true
+      traefik.docker.network: ocis
+      traefik.http.routers.ocis.rule: Host(`files.dominik-schwaiger.ch`)
+      traefik.http.routers.ocis.tls: true
+      traefik.http.routers.ocis.tls.certresolver: letsencrypt
+      traefik.http.services.ocis.loadbalancer.server.port: 9200
+
+networks:
+  ocis:
+    name: ocis
+    external: true
