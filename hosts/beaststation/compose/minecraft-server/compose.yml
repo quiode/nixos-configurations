@@ -41,7 +41,7 @@ services:
       - minecraft-internal
 
   mc-monitor:
-    image: itzg/mc-monitor:0.16.6
+    image: itzg/mc-monitor
     container_name: mc-monitor
     restart: always
     command: export-for-prometheus
