@@ -8,6 +8,9 @@
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   cfg = config.modules.programs.neovim;
+  # TODO: re-enable once nvf migrates away from archived nvim-treesitter
+  # https://github.com/NotAShelf/nvf/issues/1312
+  treesitter = false;
 in {
   options.modules.programs.neovim.enable = mkEnableOption "Enable neovim Editor";
   options.modules.programs.neovim.users = mkOption {
@@ -57,7 +60,7 @@ in {
 
             languages = {
               enableFormat = true;
-              enableTreesitter = true;
+              enableTreesitter = treesitter;
 
               nix = {
                 enable = true;
@@ -91,7 +94,7 @@ in {
 
               html = {
                 enable = true;
-                treesitter.autotagHtml = true;
+                treesitter.autotagHtml = treesitter;
               };
 
               tailwind = {
@@ -112,8 +115,8 @@ in {
             };
 
             treesitter = {
-              enable = true;
-              context.enable = true;
+              enable = treesitter;
+              context.enable = treesitter;
             };
 
             # autocompletion (ctrl + space)
