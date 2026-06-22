@@ -32,6 +32,7 @@ services:
       - .env
     environment:
       IMMICH_TELEMETRY_INCLUDE: 'all'
+      MACHINE_LEARNING_MODEL_TTL: 30
     depends_on:
       - redis
       - database
@@ -66,6 +67,8 @@ services:
     volumes:
       - model-cache:/cache
       - /etc/localtime:/etc/localtime:ro
+    environment:
+      MACHINE_LEARNING_WORKERS: 1
     env_file:
       - /ssd/critical/immich/secrets.env
       - .env
