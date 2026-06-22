@@ -28,11 +28,18 @@ in {
           enable = true;
           randomizedDelaySec = "1h";
           dates = cfg.deletionFrequency;
-          flags = ["--all"];
+          flags = ["--all" "--volumes"];
         };
 
-        # manually set container ip-ranges to avoid conflict
         daemon.settings = {
+          # cap per-container log size so json-file logs don't fill /var
+          "log-driver" = "json-file";
+          "log-opts" = {
+            "max-size" = "50m";
+            "max-file" = "3";
+          };
+
+          # manually set container ip-ranges to avoid conflict
           "default-address-pools" = [
             {
               "base" = "172.29.0.0/16";
