@@ -20,6 +20,9 @@ services:
         nginx['enable'] = true
         nginx['listen_port'] = 80
         nginx['listen_https'] = false
+        nginx['proxy_read_timeout'] = 3600
+        nginx['proxy_send_timeout'] = 3600
+        gitlab_workhorse['proxy_read_timeout'] = 3600
 
         # Mail Config - Incoming
         gitlab_rails['incoming_email_enabled'] = true

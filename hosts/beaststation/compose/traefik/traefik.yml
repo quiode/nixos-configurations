@@ -32,8 +32,8 @@ entryPoints:
     address: ":443"
     transport:
       respondingTimeouts:
-        readTimeout: "15m"
-        writeTimeout: "15m"
+        readTimeout: "60m"
+        writeTimeout: "60m"
         idleTimeout: "15m"
 
 metrics:
