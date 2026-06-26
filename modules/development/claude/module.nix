@@ -22,6 +22,7 @@ in {
     environment.systemPackages = [
       claude-code
       pkgs.claude-monitor
+      pkgs.gh # often used by claude to work with git (instead of using a web fetch)
     ];
 
     home-manager.users = genAttrs cfg.users (username: {lib, ...}: {
