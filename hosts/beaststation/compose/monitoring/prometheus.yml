@@ -5,31 +5,31 @@ global:
 scrape_configs:
   - job_name: prometheus
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ["localhost:9090"]
 
   - job_name: node-exporter
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: ["node-exporter:9100"]
 
   - job_name: cadvisor
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ["cadvisor:8080"]
 
   - job_name: traefik
     static_configs:
-      - targets: ['traefik:8082']
+      - targets: ["traefik:8082"]
 
   - job_name: minecraft
     static_configs:
-      - targets: ['mc-monitor:8080']
+      - targets: ["mc-monitor:8080"]
 
   - job_name: authentik
     static_configs:
-      - targets: ['authentik:9300']
+      - targets: ["authentik:9300"]
 
   - job_name: stalwart
     static_configs:
-      - targets: ['stalwart:8080']
+      - targets: ["stalwart:8080"]
     metrics_path: /metrics/prometheus
     basic_auth:
       username: prometheus
@@ -37,13 +37,17 @@ scrape_configs:
 
   - job_name: immich-api
     static_configs:
-      - targets: ['immich_server:8081']
+      - targets: ["immich_server:8081"]
 
   - job_name: immich-microservices
     static_configs:
-      - targets: ['immich_server:8082']
+      - targets: ["immich_server:8082"]
 
   - job_name: synapse
     metrics_path: /_synapse/metrics
     static_configs:
-      - targets: ['matrix:9000']
+      - targets: ["matrix:9000"]
+
+  - job_name: dmarc-metrics-exporter
+    static_configs:
+      - targets: ["dmarc-metrics-exporter:9797"]

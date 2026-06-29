@@ -18,9 +18,7 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
   POSTGRES_PASSWORD="${DB_PW}"
   ```
 - **Nextcloud**
-
   - `NEXTCLOUD_ADMIN_PASSWORD`
-
     - admin password for nextcloud
 
   - `SMTP_PASSWORD`
@@ -71,6 +69,8 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
   ```
 - **Stalwart** (`metrics-password`)
   - raw password file (no `KEY=value`, just the password) for Prometheus to scrape Stalwart metrics (username: `prometheus`)
+- **dmarc-metrics-exporter** (`dmarc-metrics-config.json`)
+  - JSON config file at `/ssd/critical/stalwart/dmarc-metrics-config.json` (chmod 600) containing IMAP credentials for `dmarc@dominik-schwaiger.ch`
 
 ## Bind Volumes
 
@@ -123,6 +123,7 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/traefik`
 - `/ssd/critical/wireguard`
 - `/ssd/critical/stalwart`
+- `/hdd/non-critical/dmarc-metrics-exporter`
 - `/ssd/critical/atuin/config`
 - `/ssd/critical/atuin/database`
 - `/ssd/critical/grafana`

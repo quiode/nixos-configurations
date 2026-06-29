@@ -36,6 +36,18 @@ services:
       traefik.tcp.services.stalwart-https.loadbalancer.server.port: 443
       traefik.tcp.services.stalwart-https.loadbalancer.proxyProtocol.version: 2
 
+  dmarc-metrics-exporter:
+    image: ghcr.io/jgosmann/dmarc-metrics-exporter:1.3.1
+    container_name: dmarc-metrics-exporter
+    restart: always
+    volumes:
+      - /ssd/critical/stalwart/dmarc-metrics-config.json:/etc/dmarc-metrics-exporter.json:ro
+      - /hdd/non-critical/dmarc-metrics-exporter:/var/lib/dmarc-metrics-exporter
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - stalwart
+      - monitoring
+
 networks:
   stalwart:
     name: stalwart
