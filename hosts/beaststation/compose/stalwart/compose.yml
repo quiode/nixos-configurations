@@ -37,7 +37,7 @@ services:
       traefik.tcp.services.stalwart-https.loadbalancer.proxyProtocol.version: 2
 
   dmarc-metrics-exporter:
-    image: ghcr.io/jgosmann/dmarc-metrics-exporter:1.3.1
+    image: jgosmann/dmarc-metrics-exporter:1.3.1
     container_name: dmarc-metrics-exporter
     restart: always
     volumes:
