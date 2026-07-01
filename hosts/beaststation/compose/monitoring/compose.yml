@@ -25,12 +25,20 @@ services:
       traefik.http.routers.prometheus.middlewares: authentik@docker
       traefik.http.services.prometheus.loadbalancer.server.port: 9090
 
+  renderer:
+    image: grafana/grafana-image-renderer:5.9.1
+    container_name: grafana-renderer
+    restart: always
+    networks:
+      - monitoring-internal
+
   grafana:
     image: grafana/grafana:13.0.1
     container_name: grafana
     restart: always
     depends_on:
       - prometheus
+      - renderer
     env_file:
       - /ssd/critical/grafana/secrets.env
     environment:
@@ -47,6 +55,9 @@ services:
       GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(entitlements[*], 'Grafana Admins') && 'Admin' || contains(entitlements[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
       # Required if Grafana is running behind a reverse proxy
       GF_SERVER_ROOT_URL: "https://grafana.dominik-schwaiger.ch"
+      # Image renderer
+      GF_RENDERING_SERVER_URL: "http://renderer:8081/render"
+      GF_RENDERING_CALLBACK_URL: "http://grafana:3000/"
       # Required to allow OAuth to assign the server-wide GrafanaAdmin role
       GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN: "true"
       # Mail
