@@ -69,6 +69,7 @@ services:
     restart: always
     command:
       - --path.rootfs=/host
+      - --collector.zfs
     pid: host
     networks:
       - monitoring-internal
