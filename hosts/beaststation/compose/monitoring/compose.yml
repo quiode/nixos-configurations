@@ -49,8 +49,9 @@ services:
       GF_SERVER_ROOT_URL: "https://grafana.dominik-schwaiger.ch"
       # Required to allow OAuth to assign the server-wide GrafanaAdmin role
       GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN: "true"
+      # Mail
       GF_SMTP_ENABLED: "true"
-      GF_SMTP_HOST: "mail.dominik-schwaiger.ch:587"
+      GF_SMTP_HOST: "mail.dominik-schwaiger.ch:465"
       GF_SMTP_USER: "grafana@dominik-schwaiger.ch"
       GF_SMTP_FROM_ADDRESS: "grafana@dominik-schwaiger.ch"
     volumes:
