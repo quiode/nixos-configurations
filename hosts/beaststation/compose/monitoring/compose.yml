@@ -29,6 +29,8 @@ services:
     image: grafana/grafana-image-renderer:v5.9.1
     container_name: grafana-renderer
     restart: always
+    environment:
+      AUTH_TOKEN: "${RENDERER_TOKEN}"
     networks:
       - monitoring-internal
 
@@ -58,6 +60,7 @@ services:
       # Image renderer
       GF_RENDERING_SERVER_URL: "http://renderer:8081/render"
       GF_RENDERING_CALLBACK_URL: "http://grafana:3000/"
+      GF_RENDERING_AUTH_TOKEN: "${RENDERER_TOKEN}"
       # Required to allow OAuth to assign the server-wide GrafanaAdmin role
       GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN: "true"
       # Mail
