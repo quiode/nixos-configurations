@@ -91,6 +91,8 @@ services:
     privileged: true
     devices:
       - /dev/kmsg
+    command:
+      - "--disable_metrics=disk,diskIO,percpu,sched,tcp,udp,resctrl,hugetlb,perf_event,referenced_memory,process"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
