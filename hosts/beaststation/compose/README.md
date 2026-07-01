@@ -67,6 +67,13 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
     POSTGRES_PASSWORD=${ATUIN_DB_PASSWORD}
     ATUIN_DB_URI=postgres://atuin:${ATUIN_DB_PASSWORD}@atuin-db/atuin
   ```
+- **Grafana**
+  - `GF_AUTH_GENERIC_OAUTH_CLIENT_ID`
+    - Authentik OAuth client ID
+  - `GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET`
+    - Authentik OAuth client secret
+  - `GF_SMTP_PASSWORD`
+    - password for <grafana@dominik-schwaiger.ch> (used for alert emails)
 - **Stalwart** (`metrics-password`)
   - raw password file (no `KEY=value`, just the password) for Prometheus to scrape Stalwart metrics (username: `prometheus`)
 - **dmarc-metrics-exporter** (`dmarc-metrics-config.json`)
