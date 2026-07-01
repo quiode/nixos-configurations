@@ -70,11 +70,13 @@ services:
     command:
       - --path.rootfs=/host
       - --collector.zfs
+      - --collector.systemd
     pid: host
     networks:
       - monitoring-internal
     volumes:
       - /:/host:ro,rslave
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
       - /etc/localtime:/etc/localtime:ro
 
   cadvisor:
