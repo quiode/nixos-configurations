@@ -76,7 +76,7 @@ services:
       - monitoring-internal
     volumes:
       - /:/host:ro,rslave
-      - /var/run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro
       - /etc/localtime:/etc/localtime:ro
 
   cadvisor:
