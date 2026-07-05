@@ -91,7 +91,7 @@ services:
 
   database:
     container_name: immich_postgres
-    image: ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.3.0
+    image: ghcr.io/immich-app/postgres:16-vectorchord0.4.3-pgvectors0.3.0
     networks:
       - immich-internal
     env_file:
@@ -105,11 +105,11 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /ssd/critical/immich/database:/var/lib/postgresql/data
+    shm_size: 128mb
     restart: always
 
 volumes:
   model-cache:
-
 
 networks:
   immich-internal:
