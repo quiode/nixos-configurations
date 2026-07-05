@@ -2,7 +2,7 @@ services:
   home-assistant:
     container_name: home-assistant
     hostname: home.dominik-schwaiger.ch
-    image: ghcr.io/home-assistant/home-assistant:2026.6
+    image: ghcr.io/home-assistant/home-assistant:2026.7
     depends_on:
       - esphome
     volumes:
@@ -25,7 +25,7 @@ services:
       traefik.http.services.home-assistant.loadbalancer.server.port: 8123
 
   esphome:
-    image: ghcr.io/esphome/esphome:2026.5
+    image: ghcr.io/esphome/esphome:2026.6
     container_name: esphome
     volumes:
       - /etc/localtime:/etc/localtime:ro
