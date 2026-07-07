@@ -19,9 +19,13 @@ in {
       ]);
 
   modules = {
-    bundles.gaming = {
-      enable = false;
-      users = config.modules.users.main;
+    bundles = {
+      gaming = {
+        enable = false;
+        users = config.modules.users.main;
+      };
+
+      photography.enable = true;
     };
 
     desktop = {

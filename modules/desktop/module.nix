@@ -26,8 +26,6 @@ in {
 
   config = mkIf cfg.enable {
     modules = {
-      bundles.photography.enable = true;
-
       desktop = {
         gnome = mkIf (cfg.manager == "gnome") {
           enable = true;
