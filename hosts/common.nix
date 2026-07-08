@@ -9,7 +9,7 @@
   inherit (inputs) nix4vscode nixpkgs-unstable nvf agenix;
   stateVersion = "24.11";
 in {
-  environment.systemPackages = (with pkgs; [wget onefetch htop alejandra dua btop inputs.agenix.packages."${stdenv.hostPlatform.system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; []);
+  environment.systemPackages = (with pkgs; [wget onefetch htop btop bottom dua alejandra inputs.agenix.packages."${stdenv.hostPlatform.system}".default rmtrash file imagemagick zip unzip]) ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; []);
 
   # for general icons
   fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono];
