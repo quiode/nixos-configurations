@@ -9,6 +9,19 @@
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkIf;
   cfg = config.modules.desktop.gnome;
+
+  # GNOME Shell Extensions
+  extensions = with pkgs.gnomeExtensions; [
+    removable-drive-menu
+    gravatar
+    wallpaper-slideshow
+    clipboard-history
+    do-not-disturb-while-screen-sharing-or-recording
+    dim-completed-calendar-events
+    system-monitor
+    # tray icons don't really work :c
+    appindicator
+  ];
 in {
   options.modules.desktop.gnome.enable = mkEnableOption "Gnome Desktop Environment";
   options.modules.desktop.gnome.users = mkOption {
@@ -36,17 +49,7 @@ in {
     };
 
     environment = with pkgs; {
-      systemPackages =
-        (with gnomeExtensions; [
-          removable-drive-menu
-          gravatar
-          wallpaper-slideshow
-          clipboard-history
-          do-not-disturb-while-screen-sharing-or-recording
-          dim-completed-calendar-events
-          system-monitor
-        ])
-        ++ [gnome-tweaks];
+      systemPackages = extensions ++ [gnome-tweaks];
 
       gnome.excludePackages = [
         gnome-photos
@@ -109,16 +112,7 @@ in {
         "org/gnome/shell" = {
           disable-user-extensions = false;
 
-          # `gnome-extensions list` for a list
-          enabled-extensions = [
-            "trayIconsReloaded@selfmade.pl"
-            "drive-menu@gnome-shell-extensions.gcampax.github.com"
-            "system-monitor@gnome-shell-extensions.gcampax.github.com"
-            "gravatar@dsheeler.net"
-            "gsconnect@andyholmes.github.io"
-            "azwallpaper@azwallpaper.gitlab.com"
-            "clipboard-history@alexsaveau.dev"
-          ];
+          enabled-extensions = map (e: e.extensionUuid) extensions;
         };
 
         # Custom Keybinds
