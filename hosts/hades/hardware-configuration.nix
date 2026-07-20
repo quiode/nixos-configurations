@@ -16,6 +16,7 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
+  # TODO: use btrfs
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/45cf061a-c507-46a4-bd8f-5673d703f989";
     fsType = "ext4";
