@@ -16,6 +16,15 @@ in {
 
     modules.services.vm.enable = true; # enable vm to install windows for adobe lightroom
 
-    environment.systemPackages = with pkgs; [geeqie identity gimp gthumb photocollage kdePackages.kdenlive hugin];
+    environment.systemPackages = with pkgs; [
+      geeqie # image viewer / manager
+      identity # image comparison
+      gimp # image editing
+      gthumb # image viewer
+      photocollage # collages (instagram posts)
+      kdePackages.kdenlive # video editing
+      hugin # panoramas
+      rapidraw # image editing
+    ];
   };
 }
