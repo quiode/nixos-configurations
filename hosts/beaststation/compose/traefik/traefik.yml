@@ -45,9 +45,9 @@ certificatesResolvers:
     acme:
       email: "mail@dominik-schwaiger.ch"
       storage: "/etc/certs/acme.json"
-      propagation:
-        delayBeforeChecks: 30s
       dnsChallenge:
+        propagation:
+          delayBeforeChecks: 30s
         provider: cloudflare
         resolvers:
           - "1.1.1.1:53"
