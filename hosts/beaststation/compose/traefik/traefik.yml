@@ -52,3 +52,9 @@ certificatesResolvers:
         resolvers:
           - "1.1.1.1:53"
           - "8.8.8.8:53"
+
+tcp:
+  serversTransports:
+    stalwart-proxyproto:
+      proxyProtocol:
+        version: 2

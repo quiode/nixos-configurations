@@ -34,8 +34,7 @@ services:
       traefik.tcp.routers.stalwart-https.entrypoints: websecure
       traefik.tcp.routers.stalwart-https.tls.passthrough: true
       traefik.tcp.services.stalwart-https.loadbalancer.server.port: 443
-      traefik.tcp.serversTransports.stalwart-proxyproto.proxyProtocol.version: 2
-      traefik.tcp.services.stalwart-https.loadbalancer.serversTransport: stalwart-proxyproto
+      traefik.tcp.services.stalwart-https.loadbalancer.serversTransport: stalwart-proxyproto@file
 
   dmarc-metrics-exporter:
     image: jgosmann/dmarc-metrics-exporter:1.3.1
