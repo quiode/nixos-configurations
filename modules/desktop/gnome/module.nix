@@ -115,6 +115,12 @@ in {
           enabled-extensions = map (e: e.extensionUuid) extensions;
         };
 
+        "/org/gnome/desktop/calendar".show-weekdate = true;
+        "/org/gnome/desktop/interface" = {
+          clock-show-weekday = true;
+          clock-show-date = true;
+        };
+
         # Custom Keybinds
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
           name = "Terminal";
