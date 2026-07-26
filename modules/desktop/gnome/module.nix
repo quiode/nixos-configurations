@@ -93,6 +93,8 @@ in {
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
           enable-hot-corners = true;
+          clock-show-weekday = true;
+          clock-show-date = true;
         };
         "org/gnome/desktop/wm/preferences".workspace-names = ["Main"];
         "org/gnome/desktop/session".idle-delay = mkUint32 0;
@@ -115,11 +117,7 @@ in {
           enabled-extensions = map (e: e.extensionUuid) extensions;
         };
 
-        "/org/gnome/desktop/calendar".show-weekdate = true;
-        "/org/gnome/desktop/interface" = {
-          clock-show-weekday = true;
-          clock-show-date = true;
-        };
+        "org/gnome/desktop/calendar".show-weekdate = true;
 
         # Custom Keybinds
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
