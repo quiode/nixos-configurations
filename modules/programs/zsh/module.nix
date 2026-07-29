@@ -38,7 +38,8 @@ in {
           history.append = true;
 
           shellAliases = {
-            upgrade = "nh os switch";
+            upgrade-now = "nh os switch";
+            upgrade-later = "nh os switch boot";
             tmpd = ''zsh -c "cd $(mktemp -d); zsh -i"'';
           };
 

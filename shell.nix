@@ -23,9 +23,16 @@ mkShellNoCC {
     })
 
     (writeShellApplication {
-      name = "upgrade";
+      name = "upgrade-now";
       text = ''
         nh os switch
+      '';
+    })
+
+    (writeShellApplication {
+      name = "upgrade-later";
+      text = ''
+        nh os boot
       '';
     })
 
