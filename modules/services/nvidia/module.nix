@@ -57,6 +57,9 @@ in {
         enable32Bit = true; # needed for docker nvidia enable
       };
 
+      # REMARK: sometimes, upgrading fails with the message: nvidia-container-toolkit: Failed to start Container Device Interface (CDI) for Nvidia generator.
+      # This is a known problem: https://github.com/NixOS/nixpkgs/issues/504939.
+      # Simply to `nh os boot` and reboot instead uf `nh os switch` to fix it.
       nvidia-container-toolkit.enable = true;
     };
 
