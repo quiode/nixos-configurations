@@ -1,3 +1,4 @@
+# Main user on a server
 {
   lib,
   config,

@@ -35,7 +35,7 @@ in {
     };
 
     development.claude = {
-      enable = true;
+      enable = false;
       users = config.modules.users.main;
     };
 

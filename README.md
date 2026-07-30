@@ -22,7 +22,7 @@ Contains host-specific configurations.
 
 ## Develop
 
-Run `nix develop` to open a shell with some usefull commands and the minimal required packages.
+Run `nix develop` to open a shell with some useful commands and the minimal required packages.
 
 ## Inspirations
 
