@@ -77,7 +77,7 @@ in {
             backup = {
               HostName = "yniederer.ch";
               Port = 2222;
-              User = "domina";
+              User = "domi";
             };
 
             euler = {

@@ -269,7 +269,7 @@ in {
       commands = {
         "hdd/enc/critical" = {
           source = "hdd/enc/critical";
-          target = "domina@yniederer.ch:backup/hdd";
+          target = "domi@yniederer.ch:data/backup/hdd";
           sendOptions = "w";
           extraArgs = [
             "--sshport"
@@ -280,7 +280,7 @@ in {
 
         "rpool/ssd/critical" = {
           source = "rpool/ssd/critical";
-          target = "domina@yniederer.ch:backup/ssd";
+          target = "domi@yniederer.ch:data/backup/ssd";
           sendOptions = "w";
           extraArgs = [
             "--sshport"
@@ -334,7 +334,7 @@ in {
     ssh = {
       startAgent = true;
       knownHosts = {
-        "[yniederer.ch]:2222".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxx2JxRobdvqPUIDgl0xFHoF0UVjNGNGmQzqg0xr210";
+        "[yniederer.ch]:2222".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMcoq+rOrJaNGZDDupN6mjXHyw5aFA5lY8TedKwfrwmz";
       };
     };
   };
