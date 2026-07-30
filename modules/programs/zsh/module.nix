@@ -39,7 +39,7 @@ in {
 
           shellAliases = {
             upgrade-now = "nh os switch";
-            upgrade-later = "nh os switch boot";
+            upgrade-later = "nh os boot";
             tmpd = ''zsh -c "cd $(mktemp -d); zsh -i"'';
           };
 
