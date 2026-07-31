@@ -60,7 +60,6 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      spotify
       nextcloud-client
       thunderbird
       immich-cli

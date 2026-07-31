@@ -79,7 +79,6 @@ in {
           [
             "firefox.desktop"
             "thunderbird.desktop"
-            "spotify.desktop"
             "org.gnome.Console.desktop"
             "org.gnome.Nautilus.desktop"
             "signal.desktop"
