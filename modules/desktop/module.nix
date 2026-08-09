@@ -68,6 +68,7 @@ in {
       pdfsam-basic
       marktext
       openconnect
+      piper # GUI for configuring gaming mice (G203)
     ];
 
     hardware = {
@@ -96,6 +97,8 @@ in {
         # no need to redefine it in your config for now)
         #media-session.enable = true;
       };
+
+      ratbagd.enable = true; # enable libratbag daemon for gaming mice (G203)
     };
 
     programs.firefox.enable = true;
