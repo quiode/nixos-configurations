@@ -121,16 +121,6 @@ in {
               language_servers = ["nil" "!nixd"];
             };
           };
-
-          language_models = {
-            openai_compatible = {
-              # TODO: finish setup, save TOKEN in local dotenv
-              sph = {
-                api_url = "https://litellm.sph-prod.ethz.ch/v1";
-                available_models = [];
-              };
-            };
-          };
         };
       };
     });
