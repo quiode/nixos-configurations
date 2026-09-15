@@ -25,6 +25,7 @@ in {
       kdePackages.kdenlive # video editing
       hugin # panoramas
       rapidraw # image editing
+      inkscape # vector graphics
     ];
   };
 }
