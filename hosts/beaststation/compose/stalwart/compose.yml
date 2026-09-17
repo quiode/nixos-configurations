@@ -1,6 +1,6 @@
 services:
   stalwart:
-    image: stalwartlabs/stalwart:v0.16.11
+    image: stalwartlabs/stalwart:v0.16.22
     container_name: stalwart
     ports:
       - 25:25 # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
@@ -37,7 +37,7 @@ services:
       traefik.tcp.services.stalwart-https.loadbalancer.serversTransport: stalwart-proxyproto@file
 
   dmarc-metrics-exporter:
-    image: jgosmann/dmarc-metrics-exporter:1.3.1
+    image: jgosmann/dmarc-metrics-exporter:1
     container_name: dmarc-metrics-exporter
     restart: always
     volumes:
