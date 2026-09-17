@@ -25,7 +25,7 @@ services:
       traefik.http.services.home-assistant.loadbalancer.server.port: 8123
 
   esphome:
-    image: ghcr.io/esphome/esphome:2026.6
+    image: ghcr.io/esphome/esphome:2026.9
     container_name: esphome
     volumes:
       - /etc/localtime:/etc/localtime:ro
