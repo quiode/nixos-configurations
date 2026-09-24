@@ -240,6 +240,18 @@ in {
               };
           };
 
+          ocaml = {
+            extensions =
+              commonExtensions
+              ++ (with vscode-extensions; [
+                ocamllabs.ocaml-platform
+              ]);
+            userSettings =
+              commonSettings
+              // {
+              };
+          };
+
           empty = {
             extensions = [];
             userSettings = {};
