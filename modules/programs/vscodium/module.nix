@@ -252,6 +252,43 @@ in {
               };
           };
 
+          # TODO: remove then no longer used or can't be fixed
+          stm32 = let
+            stmExtensions = getExtensions [
+              "stmicroelectronics.stm32-vscode-extension"
+              "stmicroelectronics.stm32cube-ide-registers"
+              "stmicroelectronics.stm32cube-ide-build-cmake"
+              "stmicroelectronics.stm32cube-ide-build-analyzer"
+              "stmicroelectronics.stm32cube-ide-bundles-manager"
+              "stmicroelectronics.stm32cube-ide-debug-jlink-gdbserver"
+              "stmicroelectronics.stm32cube-ide-debug-core"
+              "stmicroelectronics.stm32cube-ide-debug-stlink-gdbserver"
+              "stmicroelectronics.stm32cube-ide-clangd"
+              "stmicroelectronics.stm32cube-ide-project-manager"
+              "stmicroelectronics.stm32cube-ide-rtos"
+              "stmicroelectronics.stm32cube-ide-core"
+              "stmicroelectronics.stm32cube-ide-debug-generic-gdbserver"
+              "ms-vscode.cmake-tools"
+              "ms-vscode.vscode-serial-monitor"
+            ];
+
+            # path inside an extension
+            extPath = id: sub: let
+              ext = lib.findFirst (e: e.vscodeExtUniqueId == id) (throw "missing ${id}") stmExtensions;
+            in "${ext}/share/vscode/extensions/${id}/${sub}";
+
+            cubeCmake = extPath "stmicroelectronics.stm32cube-ide-build-cmake" "resources/cube-cmake/linux/x86_64";
+            cubeBinaries = extPath "stmicroelectronics.stm32cube-ide-core" "resources/binaries/linux/x86_64";
+          in {
+            extensions = commonExtensions ++ stmExtensions;
+
+            userSettings =
+              commonSettings
+              // {
+                cmake.environment.PATH = "${cubeCmake}:${cubeBinaries}:\${env:PATH}";
+              };
+          };
+
           empty = {
             extensions = [];
             userSettings = {};

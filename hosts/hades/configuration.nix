@@ -37,6 +37,8 @@ in {
       enable = true;
       main = true;
     };
+
+    development.stm32.enable = true;
   };
 
   # automatic screen rotation
