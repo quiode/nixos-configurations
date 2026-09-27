@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin:10.11.11
+    image: jellyfin/jellyfin:12.1
     container_name: 'jellyfin'
     group_add:
       # by id as these may not exist within the container. Needed to provide permissions to the VAAPI Devices
