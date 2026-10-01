@@ -162,8 +162,6 @@ in {
   };
 
   services = {
-    timesyncd.enable = true;
-
     xserver = {
       enable = false; # disable graphics
     };
