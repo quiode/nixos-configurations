@@ -27,8 +27,6 @@
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        home-manager.follows = "home-manager";
       };
     };
 
