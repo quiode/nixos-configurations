@@ -46,11 +46,8 @@ These should be saved to `/ssd/critical/service/secrets.env` for each service an
     - password for immich db
       `POSTGRES_PASSWORD="${DB_PASSWORD}"`
 - **Traefik**
-  - `CF_DNS_API_TOKEN`
-    - Cloudflare API token with DNS edit permissions for dns challenge (generate at dash.cloudflare.com/profile/api-tokens)
-- **Cloudflare DDNS**
-  - `CLOUDFLARE_API_TOKEN`
-    - Cloudflare API token with DNS edit permissions for DDNS updates of `dominik-schwaiger.ch` (generate at dash.cloudflare.com/profile/api-tokens)
+  - `INFOMANIAK_ACCESS_TOKEN`
+    - access token for automatic dns certificates
 - **Authentik**
   - `AUTHENTIK_EMAIL__PASSWORD`
   - `POSTGRES_PASSWORD`

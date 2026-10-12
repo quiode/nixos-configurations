@@ -51,7 +51,7 @@ certificatesResolvers:
       dnsChallenge:
         propagation:
           delayBeforeChecks: 30s
-        provider: cloudflare
+        provider: infomaniak
         resolvers:
           - "1.1.1.1:53"
           - "8.8.8.8:53"
