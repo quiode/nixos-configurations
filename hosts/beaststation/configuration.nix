@@ -298,7 +298,7 @@ in {
       enable = true;
       config = {
         user = {
-          email = "beaststation@dominik-schwaiger.ch";
+          email = "server@dominik-schwaiger.ch";
           name = "beaststation";
         };
 
@@ -322,9 +322,9 @@ in {
       };
       accounts = {
         default = {
-          host = "mail.dominik-schwaiger.ch";
-          from = "beaststation@dominik-schwaiger.ch";
-          user = "beaststation@dominik-schwaiger.ch";
+          host = "mail.infomaniak.com";
+          from = "server@dominik-schwaiger.ch";
+          user = "server@dominik-schwaiger.ch";
           passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.beaststation_mail_password.path}";
         };
       };
