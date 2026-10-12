@@ -72,6 +72,14 @@ services:
       - acme:/traefik:ro
       - certs:/output
 
+  ddns-updater:
+    image: qmcgaw/ddns-updater:2
+    restart: always
+    container_name: ddns-updater
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ssd/critical/ddns-updater/config.json:/updater/data/config.json:ro
+
 # using volumes because data is temporary and small -> on ssd
 volumes:
   acme:
