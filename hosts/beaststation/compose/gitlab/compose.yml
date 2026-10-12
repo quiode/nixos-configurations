@@ -26,10 +26,10 @@ services:
 
         # Mail Config - Incoming
         gitlab_rails['incoming_email_enabled'] = true
-        gitlab_rails['incoming_email_address'] = "gitlab+%{key}@dominik-schwaiger.ch"
-        gitlab_rails['incoming_email_email'] = "gitlab@dominik-schwaiger.ch"
+        gitlab_rails['incoming_email_address'] = "server+%{key}@dominik-schwaiger.ch"
+        gitlab_rails['incoming_email_email'] = "server@dominik-schwaiger.ch"
         gitlab_rails['incoming_email_password'] = ENV['GITLAB_SMTP_PASSWORD']
-        gitlab_rails['incoming_email_host'] = "mail.dominik-schwaiger.ch"
+        gitlab_rails['incoming_email_host'] = "mail.infomaniak.com"
         gitlab_rails['incoming_email_port'] = 993
         gitlab_rails['incoming_email_ssl'] = true
         gitlab_rails['incoming_email_start_tls'] = false
@@ -41,16 +41,16 @@ services:
 
         # Mail Config - SMTP
         gitlab_rails['smtp_enable'] = true 
-        gitlab_rails['smtp_address'] = "mail.dominik-schwaiger.ch"
+        gitlab_rails['smtp_address'] = "mail.infomaniak.com"
         gitlab_rails['smtp_port'] = 465    
-        gitlab_rails['smtp_user_name'] = "gitlab@dominik-schwaiger.ch"
+        gitlab_rails['smtp_user_name'] = "server@dominik-schwaiger.ch"
         gitlab_rails['smtp_password'] = ENV['GITLAB_SMTP_PASSWORD']
         gitlab_rails['smtp_tls'] = true    
         gitlab_rails['smtp_enable_starttls_auto'] = false
         gitlab_rails['smtp_domain'] = "dominik-schwaiger.ch"
         gitlab_rails['smtp_authentication'] = "login"
-        gitlab_rails['gitlab_email_from'] = "gitlab@dominik-schwaiger.ch"
-        gitlab_rails['gitlab_email_reply_to'] = "noreply@dominik-schwaiger.ch"
+        gitlab_rails['gitlab_email_from'] = "server@dominik-schwaiger.ch"
+        gitlab_rails['gitlab_email_reply_to'] = "server@dominik-schwaiger.ch"
 
         # Container Registry
         registry['enable'] = true
