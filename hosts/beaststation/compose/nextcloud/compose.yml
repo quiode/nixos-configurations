@@ -14,11 +14,11 @@ x-env: &env
     OVERWRITEPROTOCOL: 'https'
     OVERWRITEWEBROOT: '/'
     NEXTCLOUD_TRUSTED_DOMAINS: 'nextcloud.dominik-schwaiger.ch'
-    SMTP_HOST: 'mail.dominik-schwaiger.ch'
+    SMTP_HOST: 'mail.infomaniak.com'
     SMTP_SECURE: 'ssl'
-    SMTP_NAME: 'nextcloud@dominik-schwaiger.ch'
+    SMTP_NAME: 'server@dominik-schwaiger.ch'
     SMTP_PORT: '465'
-    MAIL_FROM_ADDRESS: 'nextcloud'
+    MAIL_FROM_ADDRESS: 'server'
     MAIL_DOMAIN: 'dominik-schwaiger.ch'
   env_file:
     - /ssd/critical/nextcloud/secrets.env
