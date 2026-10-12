@@ -2,8 +2,8 @@ services:
   atuin:
     container_name: atuin
     restart: always
-    image: ghcr.io/atuinsh/atuin:18.21.0
-    command: server start
+    image: ghcr.io/atuinsh/atuin:18.23.0
+    command: start
     depends_on:
       - atuin-db
     networks:
