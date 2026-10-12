@@ -47,7 +47,6 @@ certificatesResolvers:
   letsencrypt:
     acme:
       email: "mail@dominik-schwaiger.ch"
-      storage: "/etc/certs/acme.json"
       dnsChallenge:
         propagation:
           delayBeforeChecks: 30s
