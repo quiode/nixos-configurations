@@ -10,7 +10,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - /etc/localtime:/etc/localtime:ro
-      - acme:/etc/certs # for sharing certs with other services
     env_file:
       - /ssd/critical/traefik/secrets.env
     environment:
@@ -52,25 +51,8 @@ services:
       - sonarr
       - prowlarr
       - wireguard
-      - stalwart
       - atuin
       - monitoring
-
-  traefik-certs-dumper:
-    image: ghcr.io/kereis/traefik-certs-dumper
-    container_name: traefik-certs-dumper
-    command: --restart-containers stalwart
-    restart: always
-    depends_on:
-      - traefik
-    environment:
-      CERTIFICATE_FILE_NAME: fullchain
-      PRIVATE_KEY_FILE_NAME: privkey
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /etc/localtime:/etc/localtime:ro
-      - acme:/traefik:ro
-      - certs:/output
 
   ddns-updater:
     image: qmcgaw/ddns-updater:2
@@ -79,12 +61,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /ssd/critical/ddns-updater/config.json:/updater/data/config.json:ro
-
-# using volumes because data is temporary and small -> on ssd
-volumes:
-  acme:
-  certs:
-    name: traefik_certs
 
 networks:
   nextcloud:
@@ -140,9 +116,6 @@ networks:
 
   wireguard:
     name: wireguard
-
-  stalwart:
-    name: stalwart
 
   atuin:
     name: atuin

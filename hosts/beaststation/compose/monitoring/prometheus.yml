@@ -27,14 +27,6 @@ scrape_configs:
     static_configs:
       - targets: ["authentik:9300"]
 
-  - job_name: stalwart
-    static_configs:
-      - targets: ["stalwart:8080"]
-    metrics_path: /metrics/prometheus
-    basic_auth:
-      username: prometheus
-      password_file: /etc/prometheus/stalwart-password
-
   - job_name: immich-api
     static_configs:
       - targets: ["immich_server:8081"]
