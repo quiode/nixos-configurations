@@ -25,7 +25,7 @@ services:
         gitlab_workhorse['proxy_read_timeout'] = 3600
 
         # Mail Config - Incoming
-        gitlab_rails['incoming_email_enabled'] = true
+        gitlab_rails['incoming_email_enabled'] = false
         gitlab_rails['incoming_email_address'] = "server+%{key}@dominik-schwaiger.ch"
         gitlab_rails['incoming_email_email'] = "server@dominik-schwaiger.ch"
         gitlab_rails['incoming_email_password'] = ENV['GITLAB_SMTP_PASSWORD']
