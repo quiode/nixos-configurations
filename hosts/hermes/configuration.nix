@@ -53,13 +53,13 @@ in {
 
     openssh = {
       enable = true;
+      ports = [22 2223];
       settings = {
         # Opinionated: forbid root login through SSH.
         PermitRootLogin = "no";
         # Opinionated: use keys only.
         # Remove if you want to SSH using passwords
         PasswordAuthentication = false;
-        ports = [22 2223];
       };
     };
 
