@@ -59,6 +59,7 @@ in {
         # Opinionated: use keys only.
         # Remove if you want to SSH using passwords
         PasswordAuthentication = false;
+        ports = [22 2223];
       };
     };
 
@@ -68,7 +69,7 @@ in {
       interval = "5min";
       protocol = "dyndns2";
       username = "hermes";
-      passwordFile = "config.age.secrets.hermes_infomaniak_dyndns.path";
+      passwordFile = config.age.secrets.hermes_infomaniak_dyndns.path;
       domains = ["hermes.dominik-schwaiger.ch"];
       server = "infomaniak.com";
       ssl = true;

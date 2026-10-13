@@ -93,8 +93,8 @@ in {
             };
 
             hermes = {
-              HostName = "192.168.0.28";
-              Port = 22;
+              HostName = "hermes.dominik-schwaiger.ch";
+              Port = 2223;
               User = "domina";
             };
           };
