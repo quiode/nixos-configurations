@@ -41,7 +41,7 @@
     };
 
     # Systems, gets a list of systems, allows easy overriding
-    systems.url = "github:nix-systems/x86_64-linux";
+    systems.url = "github:nix-systems/default-linux";
   };
 
   outputs = inputs: let

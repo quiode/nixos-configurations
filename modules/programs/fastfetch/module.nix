@@ -12,6 +12,7 @@
     beaststation = ./beaststation.txt;
     artemis = ./artemis.txt;
     hades = ./hades.txt;
+    hermes = ./hermes.txt;
   };
 in {
   options.modules.programs.fastfetch.enable = mkEnableOption "enable fastfetch";
@@ -37,6 +38,7 @@ in {
                 "1" = "red";
                 "2" = "blue";
                 "3" = "cyan";
+                "4" = "yellow";
               };
 
               padding = {

@@ -68,4 +68,9 @@ in {
     system = "x86_64-linux";
     hostname = "hades";
   };
+  # Raspberry Pi Buttikon
+  hermes = mkSystem {
+    system = "aarch64-linux";
+    hostname = "hermes";
+  };
 }
