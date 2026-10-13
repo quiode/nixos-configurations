@@ -4,7 +4,7 @@ Contains configuration information for [agenix](https://github.com/ryantm/agenix
 
 ## Add a machine
 
-1. add the public key of the machine to: `secrets.nix`
+1. add the public key of the machine to: `agenix-rules.nix`
 1. rekey all the secrets with: `agenix -r` (note that the private key is needed)
 
 ## Add a secret

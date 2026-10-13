@@ -13,6 +13,13 @@ in {
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  # specify agenix secrets. will be mounted at /run/agenix/secret
+  age.secrets = {
+    # password for mail
+    hermes_infomaniak_dyndns.file = ../../secrets/hermes_infomaniak_dyndns.age;
+  };
+
   boot.loader = {
     # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
     grub.enable = mkForce false;
@@ -53,6 +60,18 @@ in {
         # Remove if you want to SSH using passwords
         PasswordAuthentication = false;
       };
+    };
+
+    # automatically update ip
+    ddclient = {
+      enable = true;
+      interval = "5min";
+      protocol = "dyndns2";
+      username = "hermes";
+      passwordFile = "config.age.secrets.hermes_infomaniak_dyndns.path";
+      domains = ["hermes.dominik-schwaiger.ch"];
+      server = "infomaniak.com";
+      ssl = true;
     };
   };
 
