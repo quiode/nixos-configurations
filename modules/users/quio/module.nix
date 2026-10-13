@@ -91,6 +91,12 @@ in {
               Port = 22;
               User = "ubuntu";
             };
+
+            hermes = {
+              HostName = "192.168.0.28";
+              Port = 22;
+              User = "domina";
+            };
           };
         };
       };
