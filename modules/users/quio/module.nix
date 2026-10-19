@@ -32,6 +32,10 @@ in {
     };
 
     home-manager.users.quio = {
+      imports = [
+        ./ssh-soseth.nix
+      ];
+
       home = {
         username = "quio";
         homeDirectory = "/home/quio";
