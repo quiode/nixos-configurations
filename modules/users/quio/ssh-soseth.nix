@@ -55,7 +55,6 @@
     "status.vsos.ethz.ch"
     "stor-1.sos.ethz.ch"
     "webmail.sos.ethz.ch"
-    "webmail-new.sos.ethz.ch"
     "mon.sos.ethz.ch"
     "app-3.sos.ethz.ch"
     "chat.sos.ethz.ch"
