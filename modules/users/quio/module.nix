@@ -66,7 +66,7 @@ in {
           enable = true;
           enableDefaultConfig = false;
           settings = {
-            home = {
+            "home beaststation" = {
               HostName = "dominik-schwaiger.ch";
               Port = 2222;
               User = "domina";
@@ -96,7 +96,7 @@ in {
               User = "ubuntu";
             };
 
-            hermes = {
+            "hermes raspi" = {
               HostName = "hermes.dominik-schwaiger.ch";
               Port = 2223;
               User = "domina";
