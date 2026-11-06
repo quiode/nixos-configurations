@@ -12,6 +12,35 @@ in {
   age.secrets = {
     # password for mail
     beaststation_mail_password.file = ../../secrets/beaststation_mail_password.age;
+
+    # wireguard hub private key (see hermes + hades peers below)
+    beaststation_wireguard_key.file = ../../secrets/beaststation_wireguard_key.age;
+  };
+
+  # WireGuard hub: site-to-site to hermes (Buttikon LAN) + road-warrior peers (e.g. hades).
+  networking.wg-quick.interfaces.wg0 = {
+    address = ["10.100.0.1/24"];
+    listenPort = 51820;
+    privateKeyFile = config.age.secrets.beaststation_wireguard_key.path;
+    peers = [
+      {
+        # hermes: site-to-site.
+        publicKey = "PbdcQV8jYWqxpYah0ci/Z71t69OCLIfzJGUTBOGuKRw=";
+        # hermes's tunnel IP plus the whole Buttikon LAN, so beaststation
+        # routes Zurich-LAN traffic destined for Buttikon through the
+        # tunnel, and accepts packets sourced from anywhere in the Buttikon
+        # LAN via this peer.
+        allowedIPs = ["10.100.0.2/32" "192.168.0.0/24"];
+      }
+      {
+        # hades: road-warrior client. Not Nix/agenix-managed (no SSH host
+        # key on hades, and quio's personal key is passphrase-protected).
+        # It's a NetworkManager profile instead, backed up in
+        # secrets/hades_wireguard_key.age. See secrets/README.md.
+        publicKey = "PYuFpM2lJpvZnA0AdeXPYqmTNs0vsX5175PqhymdayY=";
+        allowedIPs = ["10.100.0.3/32"];
+      }
+    ];
   };
 
   environment = {
@@ -154,12 +183,44 @@ in {
       enable = true;
 
       allowedTCPPorts = commonPorts;
-      allowedUDPPorts = commonPorts;
+      allowedUDPPorts = commonPorts ++ [51820]; # 51820: wireguard hub
+
+      checkReversePath = false; # needed once asymmetric routing via wg0 exists
+
+      # Docker sets the FORWARD chain's default policy to DROP, which would
+      # silently block traffic routed in from Zurich-LAN devices or out to
+      # the internet for hades. Test from another device, not beaststation
+      # itself: its own traffic skips FORWARD entirely.
+      #
+      # IFACE is resolved at firewall-start time instead of hardcoded, since
+      # beaststation only has one NIC and it's moving to a new network.
+      extraCommands = ''
+        IFACE=$(ip -4 route show default | awk '{print $5; exit}')
+        iptables -A FORWARD -i wg0 -o "$IFACE" -j ACCEPT
+        iptables -A FORWARD -i "$IFACE" -o wg0 -j ACCEPT
+        # spoke-to-spoke: lets hades (road-warrior) reach the Buttikon LAN
+        # through hermes, and vice versa. Both directions use wg0 on both
+        # sides, so the rules above don't cover this.
+        iptables -A FORWARD -i wg0 -o wg0 -j ACCEPT
+        # NAT hades's traffic so it can reach the internet. Scoped to just
+        # hades's /32 so it never applies to hermes/Buttikon-LAN traffic.
+        iptables -t nat -A POSTROUTING -s 10.100.0.3/32 -o "$IFACE" -j MASQUERADE
+      '';
+      extraStopCommands = ''
+        IFACE=$(ip -4 route show default | awk '{print $5; exit}')
+        iptables -D FORWARD -i wg0 -o "$IFACE" -j ACCEPT || true
+        iptables -D FORWARD -i "$IFACE" -o wg0 -j ACCEPT || true
+        iptables -D FORWARD -i wg0 -o wg0 -j ACCEPT || true
+        iptables -t nat -D POSTROUTING -s 10.100.0.3/32 -o "$IFACE" -j MASQUERADE || true
+      '';
     };
 
     # explicitly enable, needed for remote unlocking
     useDHCP = mkForce true;
   };
+
+  # let beaststation route/forward between the LAN, the WAN, and wg0
+  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
 
   services = {
     xserver = {

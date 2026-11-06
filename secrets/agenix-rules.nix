@@ -19,4 +19,12 @@ let
 in {
   "beaststation_mail_password.age".publicKeys = all;
   "hermes_infomaniak_dyndns.age".publicKeys = all;
+
+  # scoped tighter than `all`: only the admin users + the host that decrypts it
+  "hermes_wireguard_key.age".publicKeys = users ++ [hermes];
+  "beaststation_wireguard_key.age".publicKeys = users ++ [beaststation];
+
+  # hades's road-warrior key, manual backup only (no age.secrets wiring, see
+  # secrets/README.md). Scoped to just quio-on-hades, a personal credential.
+  "hades_wireguard_key.age".publicKeys = [hades-quio];
 }

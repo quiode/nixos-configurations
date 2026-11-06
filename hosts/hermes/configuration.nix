@@ -18,7 +18,56 @@ in {
   age.secrets = {
     # password for mail
     hermes_infomaniak_dyndns.file = ../../secrets/hermes_infomaniak_dyndns.age;
+
+    # wireguard site-to-site key, dials out to beaststation
+    hermes_wireguard_key.file = ../../secrets/hermes_wireguard_key.age;
   };
+
+  # WireGuard site-to-site tunnel to beaststation (the hub). Uses the legacy
+  # `networking.wireguard` module (not wg-quick) for `dynamicEndpointRefreshSeconds`:
+  # beaststation's endpoint is a DNS name that can change IP, and wg-quick only
+  # resolves `Endpoint=` once at interface bring-up.
+  networking.wireguard.interfaces.wg0 = {
+    ips = ["10.100.0.2/32"];
+    privateKeyFile = config.age.secrets.hermes_wireguard_key.path;
+    peers = [
+      {
+        publicKey = "8FRlQ/czdDqh46A2KFQJf32ngA/boqmnxl+PEDzcbVU=";
+        endpoint = "beaststation.dominik-schwaiger.ch:51820";
+        dynamicEndpointRefreshSeconds = 60; # re-resolve DNS periodically
+        # The whole tunnel pool (not just beaststation's own /32) + the
+        # Zurich LAN. hermes needs a route to the pool, not just the hub
+        # address, so return traffic to OTHER peers behind the hub (e.g.
+        # hades at 10.100.0.3, reaching the Buttikon LAN through beaststation)
+        # has somewhere to go.
+        allowedIPs = ["10.100.0.0/24" "192.168.1.0/24"];
+        persistentKeepalive = 25; # keep hermes's NAT mapping alive from the Buttikon side
+      }
+    ];
+  };
+
+  networking.firewall = {
+    checkReversePath = false;
+    # hermes has no Docker, so FORWARD's default policy is ACCEPT and
+    # traffic would pass anyway, but add explicit rules for clarity/robustness.
+    # The interface is resolved at firewall-start time rather than hardcoded,
+    # since hermes only has one physical NIC.
+    extraCommands = ''
+      IFACE=$(ip -4 route show default | awk '{print $5; exit}')
+      iptables -A FORWARD -i wg0 -o "$IFACE" -j ACCEPT
+      iptables -A FORWARD -i "$IFACE" -o wg0 -j ACCEPT
+    '';
+    extraStopCommands = ''
+      IFACE=$(ip -4 route show default | awk '{print $5; exit}')
+      iptables -D FORWARD -i wg0 -o "$IFACE" -j ACCEPT || true
+      iptables -D FORWARD -i "$IFACE" -o wg0 -j ACCEPT || true
+    '';
+  };
+  # No allowedUDPPorts needed, hermes only dials out. The NixOS firewall
+  # tracks the resulting UDP flow as established for return traffic.
+
+  # let hermes route/forward between the Buttikon LAN and wg0
+  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
 
   boot.loader = {
     # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
