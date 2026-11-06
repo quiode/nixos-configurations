@@ -67,13 +67,13 @@ in {
           enableDefaultConfig = false;
           settings = {
             "home beaststation" = {
-              HostName = "dominik-schwaiger.ch";
+              HostName = "beaststation.dominik-schwaiger.ch";
               Port = 2222;
               User = "domina";
             };
 
             home-root = {
-              HostName = "dominik-schwaiger.ch";
+              HostName = "beaststation.dominik-schwaiger.ch";
               Port = 2222;
               User = "root";
             };
