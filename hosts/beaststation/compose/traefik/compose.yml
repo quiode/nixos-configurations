@@ -50,7 +50,6 @@ services:
       - radarr
       - sonarr
       - prowlarr
-      - wireguard
       - atuin
       - monitoring
 
@@ -113,9 +112,6 @@ networks:
 
   prowlarr:
     name: prowlarr
-
-  wireguard:
-    name: wireguard
 
   atuin:
     name: atuin

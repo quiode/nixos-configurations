@@ -121,7 +121,6 @@ Critical data (which should be snapshotted more often and also should be backed 
 - `/ssd/critical/gitlab/registry/database`
 - `/ssd/critical/factorio`
 - `/ssd/critical/traefik`
-- `/ssd/critical/wireguard`
 - `/ssd/critical/atuin/config`
 - `/ssd/critical/atuin/database`
 - `/ssd/critical/grafana`
@@ -140,4 +139,3 @@ Critical data (which should be snapshotted more often and also should be backed 
 - 389 (LDAP Authentik)
 - 636 (LDAP Authentik)
 - 34197 (Factorio)
-- 51820 (wireguard (VPN))
