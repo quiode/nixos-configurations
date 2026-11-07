@@ -48,7 +48,7 @@ in {
     systemPackages = with pkgs; [
       sanoid
       immich-cli
-      speedtest-cli
+      ookla-speedtest
       pciutils
       usbutils
     ];
