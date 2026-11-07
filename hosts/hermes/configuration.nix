@@ -53,14 +53,14 @@ in {
     # The interface is resolved at firewall-start time rather than hardcoded,
     # since hermes only has one physical NIC.
     extraCommands = ''
-      IFACE=$(ip -4 route show default | awk '{print $5; exit}')
-      iptables -A FORWARD -i wg0 -o "$IFACE" -j ACCEPT
-      iptables -A FORWARD -i "$IFACE" -o wg0 -j ACCEPT
+      IFACE=$(${pkgs.iproute2}/bin/ip -4 route show default | ${pkgs.gawk}/bin/awk '{print $5; exit}')
+      ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -o "$IFACE" -j ACCEPT
+      ${pkgs.iptables}/bin/iptables -A FORWARD -i "$IFACE" -o wg0 -j ACCEPT
     '';
     extraStopCommands = ''
-      IFACE=$(ip -4 route show default | awk '{print $5; exit}')
-      iptables -D FORWARD -i wg0 -o "$IFACE" -j ACCEPT || true
-      iptables -D FORWARD -i "$IFACE" -o wg0 -j ACCEPT || true
+      IFACE=$(${pkgs.iproute2}/bin/ip -4 route show default | ${pkgs.gawk}/bin/awk '{print $5; exit}')
+      ${pkgs.iptables}/bin/iptables -D FORWARD -i wg0 -o "$IFACE" -j ACCEPT || true
+      ${pkgs.iptables}/bin/iptables -D FORWARD -i "$IFACE" -o wg0 -j ACCEPT || true
     '';
   };
   # No allowedUDPPorts needed, hermes only dials out. The NixOS firewall

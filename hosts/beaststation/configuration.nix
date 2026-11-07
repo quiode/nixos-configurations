@@ -195,23 +195,23 @@ in {
       # IFACE is resolved at firewall-start time instead of hardcoded, since
       # beaststation only has one NIC and it's moving to a new network.
       extraCommands = ''
-        IFACE=$(ip -4 route show default | awk '{print $5; exit}')
-        iptables -A FORWARD -i wg0 -o "$IFACE" -j ACCEPT
-        iptables -A FORWARD -i "$IFACE" -o wg0 -j ACCEPT
+        IFACE=$(${pkgs.iproute2}/bin/ip -4 route show default | ${pkgs.gawk}/bin/awk '{print $5; exit}')
+        ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -o "$IFACE" -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -A FORWARD -i "$IFACE" -o wg0 -j ACCEPT
         # spoke-to-spoke: lets hades (road-warrior) reach the Buttikon LAN
         # through hermes, and vice versa. Both directions use wg0 on both
         # sides, so the rules above don't cover this.
-        iptables -A FORWARD -i wg0 -o wg0 -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -o wg0 -j ACCEPT
         # NAT hades's traffic so it can reach the internet. Scoped to just
         # hades's /32 so it never applies to hermes/Buttikon-LAN traffic.
-        iptables -t nat -A POSTROUTING -s 10.100.0.3/32 -o "$IFACE" -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.3/32 -o "$IFACE" -j MASQUERADE
       '';
       extraStopCommands = ''
-        IFACE=$(ip -4 route show default | awk '{print $5; exit}')
-        iptables -D FORWARD -i wg0 -o "$IFACE" -j ACCEPT || true
-        iptables -D FORWARD -i "$IFACE" -o wg0 -j ACCEPT || true
-        iptables -D FORWARD -i wg0 -o wg0 -j ACCEPT || true
-        iptables -t nat -D POSTROUTING -s 10.100.0.3/32 -o "$IFACE" -j MASQUERADE || true
+        IFACE=$(${pkgs.iproute2}/bin/ip -4 route show default | ${pkgs.gawk}/bin/awk '{print $5; exit}')
+        ${pkgs.iptables}/bin/iptables -D FORWARD -i wg0 -o "$IFACE" -j ACCEPT || true
+        ${pkgs.iptables}/bin/iptables -D FORWARD -i "$IFACE" -o wg0 -j ACCEPT || true
+        ${pkgs.iptables}/bin/iptables -D FORWARD -i wg0 -o wg0 -j ACCEPT || true
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.3/32 -o "$IFACE" -j MASQUERADE || true
       '';
     };
 

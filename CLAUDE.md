@@ -63,6 +63,10 @@ Secrets are managed with [agenix](https://github.com/ryantm/agenix); encrypted `
 
 **Never read private key material.** Files like `*_private.key`, raw WireGuard/SSH/age private keys, or any plaintext secret sitting in the working tree before it's encrypted must never be opened with the Read tool (or otherwise passed through the model), not even the user's own keys on their own machine. If a private key needs to go into a config or be consumed by a script, do it via shell commands that read the file and act on it at execution time (e.g. `cat key | someCommand`) without the content ever appearing in a tool result you see. Public keys are not secret and are fine to read and inline.
 
+### Shell scripts in systemd services
+
+Any shell script handed to systemd by a NixOS option (`extraCommands`, `extraStopCommands`, `script`, `ExecStart`, etc.) runs with a minimal `PATH` that doesn't include ordinary system utilities. Bare commands like `ip` or `awk` can fail with exit code 127 and silently take down the whole service (see `hosts/beaststation/configuration.nix` and `hosts/hermes/configuration.nix` for a real example: the firewall's `extraCommands` used bare `ip`/`awk`/`iptables`, which crashed `firewall.service` entirely, so none of the custom rules were ever installed). Reference binaries by their full Nix store path instead, e.g. `${pkgs.iproute2}/bin/ip`, `${pkgs.gawk}/bin/awk`, `${pkgs.iptables}/bin/iptables`, whenever `pkgs` is in scope.
+
 ### Formatting
 
 All `.nix` files are formatted with `alejandra`. Run `format` (or `alejandra .`) before committing; `nix flake check` fails the build if formatting is off.
