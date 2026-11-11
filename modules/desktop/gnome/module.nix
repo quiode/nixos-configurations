@@ -49,7 +49,7 @@ in {
     };
 
     environment = with pkgs; {
-      systemPackages = extensions ++ [gnome-tweaks];
+      systemPackages = extensions ++ [gnome-tweaks gnome-firmware];
 
       gnome.excludePackages = [
         gnome-photos

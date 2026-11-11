@@ -36,6 +36,8 @@ in {
       };
 
       fastfetch.enable = true;
+
+      updatecheck.enable = true;
     };
 
     development.claude = {
@@ -122,6 +124,9 @@ in {
         variant = "";
       };
     };
+
+    # firmware updates (system BIOS, docks, peripherals via UEFI capsules)
+    fwupd.enable = true;
   };
 
   # Configure console keymap
