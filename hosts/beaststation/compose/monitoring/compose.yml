@@ -82,7 +82,7 @@ services:
       traefik.http.services.grafana.loadbalancer.server.port: 3000
 
   node-exporter:
-    image: prom/node-exporter:v1.11.1
+    image: prom/node-exporter:v1.12.1
     container_name: node-exporter
     restart: always
     command:
