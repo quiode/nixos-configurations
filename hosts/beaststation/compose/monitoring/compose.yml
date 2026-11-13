@@ -1,5 +1,4 @@
 services:
-  # TODO: enable metrics for: wg-easy(https://wg-easy.github.io/wg-easy/development/advanced/metrics/prometheus)
   prometheus:
     image: prom/prometheus:v3.13.0
     container_name: prometheus
@@ -34,7 +33,7 @@ services:
       - monitoring-internal
 
   grafana:
-    image: grafana/grafana:13.1.0
+    image: grafana/grafana:13.3.1
     container_name: grafana
     restart: always
     depends_on:
