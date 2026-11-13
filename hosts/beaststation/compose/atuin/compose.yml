@@ -2,7 +2,7 @@ services:
   atuin:
     container_name: atuin
     restart: always
-    image: ghcr.io/atuinsh/atuin:18.24.0
+    image: ghcr.io/atuinsh/atuin:18.24
     command: start
     depends_on:
       - atuin-db
