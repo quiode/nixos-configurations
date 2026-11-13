@@ -24,7 +24,7 @@ services:
       traefik.http.services.prometheus.loadbalancer.server.port: 9090
 
   renderer:
-    image: grafana/grafana-image-renderer:v5.9.1
+    image: grafana/grafana-image-renderer:v5.12.11
     container_name: grafana-renderer
     restart: always
     environment:
