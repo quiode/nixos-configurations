@@ -325,6 +325,9 @@ in {
       commonArgs = [
         "--delete-target-snapshots"
         "--no-sync-snap"
+        "--force-delete"
+        "--sshport"
+        "2222"
       ];
 
       commands = {
@@ -332,10 +335,6 @@ in {
           source = "hdd/enc/critical";
           target = "domi@yniederer.ch:data/backup/hdd";
           sendOptions = "w";
-          extraArgs = [
-            "--sshport"
-            "2222"
-          ];
           recursive = true;
         };
 
@@ -343,10 +342,6 @@ in {
           source = "rpool/ssd/critical";
           target = "domi@yniederer.ch:data/backup/ssd";
           sendOptions = "w";
-          extraArgs = [
-            "--sshport"
-            "2222"
-          ];
           recursive = true;
         };
       };
